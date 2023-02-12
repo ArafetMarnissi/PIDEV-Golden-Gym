@@ -12,6 +12,7 @@
 
 		{% block stylesheets %}
 
+<<<<<<< HEAD
 			<link rel="stylesheet" href="{{asset('vendors/bootstrap/bootstrap.min.css')}}">
 			<link rel="stylesheet" href="{{asset('vendors/fontawesome/css/all.min.css')}}">
 			<link rel="stylesheet" href="{{asset('vendors/themify-icons/themify-icons.css')}}">
@@ -35,6 +36,29 @@
 		{% endblock %}
 	</head>
 	<body>
+=======
+  {% if app.user %}
+           
+            <div>Bonjour {{ app.user.username }} <a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
+                  </div>
+
+  {% else %}         
+  <ul class="nav-shop">
+              <li class="nav-item"><a class="button button-header" href="#">Se connecter</a></li>
+              <li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">0 </span></button> </li>
+
+            </ul>                     
+  {% endif %}
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+    {% endblock %}
+        {% block body %}
+        
+        {% endblock %}
+>>>>>>> 6b04049d3feed7de9918c9da6e96c41a400ee893
 
 		{% block header %}
 			<header class="header_area">
@@ -189,6 +213,7 @@
 					</div>
 				</div>
 
+<<<<<<< HEAD
 				<div class="footer-bottom">
 					<div class="container">
 						<div class="row d-flex">
@@ -204,6 +229,14 @@
 							</p>
 						</div>
 					</div>
+=======
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row d-flex">
+					<p class="col-lg-12 footer-text text-center">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved made by Golden Comets.
+>>>>>>> 6b04049d3feed7de9918c9da6e96c41a400ee893
 				</div>
 			</footer>
 		{% endblock %}

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ActiviteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ActiviteRepository::class)]
 class Activite
@@ -15,21 +16,33 @@ class Activite
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le nom de l'activité est obligatoire")]
+    #[Assert\Length(min:2,max:15,minMessage:"Le nom de l'activité doit comporter au moins {{ limit }} caractéres", maxMessage:"Le nom de l'activité doit comporter au maximum {{ limit }} caractéres")]
+    #[Assert\Regex(pattern: '/^[a-z]+$/i',htmlPattern: '^[a-zA-Z]+$',message:"Le nom de l'activité doit contenir que des lettres")]
     private ?string $nomAcitivite = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message:"La description de l'activité est obligatoire")]
+    #[Assert\Length(min:10,minMessage:"La description de l'activité doit comporter au moins {{ limit }} caractéres")]
     private ?string $descriptionActivite = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"La durée de l'activité est obligatoire")]
     private ?string $dureeActivite = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\GreaterThanOrEqual('today',message:"La date de l'activité doit être supérieur à la date actuelle")]
     private ?\DateTimeInterface $DateActivite = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le nom du coach est obligatoire")]
+    #[Assert\Length(min:2,minMessage:"Le nom du coach doit comporter au moins {{ limit }} caractéres")]
+    #[Assert\Regex(pattern: '/^[a-z]+$/i',htmlPattern: '^[a-zA-Z]+$',message:"Le nom du coach doit contenir que des lettres")]
     private ?string $coach = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Il faut donner le nombre de places")]
+    #[Assert\Positive(message:"Nombre de places doit être positif")]
     private ?int $nbrePlace = null;
 
     public function getId(): ?int
