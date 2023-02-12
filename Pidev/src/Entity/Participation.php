@@ -17,6 +17,10 @@ class Participation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateParticipation = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Activite $activite = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -30,6 +34,18 @@ class Participation
     public function setDateParticipation(\DateTimeInterface $dateParticipation): self
     {
         $this->dateParticipation = $dateParticipation;
+
+        return $this;
+    }
+
+    public function getActivite(): ?Activite
+    {
+        return $this->activite;
+    }
+
+    public function setActivite(?Activite $activite): self
+    {
+        $this->activite = $activite;
 
         return $this;
     }
