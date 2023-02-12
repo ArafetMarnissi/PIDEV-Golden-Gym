@@ -1,0 +1,39 @@
+{% extends 'baseback.html.twig' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+<h1> Liste des Activites</h1>
+<table border="1">
+    <tr> <th>Id</th>
+        <th> Name</th>
+        <th> Description</th>
+        <th> Duree</th>
+        <th> Date</th>
+        <th> Coach</th>
+        <th> Nombre places</th>
+    </tr>
+    {%  for a in  activites %}
+        <tr>
+            <td>  {{ a.id }}</td>
+            <td>   {{ a.nomAcitivite }} </td>
+            <td>   {{ a.descriptionActivite }} </td>
+            <td>   {{ a.dureeActivite }} </td>
+            <td>   {{ a.DateActivite|date('Y-m-d') }} </td>
+            <td>   {{ a.coach }} </td>
+            <td>   {{ a.nbrePlace }} </td>
+            <td> <a href="{{ path('updateActivite', {id:a.id}) }}">Modifier </a></td>
+            <td> <a href="{{ path('deleteActivite', {id:a.id}) }}">Supprimer </a></td>
+        </tr>
+    {% endfor %}
+</table>
+<form action="{{ path('addActivite') }}">
+    <button class="btn btn-primary">Ajouter</button>
+</form>
+</center>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'baseback.html.twig' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+<div>
+{{form_start(f,{'attr': {'novalidate': 'novalidate'}})}}
+{{form_row(f.nomAcitivite,{'attr': {'placeholder':'Nom Activite','class':'form-control-lg'}})}}
+{{form_row(f.descriptionActivite,{'attr': {'placeholder':'Description','class':'form-control-lg'}})}}
+{{form_row(f.dureeActivite,{'attr': {'placeholder':'Duree','class':'form-control-lg'}})}}
+{{form_row(f.DateActivite,{'attr': {'placeholder':'Date','class':'form-control-lg'}})}}
+{{form_row(f.coach,{'attr': {'placeholder':'Coach','class':'form-control-lg'}})}}
+{{form_row(f.nbrePlace,{'attr': {'placeholder':'Nombre places','class':'form-control-lg'}})}}
+<button type="submit" class="btn btn-primary">Ajouter</button>
+{{form_end(f)}}
+</div>
+</center>
+{% endblock %}
