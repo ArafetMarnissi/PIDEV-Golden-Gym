@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<section class="login_box_area section-margin">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="login_box_img">
+						<div class="hover">
+							<h4>Avez-vous déjà un compte?</h4>
+							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+							<a class="button button-account" href="{{path('app_login')}}">Login Now</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="login_form_inner register_form_inner">
+						<h3>Créer un compte</h3>
+						{{form_start(form)}}
+
+<div class="col-md-12 form-group">
+                        {{form_row(form.email,{'attr': {'placeholder':'Email','class':'form-control'}})}}
+</div>
+<div class="col-md-12 form-group">
+
+                        {{form_row(form.nom,{'attr': {'placeholder':'Nom','class':'form-control'}})}}
+</div>
+<div class="col-md-12 form-group">
+                        {{form_row(form.prenom,{'attr': {'placeholder':'Prenom','class':'form-control'}})}}
+</div>  
+<div class="col-md-12 form-group">
+                        {{form_row(form.password,{'attr': {'placeholder':'Mot de Passe','class':'form-control'}})}}
+</div>
+<div class="col-md-12 form-group">
+                        {{form_row(form.confirm_password,{'attr': {'placeholder':'Confirmer mot de passe','class':'form-control'}})}}
+</div> 
+
+
+<div class="col-md-12 form-group">
+								<button type="submit" value="submit"  class="button button-header">Créer un compte</button>
+							</div>                   
+                                 {{form_end(form)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    {% endblock %}
+
+

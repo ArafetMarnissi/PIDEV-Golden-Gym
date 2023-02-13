@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AbonnementRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AbonnementRepository::class)]
 class Abonnement
@@ -14,12 +15,17 @@ class Abonnement
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le nom de l'abonnement est obligatoire")]
+    #[Assert\Regex(pattern: '/^[a-z]+$/i',htmlPattern: '^[a-zA-Z]+$',message:"Le nom de l'abonnement doit contenir que des lettres")]
     private ?string $nomAbonnement = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Il faut donner le prix de l'abonnement")]
+    #[Assert\Positive(message:"Prix de l'abonnement doit être positif")]
     private ?float $prixAbonnement = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"La durée de l'abonnement est obligatoire")]
     private ?string $dureeAbonnement = null;
 
     #[ORM\OneToOne(mappedBy: 'ReservationAbonnement', cascade: ['persist', 'remove'])]

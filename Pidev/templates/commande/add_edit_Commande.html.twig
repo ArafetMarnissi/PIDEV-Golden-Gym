@@ -1,0 +1,37 @@
+{% extends 'baseback.html.twig' %}
+{% form_theme formCommande 'bootstrap_5_layout.html.twig' %}
+{% block title %}Gestionnaire de Commandes
+{% endblock %}
+
+{% block content %}
+
+	<div class="container">
+		{% if editMode %}
+			<h2>Modifier commande</h2>
+		{% else %}
+			<h2>Création d'une commande</h2>
+		{% endif %}
+
+		<div>
+
+			{{form_start(formCommande,{'attr': {'novalidate': 'novalidate'}})}}
+			<div>{{form_row(formCommande.AdresseLivraison,{'attr': {'placeholder':'Rue , ville , gouvernement'}})}}</div>
+
+			<div>{{form_row(formCommande.prixCommande,{'attr': {'placeholder':'Prix de la commande',}})}}</div>
+
+			<div>{{form_row(formCommande.methodePaiement,{'attr': {'placeholder':'méthode de paiement'}})}}</div>
+			<div>{{form_row(formCommande.telephone,{'attr': {'placeholder':'votre numéro de téléphone'}})}}</div>
+			<button type='submit' class="btn btn-round btn-facebook" href="{{ path('Affichagecommande') }}">
+				{% if editMode %}
+					Enregistrer
+				{% else %}
+					Passer Commande
+				{% endif %}
+
+
+			</button>
+			<div>{{form_end(formCommande)}}
+			</div>
+		</div>
+	</div>
+</center>{% endblock %}

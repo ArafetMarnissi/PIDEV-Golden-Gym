@@ -1,0 +1,46 @@
+{% extends 'baseback.html.twig' %}
+{% block content %}
+<div class="container">
+<br>
+<br>
+<br>
+<h2>La liste des utilisateurs : </h2>
+<center>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Email</th>
+      <th scope="col">ROLE </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+    </tr>
+  </thead>
+  <tbody>
+  {%  for user in  users %}
+    <tr>
+      <td scope="row">{{user.id}}</td>
+      <td>{{user.nom}}</td>
+      <td>{{user.prenom}}</td>
+      <td>{{user.email}}</td>
+      {% for role in user.roles %}
+      {% if role !="ROLE_USER"%}
+
+      <td> {{ role }}</td>
+      {% endif %}
+      {% endfor %}
+          <td>  <a class="btn btn-sm btn-success" href="{{ path('update_user', {id:user.id}) }}">Modifier</a></td>
+      <td>  <a class="btn btn-sm btn-danger" href="{{ path('delete_user', {id:user.id}) }}">Supprimer</a></td>
+  
+
+    </tr>
+ 
+    {%  endfor %}
+  </tbody>
+</table>
+
+</center>
+</div>
+{% endblock %}
