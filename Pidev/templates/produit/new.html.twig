@@ -1,24 +1,31 @@
 {% extends 'baseback.html.twig' %}
-
+{% form_theme formp 'bootstrap_5_layout.html.twig' %}
 {% block content %}
 <br>
 <br>
 <br>
 <br>
+<div class="container">
 
-<center>
-<table>
-<td>{{form_start(formp,{'attr': {'novalidate': 'novalidate'}})}}</td>
-<th>{{form_row(formp.nom,{'attr': {'placeholder':'Nom Produit','class':'form-control-lg'}})}}</th>
-<th>{{form_row(formp.description,{'attr': {'placeholder':'Description','class':'form-control-lg'}})}}</th>
-<td>{{form_row(formp.prixProduit,{'attr': {'placeholder':'Prix','class':'form-control-lg'}})}}</td>
-<td>{{form_row(formp.quantiteProduit,{'attr': {'placeholder':'Quantite','class':'form-control-lg'}})}}</td>
-<td>{{form_row(formp.dateExpiration,{'attr': {'placeholder':'date Expiration','class':'form-control-lg'}})}}</td>
-<td>{{form_row(formp.category,{'attr': {'placeholder':'category','class':'form-control-lg'}})}}</td>
-<td>{{form_end(formp)}}</td>
-</table>
-<form action="{{ path('list_produit') }}">
-    <button class="btn btn-primary">afficher</button>
-</form>
-</center>
+{{form_start(formp,{'attr': {'novalidate': 'novalidate'}})}}
+{{form_row(formp.nom,{'attr': {'placeholder':'Nom Produit','class':'form-control-lg'}})}}
+{{form_row(formp.description,{'attr': {'placeholder':'Description','class':'form-control-lg'}})}}
+{{form_row(formp.prixProduit,{'attr': {'placeholder':'Prix','class':'form-control-lg'}})}}
+{{form_row(formp.quantiteProduit,{'attr': {'placeholder':'Quantite','class':'form-control-lg'}})}}
+{{form_row(formp.dateExpiration,{'attr': {'placeholder':'date Expiration','class':'form-control-lg'}})}}
+{{form_row(formp.category,{'attr': {'placeholder':'category','class':'form-control-lg'}})}}
+{{form_row(formp.imageProduit)}}
+<button type='submit' class="btn btn-round btn-facebook" >
+                {% if editmode %}
+                    modifier
+                {% else %}
+                    ajouter
+                {% endif %}
+                </button>
+                {{form_end(formp)}}
+    <button class="btn btn-round btn-facebook" href="{{ path('list_produit') }}"> 
+    afficher</button>
+    
+</div>
+
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'baseback.html.twig' %}
+{% form_theme formc 'bootstrap_5_layout.html.twig' %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+
+{{form_start(formc,{'attr': {'novalidate': 'novalidate'}})}}
+{{form_row(formc.nomCategory,{'attr': {'placeholder':'nom categorie','class':'form-control-lg'}})}}
+{{form_row(formc.imageCategorie)}}
+<button type='submit' class="btn btn-round btn-facebook" >
+                {% if editmode %}
+                    modifier
+                {% else %}
+                    ajouter
+                {% endif %}
+                </button>
+                {{form_end(formc)}}
+    <button class="btn btn-round btn-facebook" href="{{ path('list_cat') }}"> 
+    afficher</button>
+    
+</div>
+
+{% endblock %}
