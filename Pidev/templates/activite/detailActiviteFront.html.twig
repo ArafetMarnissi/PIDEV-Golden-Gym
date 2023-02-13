@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br>
+<br>
+  <section class="blog_area">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-8">
+                  <div class="blog_left_sidebar">
+                      <article class="row blog_item">
+                          <div class="col-md-3">
+                              <div class="blog_info text-right">
+                                  <ul class="blog_meta list">
+                                      <li>
+                                          Coach : {{ activites.coach }}
+                                              <i class="lnr lnr-user"></i>
+                                          
+                                      </li>
+                                      <li>
+                                          Date : {{ activites.DateActivite|date('Y-m-d')}}
+                                              <i class="lnr lnr-calendar-full"></i>
+                                          
+                                      </li>
+                                      <li>
+                                         Nombre de places : {{ activites.nbrePlace }}
+                                              <i class="lnr lnr-eye"></i>
+                                          
+                                      </li>
+                                      <li>
+                                         Durée : {{ activites.dureeActivite }}
+                                              <i class="lnr lnr-bubble"></i>
+                                          
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="col-md-9">
+                              <div class="blog_post">
+                                  <img width=950 src="{{ asset('img/activite/'~activites.Image)}}" alt="">
+                                  <div class="blog_details">
+                                      
+                                          <h2>{{ activites.nomAcitivite }}</h2>
+                                      
+                                      <p>{{ activites.descriptionActivite }}</p>
+                                      <a class="button button-blog" href="{{path('AffichageActiviteF')}}">Retour à la liste</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </article>
+                  </div>
+              </div>
+              <div class="col-lg-4">
+                  <div class="blog_right_sidebar">
+                      <aside class="single_sidebar_widget author_widget">
+                          <img class="author_img rounded-circle" src="{{ asset("img/blog/author.png") }}" alt="">
+                          <h4>{{ activites.coach }}</h4>
+                          <p>Coach</p>
+                          <div class="social_icon">
+                              <a href="#">
+                                  <i class="fab fa-facebook-f"></i>
+                              </a>
+                              <a href="#">
+                                  <i class="fab fa-twitter"></i>
+                              </a>
+                              <a href="#">
+                                  <i class="fab fa-github"></i>
+                              </a>
+                              <a href="#">
+                                <i class="fab fa-behance"></i>
+                              </a>
+                          </div>
+                          <p>Boot camps have its supporters andit sdetractors. Some people do not understand why you should
+                              have to spend money on boot camp when you can get. Boot camps have itssuppor ters andits
+                              detractors.
+                          </p>
+                          
+                      </aside>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <br>
+  <br>
+{%endblock%}

@@ -27,6 +27,7 @@
             <td>   {{ a.DateActivite|date('Y-m-d') }} </td>
             <td>   {{ a.coach }} </td>
             <td>   {{ a.nbrePlace }} </td>
+            <td>   {{ a.Image }} </td>
             <td> <a href="{{ path('updateActivite', {id:a.id}) }}">Modifier </a></td>
             <td> <a href="{{ path('deleteActivite', {id:a.id}) }}">Supprimer </a></td>
         </tr>
