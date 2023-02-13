@@ -42,9 +42,8 @@ class ProduitController extends AbstractController
         //$produits=$repository->findAll();
         $produit=new Produit;
         $form=$this->createForm(ProduitType::class,$produit);
-        $form->add('ajouter',SubmitType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted())
+        if ($form->isSubmitted() )
         {
             $brochureFile = $form->get('imageProduit')->getData();
             if ($brochureFile) {
@@ -65,7 +64,7 @@ class ProduitController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('list_produit');
         }
-        return $this->renderForm('produit/new.html.twig',['formp'=>$form]);
+        return $this->renderForm('produit/new.html.twig',['formp'=>$form,"editmode"=>$produit->getid()!==null]);
     }
 
     #[Route('/deletep/{id}',name: 'deletep')]
@@ -80,21 +79,34 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/editp/{id}', name: 'editp')]
-    public function editp(HttpFoundationRequest $request,ManagerRegistry $doctrine,$id ): Response
+    public function editp(HttpFoundationRequest $request,ManagerRegistry $doctrine,$id,SluggerInterface $slugger ): Response
     {  
         $repository= $doctrine->getRepository(Produit::class);
         $produits=$repository->find($id);
        $form=$this->createForm(ProduitType::class,$produits);
-       $form->add('modifier',SubmitType::class);
        $form->handleRequest($request);
        if($form->isSubmitted())
        {
+        $brochureFile = $form->get('imageProduit')->getData();
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('produit_image'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                }
+                $produits->setImageProduit($newFilename);
+            }
         $em=$doctrine->getManager();
         $produits->setnom($form->get('nom')->getData());
         $em->flush();
         return $this->redirectToRoute('list_produit');
        }
-       return $this->renderForm('produit/new.html.twig',['formp'=>$form]);
+       return $this->renderForm('produit/new.html.twig',['formp'=>$form,"editmode"=>$produits->getid()!==null]);
     }
 
     #[Route('/get/{id}', name: 'getid')]
