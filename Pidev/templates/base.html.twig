@@ -10,60 +10,7 @@
 
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 
-<<<<<<< HEAD
-    {% block header %}
-    <header class="header_area">
-    <div class="main_menu">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-          <a class="navbar-brand logo_h" href="index.html"><img width="140" height="50" src="{{asset('img/logo1.png')}}" alt=""></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-            <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-              <li class="nav-item active"><a class="nav-link" href="{{path('app_test')}}">Acceuil</a></li>
-              <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Magasin</a>
-               <!-- <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="category.html"> Category</a></li>
-                  <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
-                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-                </ul>
-                -->
-							</li>
-              <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Abonnement</a>
-              <!--
-                <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                  <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-                </ul>
-                -->
-							</li>
-							<li class="nav-item submenu dropdown">
-                <a  class="nav-link dropdown-toggle" role="button" aria-haspopup="true"
-                  aria-expanded="false" href="{{path('AffichageActiviteF')}}">Activités</a>
-                <!--
-                <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
-                  <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
-                </ul>
-                -->
-              </li>
-              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-            </ul>
-=======
 		{% block stylesheets %}
->>>>>>> d3f8e573571b8b357c73275d49243ede70166002
 
 			<link rel="stylesheet" href="{{asset('vendors/bootstrap/bootstrap.min.css')}}">
 			<link rel="stylesheet" href="{{asset('vendors/fontawesome/css/all.min.css')}}">
@@ -94,7 +41,7 @@
 				<div class="main_menu">
 					<nav class="navbar navbar-expand-lg navbar-light">
 						<div class="container">
-							<a class="navbar-brand logo_h" href="{{path('home-page')}}"><img width="140" height="50" src="{{asset('img/logo1.png')}}" alt=""></a>
+							<a class="navbar-brand logo_h" href="index.html"><img width="140" height="50" src="{{asset('img/logo1.png')}}" alt=""></a>
 							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
@@ -103,7 +50,7 @@
 							<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 								<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 									<li class="nav-item active">
-										<a class="nav-link" href="{{path('home-page')}}">Acceuil</a>
+										<a class="nav-link" href="{{path('app_test')}}">Acceuil</a>
 									</li>
 									<li class="nav-item submenu dropdown">
 										<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Magasin</a>
@@ -126,7 +73,7 @@
 																				                -->
 									</li>
 									<li class="nav-item submenu dropdown">
-										<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Activités</a>
+										<a class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" href="{{path('AffichageActiviteF')}}">Activités</a>
 										<!--
 																				                <ul class="dropdown-menu">
 																				                  <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
@@ -140,31 +87,19 @@
 									</li>
 								</ul>
 
+								<ul class="nav-shop">
+									<li class="nav-item">
+										<a class="button button-header" href="#">Se connecter</a>
+									</li>
+									<li class="nav-item">
+										<button>
+											<i class="ti-shopping-cart"></i>
+											<span class="nav-shop__circle">0
+											</span>
+										</button>
+									</li>
 
-								{% if app.user %}
-
-									<div>Bonjour,
-										<span class="section-intro__style">{{ app.user.nom }}
-										</span>
-										<a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
-									</div>
-
-								{% else %}
-									<ul class="nav-shop">
-										<li class="nav-item">
-											<a class="button button-header" href="#">Se connecter</a>
-										</li>
-										<li class="nav-item">
-											<button>
-												<i class="ti-shopping-cart"></i>
-												<span class="nav-shop__circle">0
-												</span>
-											</button>
-										</li>
-
-									</ul>
-								{% endif %}
-
+								</ul>
 
 							</div>
 						</div>
@@ -262,7 +197,12 @@
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 								Copyright &copy;<script>
 									document.write(new Date().getFullYear());
-								</script>All rights reserved made by Golden Comets.
+								</script>
+								All rights reserved | This template is made with
+								<i class="fa fa-heart" aria-hidden="true"></i>
+								by
+								<a href="https://colorlib.com" target="_blank">Colorlib</a>
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</p>
 						</div>
 					</div>

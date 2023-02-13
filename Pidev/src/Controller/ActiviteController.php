@@ -14,23 +14,23 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ActiviteController extends AbstractController
 {
-    // #[Route('/activite', name: 'app_activite')]
-    // public function index(): Response
-    // {
-    //     return $this->render('activite/index.html.twig', [
-    //         'controller_name' => 'ActiviteController',
-    //     ]);
-    // }
+    #[Route('/activite', name: 'app_activite')]
+    public function index(): Response
+    {
+        return $this->render('activite/index.html.twig', [
+            'controller_name' => 'ActiviteController',
+        ]);
+    }
 
     #[Route('/addActivite', name: 'addActivite')]
-<<<<<<< HEAD
-    public function  add(ManagerRegistry $doctrine, Request  $request,SluggerInterface $slugger) : Response
-    { $activite = new Activite() ;
+    public function  add(ManagerRegistry $doctrine, Request  $request, SluggerInterface $slugger): Response
+    {
+        $activite = new Activite();
         $form = $this->createForm(ActiviteType::class, $activite);
         #$form->add('ajouter', SubmitType::class) ;
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {    $imageFile = $form->get('Image')->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('Image')->getData();
 
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
@@ -38,7 +38,7 @@ class ActiviteController extends AbstractController
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -54,16 +54,7 @@ class ActiviteController extends AbstractController
                 // instead of its contents
                 $activite->setImage($newFilename);
             }
-            
-=======
-    public function  add(ManagerRegistry $doctrine, Request  $request): Response
-    {
-        $activite = new Activite();
-        $form = $this->createForm(ActiviteType::class, $activite);
-        #$form->add('ajouter', SubmitType::class) ;
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
->>>>>>> d3f8e573571b8b357c73275d49243ede70166002
+
             $em = $doctrine->getManager();
             $em->persist($activite);
             $em->flush();
@@ -90,8 +81,8 @@ class ActiviteController extends AbstractController
     #[Route('/affichageActiviteF', name: 'AffichageActiviteF')]
     public function listFront(ManagerRegistry $doctrine): Response
     {
-        $repository= $doctrine->getRepository(Activite::class);
-        $Activites=$repository->findAll();
+        $repository = $doctrine->getRepository(Activite::class);
+        $Activites = $repository->findAll();
         return $this->render('activite/AffichageListActiviteFront.html.twig', [
             'activites' => $Activites,
         ]);
@@ -99,10 +90,10 @@ class ActiviteController extends AbstractController
 
 
     #[Route('activiteFront/get/{id}', name: 'getidFront')]
-    public function show_id(ManagerRegistry $doctrine,$id): Response
+    public function show_id(ManagerRegistry $doctrine, $id): Response
     {
-        $repository= $doctrine->getRepository(Activite::class);
-        $Activites=$repository->find($id);
+        $repository = $doctrine->getRepository(Activite::class);
+        $Activites = $repository->find($id);
         return $this->render('activite/detailActiviteFront.html.twig', [
             'activites' => $Activites,
             'id' => $id,
@@ -110,16 +101,16 @@ class ActiviteController extends AbstractController
     }
 
     #[Route('/updateActivite/{id}', name: 'updateActivite')]
-<<<<<<< HEAD
-    public function  update(ManagerRegistry $doctrine,$id,  Request  $request,SluggerInterface $slugger) : Response
-    { $activite = $doctrine
-        ->getRepository(Activite::class)
-        ->find($id);
+    public function  update(ManagerRegistry $doctrine, $id,  Request  $request, SluggerInterface $slugger): Response
+    {
+        $activite = $doctrine
+            ->getRepository(Activite::class)
+            ->find($id);
         $form = $this->createForm(ActiviteType::class, $activite);
         #$form->add('update', SubmitType::class) ;
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {         $imageFile = $form->get('Image')->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('Image')->getData();
 
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
@@ -127,7 +118,7 @@ class ActiviteController extends AbstractController
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -143,18 +134,7 @@ class ActiviteController extends AbstractController
                 // instead of its contents
                 $activite->setImage($newFilename);
             }
-            
-=======
-    public function  update(ManagerRegistry $doctrine, $id,  Request  $request): Response
-    {
-        $activite = $doctrine
-            ->getRepository(Activite::class)
-            ->find($id);
-        $form = $this->createForm(ActiviteType::class, $activite);
-        #$form->add('update', SubmitType::class) ;
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
->>>>>>> d3f8e573571b8b357c73275d49243ede70166002
+
             $em = $doctrine->getManager();
             $em->flush();
             return $this->redirectToRoute('AffichageActivite');
