@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use DateTime;
 use App\Repository\CommandeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
@@ -20,22 +22,43 @@ class Commande
     private ?\DateTimeInterface $dateCommande = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
+    #[Assert\Length(
+        min: 3,
+        max: 50,
+        minMessage: 'votre adresse de livraison n\'est pas valide',
+
+    )]
+
     private ?string $AdresseLivraison = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?float $prixCommande = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $methodePaiement = null;
 
-    #[ORM\Column]
-    private ?int $telephone = null;
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: LigneCommande::class, orphanRemoval: true)]
     private Collection $ligneCommandes;
 
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Regex(pattern: "/^\d+$/", message: "L'attribut ne peut contenir que des chiffres.")]
+    #[Assert\Length(
+        min: 8,
+        max: 8,
+        minMessage: 'votre numéro de téléphone n\'est pas valide',
+
+    )]
+    private ?string $telephone = null;
+
     public function __construct()
     {
+        $this->dateCommande = new DateTime();
         $this->ligneCommandes = new ArrayCollection();
     }
 
@@ -92,17 +115,7 @@ class Commande
         return $this;
     }
 
-    public function getTelephone(): ?int
-    {
-        return $this->telephone;
-    }
 
-    public function setTelephone(int $telephone): self
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, LigneCommande>
@@ -130,6 +143,18 @@ class Commande
                 $ligneCommande->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }
