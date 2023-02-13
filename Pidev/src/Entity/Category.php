@@ -18,7 +18,7 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $nomCategory = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable:true)]
     private ?string $imageCategorie = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Produit::class, orphanRemoval: true)]
