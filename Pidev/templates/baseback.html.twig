@@ -1,3 +1,5 @@
+{% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +21,7 @@
 
 </head>
 <body>
+
 {% block header %}
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="{{ asset("assetsback/img/sidebar-1.jpg") }}">
@@ -39,9 +42,9 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{path('app_user')}}">
                         <i class="material-icons">person</i>
-                        <p>User Profile</p>
+                        <p>Gestion d'utilisateurs</p>
                     </a>
                 </li>
                 <li class="nav-item ">
@@ -139,10 +142,10 @@
                                 </p>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Settings</a>
+                                <span class="dropdown-item" href="#">{{app.user.username}}</span>
+                                
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Log out</a>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">Se Déconnecter</a>
                             </div>
                         </li>
                     </ul>
@@ -151,7 +154,8 @@
         </nav>
         <!-- End Navbar -->
         {% endblock %}
-        {% block content %}{% endblock %}
+        {% block content %}
+        {% endblock %}
         {% block footer %}
             <footer class="footer">
 
@@ -441,5 +445,14 @@
                 });
             </script>
         {% endblock %}
+        
+      
+        {% else  %}
+
+        <h1>Vous devez être connecté en tant que admin afin d'acceder au dashboard</h1>
+              <li class="nav-item"><a class="button button-header" href="{{path('app_login')}}">Se connecter</a></li>
+
+        {% endif %}
+        
 </body>
 </html>

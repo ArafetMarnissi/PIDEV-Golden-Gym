@@ -22,7 +22,7 @@ class RegistrationController extends AbstractController
     #[Route('/home', name: 'home-page')]
     public function hello(): Response
     {
-        return $this->render('base.html.twig', [
+        return $this->render('home.html.twig', [
             'controller_name' => 'RegistrationController',
         ]);
     } 
@@ -45,14 +45,14 @@ class RegistrationController extends AbstractController
             $user->setPassword($this->passwordEncoder->hashPassword($user, $user->getPassword()));
 
             // Set their role
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles(['ROLE_CLIENT']);
 
             // Save
             $em = $doctrine->getManager();
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('app_test');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
