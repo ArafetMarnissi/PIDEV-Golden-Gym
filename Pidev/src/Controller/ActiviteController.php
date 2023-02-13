@@ -23,14 +23,9 @@ class ActiviteController extends AbstractController
     }
 
     #[Route('/addActivite', name: 'addActivite')]
-<<<<<<< HEAD
     public function  add(ManagerRegistry $doctrine, Request  $request, SluggerInterface $slugger): Response
     {
         $activite = new Activite();
-=======
-    public function  add(ManagerRegistry $doctrine, Request  $request,SluggerInterface $slugger) : Response
-    { $activite = new Activite() ;
->>>>>>> 8b8a1533d9c8f6e75706624480c6840219ba1603
         $form = $this->createForm(ActiviteType::class, $activite);
         #$form->add('ajouter', SubmitType::class) ;
         $form->handleRequest($request);
@@ -59,11 +54,6 @@ class ActiviteController extends AbstractController
                 // instead of its contents
                 $activite->setImage($newFilename);
             }
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> 8b8a1533d9c8f6e75706624480c6840219ba1603
             $em = $doctrine->getManager();
             $em->persist($activite);
             $em->flush();
@@ -71,15 +61,17 @@ class ActiviteController extends AbstractController
 
             return $this->redirectToRoute('AffichageActivite');
         }
-        return $this->renderForm("activite/index.html.twig",
-            ["f"=>$form]) ;
+        return $this->renderForm(
+            "activite/index.html.twig",
+            ["f" => $form]
+        );
     }
 
     #[Route('/affichageActivite', name: 'AffichageActivite')]
     public function list(ManagerRegistry $doctrine): Response
     {
-        $repository= $doctrine->getRepository(Activite::class);
-        $Activites=$repository->findAll();
+        $repository = $doctrine->getRepository(Activite::class);
+        $Activites = $repository->findAll();
         return $this->render('activite/indexAffichage.html.twig', [
             'activites' => $Activites,
         ]);
@@ -108,18 +100,11 @@ class ActiviteController extends AbstractController
     }
 
     #[Route('/updateActivite/{id}', name: 'updateActivite')]
-<<<<<<< HEAD
     public function  update(ManagerRegistry $doctrine, $id,  Request  $request, SluggerInterface $slugger): Response
     {
         $activite = $doctrine
             ->getRepository(Activite::class)
             ->find($id);
-=======
-    public function  update(ManagerRegistry $doctrine,$id,  Request  $request,SluggerInterface $slugger) : Response
-    { $activite = $doctrine
-        ->getRepository(Activite::class)
-        ->find($id);
->>>>>>> 8b8a1533d9c8f6e75706624480c6840219ba1603
         $form = $this->createForm(ActiviteType::class, $activite);
         #$form->add('update', SubmitType::class) ;
         $form->handleRequest($request);
@@ -148,30 +133,24 @@ class ActiviteController extends AbstractController
                 // instead of its contents
                 $activite->setImage($newFilename);
             }
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> 8b8a1533d9c8f6e75706624480c6840219ba1603
             $em = $doctrine->getManager();
             $em->flush();
             return $this->redirectToRoute('AffichageActivite');
         }
-        return $this->renderForm("activite/indexUpdate.html.twig",
-            ["f"=>$form]) ;
-
-
+        return $this->renderForm(
+            "activite/indexUpdate.html.twig",
+            ["f" => $form]
+        );
     }
 
     #[Route('/deleteActivite/{id}', name: 'deleteActivite')]
     public function DeleteS(ManagerRegistry $doctrine, $id): Response
     {
-        $repository= $doctrine->getRepository(Activite::class);
-        $activite=$repository->find($id);
-        $em= $doctrine->getManager();
+        $repository = $doctrine->getRepository(Activite::class);
+        $activite = $repository->find($id);
+        $em = $doctrine->getManager();
         $em->remove($activite);
         $em->flush();
         return $this->redirectToRoute('AffichageActivite');
     }
-
 }
