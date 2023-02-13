@@ -86,12 +86,18 @@
               <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
             </ul>
 
-            <ul class="nav-shop">
+  {% if app.user %}
+           
+            <div>Bonjour {{ app.user.username }} <a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
+                  </div>
+
+  {% else %}         
+  <ul class="nav-shop">
               <li class="nav-item"><a class="button button-header" href="#">Se connecter</a></li>
               <li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">0 </span></button> </li>
 
-            </ul>
-            
+            </ul>                     
+  {% endif %}
           </div>
         </div>
       </nav>
@@ -184,9 +190,8 @@
 			<div class="container">
 				<div class="row d-flex">
 					<p class="col-lg-12 footer-text text-center">
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved made by Golden Comets.
 				</div>
 			</div>
 		</div>
