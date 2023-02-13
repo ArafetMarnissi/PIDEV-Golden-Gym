@@ -28,7 +28,7 @@ class Produit
     #[ORM\Column]
     private ?int $quantiteProduit = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable:true)]
     private ?string $imageProduit = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
