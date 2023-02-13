@@ -1,0 +1,34 @@
+{% extends 'baseback.html.twig' %}
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+<h2>Modifier utilisateur</h2>
+</center>
+
+<div class="container">
+{{form_start(form)}}
+
+
+                        {{form_row(form.nom,{'attr': {'placeholder':'Nom','class':'form-control'}})}}
+                        {{form_row(form.prenom,{'attr': {'placeholder':'Prenom','class':'form-control'}})}}
+                        {{form_row(form.email,{'attr': {'placeholder':'Email','class':'form-control'}})}}
+                        {{form_row(form.password,{'attr': {'placeholder':'Mot de Passe','class':'form-control'}})}}
+                        {{form_row(form.confirm_password,{'attr': {'placeholder':'Confrmer le mot de passe','class':'form-control'}})}}
+
+
+<center>
+<div class="col-md-12 form-group">
+								<button type="submit" value="submit"  class="btn btn-sm btn-success">Modifier</button>
+								<a type="submit"  href="{{path('app_user')}}" class="btn btn-sm btn">Retourner à liste</a>
+
+							</div>  
+                            </center>
+                             
+{{form_end(form)}}
+</div>
+{% endblock %}

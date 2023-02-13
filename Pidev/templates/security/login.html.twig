@@ -10,19 +10,39 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Vous ête déjà connecté en tant que  {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnecter</a>
         </div>
     {% endif %}
+    <section class="login_box_area section-margin">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+    <h1 class="h3 mb-3 font-weight-normal">Se Connecter</h1>
     <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <input type="email"  name="email" id="inputEmail" class="form-control" autocomplete="email" width="100" height="48" required autofocus>
     <label for="inputPassword">Password</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
+    <br>
+
+    <center>
+     <button class="btn btn-lg btn-success" type="submit">
+Se Connecter
+    </button>
+     </center>
+      <center>
+     <a class="btn btn-lg btn-blue" href="{{path('security_registration')}}">
+Créer un compte    </a>
+     </center>
+     </div>
+      </div>
+    </div>
+    </section>
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -35,8 +55,6 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+   
 </form>
 {% endblock %}
