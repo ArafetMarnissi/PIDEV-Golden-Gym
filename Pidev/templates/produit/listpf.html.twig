@@ -115,25 +115,26 @@
           <!-- End Filter Bar -->
           <!-- Start Best Seller -->
           <section class="lattest-product-area pb-40 category-list">
-          {% for p in produit %}
             <div class="row">
+            {% for p in produit %}
               <div class="col-md-6 col-lg-4">
                 <div class="card text-center card-product">
                   <div class="card-product__img">
-                    <img class="card-img"  src="{{asset('uploads/produits/'~p.imageproduit)}}" alt="">
+                    <img class="card-img" style="width:100px;"  src="{{asset('uploads/produits/'~p.imageproduit)}}" alt="">
                     <ul class="card-product__imgOverlay">
-                      <li><button><i class="ti-search"></i></button></li>
+                      <!--<li><button><i class="ti-search"></i></button></li>-->
                       <li><button><i class="ti-shopping-cart"></i></button></li>
-                      <li><button><i class="ti-heart"></i></button></li>
+                     <!-- <li><button><i class="ti-heart"></i></button></li>-->
                     </ul>
                   </div>
                   <div class="card-body">
                     <p>{{p.category.nomCategory}}</p>
-                    <h4 class="card-product__title"><a style="width:100px;" href="{{ path('gtidf',{id:p.id})}}">{{ p.nom }}</a></h4>
+                    <h4 class="card-product__title"><a  href="{{ path('gtidf',{id:p.id})}}">{{ p.nom }}</a></h4>
                     <p class="card-product__price">{{p.prixproduit}}TND</p>
                   </div>
                 </div>
-              </div>{% endfor %}
+              </div>
+            {% endfor %}
              <!-- <div class="col-md-6 col-lg-4">
                 <div class="card text-center card-product">
                   <div class="card-product__img">

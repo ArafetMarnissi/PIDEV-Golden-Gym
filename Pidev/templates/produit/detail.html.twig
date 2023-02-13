@@ -1,6 +1,7 @@
 {% extends 'baseback.html.twig' %}
 
 {% block content %}
+<div class="container">
 <table class="table">
 <tbody>
             <tr>
@@ -38,15 +39,16 @@
             <tr>
                 <th>actions</th>
                 <td>
-                <a href="{{path('editp',{id:produits.id})}}">edit</a>
-                <a href="{{path('deletep',{id:produits.id})}}">supprimer</a>
+                <a href="{{path('editp',{id:produits.id})}}" class="btn btn-round btn-twitter">edit</a>
+                <a href="{{path('deletep',{id:produits.id})}}" class="btn btn-round btn-twitter">supprimer</a>
                 </td>
             </tr>
         </tbody>
 </table>
 
 <form action="{{ path('list_produit') }}">
-    <button class="btn btn-primary">afficher</button>
+    <button class="btn btn-round btn-facebook">afficher</button>
 </form>
 
+</div>
 {% endblock %}
