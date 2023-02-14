@@ -52,9 +52,12 @@ class Commande
         min: 8,
         max: 8,
         minMessage: 'votre numéro de téléphone n\'est pas valide',
-
     )]
     private ?string $telephone = null;
+
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $User = null;
 
     public function __construct()
     {
@@ -155,6 +158,18 @@ class Commande
     public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }
