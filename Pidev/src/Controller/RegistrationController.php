@@ -25,15 +25,15 @@ class RegistrationController extends AbstractController
         return $this->render('home.html.twig', [
             'controller_name' => 'RegistrationController',
         ]);
-    } 
+    }
     public function __construct(UserPasswordHasherInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
     }
 
     #[Route('/inscription', name: 'security_registration')]
-    public function registration(HttpFoundationRequest $request,PersistenceManagerRegistry $doctrine) : Response
-    {   
+    public function registration(HttpFoundationRequest $request, PersistenceManagerRegistry $doctrine): Response
+    {
         $user = new User();
 
         $form = $this->createForm(UserType::class, $user);

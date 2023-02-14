@@ -3,10 +3,16 @@
 namespace App\Form;
 
 use App\Entity\Commande;
+
 use Symfony\Component\Form\AbstractType;
+
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
+
 
 class CommandeType extends AbstractType
 {
@@ -16,35 +22,18 @@ class CommandeType extends AbstractType
 
             ->add('AdresseLivraison')
             ->add('prixCommande')
-            ->add('methodePaiement', RadioType::class, [
-                'label' => 'Payment Method',
-                'expanded' => true,
+            ->add('methodePaiement', ChoiceType::class, [
+                'label' => 'Méthode de paiement',
                 'choices' => [
-                    'Check' => 'check',
-                    'Credit Card' => 'credit_card',
-                    'Cash on Delivery' => 'cod',
+                    'paiement par chèque' => 'Chèque',
+                    'paiement par carte bancaire' => 'Carte bancaire',
+                    'paiement à la livraison' => 'à la livraison',
                 ],
+                'expanded' => true,
+                'multiple' => false,
+
             ])
-            // ->add('methodePaiement', RadioType::class, [
-            //     'label' => 'Méthode de paiement',
-            //     'expanded' => true,
-            //     'choices' => [
-            //         'Chèque' => 'check',
-            //         'Carte bancaire' => 'credit_card',
-            //         'Livraison' => 'delivery',
-            //     ],
-            //     'required' => true,
-            // ])
-            // ->add('methodePaiement', RadioType::class, [
-            //     // 'label' => 'Mon bouton radio',
-            //     'expanded' => true,
-            //     'multiple' => false,
-            //     'choices' => [
-            //         'Option 1' => 'paiement par chèque',
-            //         'Option 2' => 'paiement par carte bancaire',
-            //         'Option 3' => 'paiement à la livraison',
-            //     ],
-            // ])
+
             ->add('telephone');
     }
 

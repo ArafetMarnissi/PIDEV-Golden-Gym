@@ -37,12 +37,12 @@ class ProduitType extends AbstractType
                 ],
             ])
             ->add('dateExpiration')
-            ->add('category',EntityType::class,[
-                'class'=>Category::class,
-                'choice_label'=>'id',
-                'multiple'=>false,
-                'expanded'=>false,])
-        ;
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'nomCategory',
+                'multiple' => false,
+                'expanded' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

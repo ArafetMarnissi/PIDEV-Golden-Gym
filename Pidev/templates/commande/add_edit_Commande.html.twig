@@ -19,8 +19,11 @@
 
 			<div>{{form_row(formCommande.prixCommande,{'attr': {'placeholder':'Prix de la commande',}})}}</div>
 
-			<div>{{form_row(formCommande.methodePaiement,{'attr': {'placeholder':'méthode de paiement'}})}}</div>
+
 			<div>{{form_row(formCommande.telephone,{'attr': {'placeholder':'votre numéro de téléphone'}})}}</div>
+			<div>{{form_row(formCommande.methodePaiement,{'attr': {'placeholder':'méthode de paiement', 'type': 'radio'}})}}</div>
+
+
 			<button type='submit' class="btn btn-round btn-facebook" href="{{ path('Affichagecommande') }}">
 				{% if editMode %}
 					Enregistrer
