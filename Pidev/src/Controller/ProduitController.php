@@ -43,7 +43,7 @@ class ProduitController extends AbstractController
         $produit = new Produit;
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $brochureFile = $form->get('imageProduit')->getData();
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -84,7 +84,7 @@ class ProduitController extends AbstractController
         $produits = $repository->find($id);
         $form = $this->createForm(ProduitType::class, $produits);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $brochureFile = $form->get('imageProduit')->getData();
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -138,6 +138,4 @@ class ProduitController extends AbstractController
             'id' => $id,
         ]);
     }
-    
-
 }
