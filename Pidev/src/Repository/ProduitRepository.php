@@ -63,4 +63,10 @@ class ProduitRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function findPbycategory($n)
+    {
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager->createQuery("SELECT p FROM App\Entity\Produit p JOIN p.ctegory c WHERE c.nomcategory=:n")->setParameter('n',$n);
+        return $query->getResult();
+    }
 }

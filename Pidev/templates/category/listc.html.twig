@@ -4,9 +4,12 @@
 {% block content %}
 <div class="container">
 <br>
-<h1>Liste des produits</h1>
+<h1>Liste des categorie</h1>
 <form action="{{ path('addcat') }}">
     <button class="btn btn-round btn-facebook">Ajouter</button>
+</form>
+<form action="{{ path('list_produit') }}">
+    <button class="btn btn-round btn-facebook">Afficher produit</button>
 </form>
 <br>
 <br>
