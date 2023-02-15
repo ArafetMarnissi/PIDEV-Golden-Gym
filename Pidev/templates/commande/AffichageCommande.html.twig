@@ -1,0 +1,56 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Liste des Commandes
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		{# <table class="table" style="width: 50%; margin: 0 auto;"> #}
+		<center>
+			<h2>Liste des Commandes</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id Commande</th>
+						<th>Id Client</th>
+						<th>Adresse Livraison</th>
+						<th>Prix Commande</th>
+						<th>Meth Paiement</th>
+						<th>Téléphone</th>
+
+					</tr>
+				</thead>
+				{% for commande in commandes %}
+					<tr>
+						<td>{{ commande.id }}</td>
+						<td>{{ commande.user.id }}</td>
+						<td>{{ commande.AdresseLivraison }}</td>
+						<td>{{ commande.prixCommande }}</td>
+						<td>{{ commande.methodePaiement }}</td>
+						<td>{{ commande.telephone }}</td>
+
+
+						<td>
+							<a class="btn btn-sm btn-success" href="{{ path('modifier_commande',{'id' : commande.id}) }}">Modifier</a>
+						</td>
+						<td>
+							<a class="btn btn-sm btn-danger" href="{{ path('supprimer_commande',{'id' : commande.id}) }}">Supprimer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+
+			<div class="container">
+				<a class="btn btn-round btn-facebook" href="{{ path('ajouter_commande') }}">Ajouter Commande</a>
+			</div>
+		</center>
+	</div>
+
+
+{% endblock %}

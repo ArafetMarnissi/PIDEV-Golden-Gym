@@ -15,4 +15,12 @@ class TestController extends AbstractController
             'controller_name' => 'TestController',
         ]);
     }
+
+    /* #[Route('/test1', name: 'app_test')]
+    public function index1(): Response
+    {
+        return $this->render('base.html.twig', [
+            'controller_name' => 'TestController',
+        ]);
+    }*/
 }

@@ -18,7 +18,7 @@ class Activite
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Le nom de l'activité est obligatoire")]
     #[Assert\Length(min:2,max:15,minMessage:"Le nom de l'activité doit comporter au moins {{ limit }} caractéres", maxMessage:"Le nom de l'activité doit comporter au maximum {{ limit }} caractéres")]
-    #[Assert\Regex(pattern: '/^[a-z]+$/i',htmlPattern: '^[a-zA-Z]+$',message:"Le nom de l'activité doit contenir que des lettres")]
+    #[Assert\Regex(pattern: '/^[a-z\s]+$/i',htmlPattern: '^[a-zA-Z\s]+$',message:"Le nom de l'activité doit contenir que des lettres")]
     private ?string $nomAcitivite = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -37,13 +37,16 @@ class Activite
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Le nom du coach est obligatoire")]
     #[Assert\Length(min:2,minMessage:"Le nom du coach doit comporter au moins {{ limit }} caractéres")]
-    #[Assert\Regex(pattern: '/^[a-z]+$/i',htmlPattern: '^[a-zA-Z]+$',message:"Le nom du coach doit contenir que des lettres")]
+    #[Assert\Regex(pattern: '/^[a-z\s]+$/i',htmlPattern: '^[a-zA-Z\s]+$',message:"Le nom du coach doit contenir que des lettres")]
     private ?string $coach = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message:"Il faut donner le nombre de places")]
     #[Assert\Positive(message:"Nombre de places doit être positif")]
     private ?int $nbrePlace = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Image = null;
 
     public function getId(): ?int
     {
@@ -118,6 +121,18 @@ class Activite
     public function setNbrePlace(int $nbrePlace): self
     {
         $this->nbrePlace = $nbrePlace;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->Image;
+    }
+
+    public function setImage(?string $Image): self
+    {
+        $this->Image = $Image;
 
         return $this;
     }

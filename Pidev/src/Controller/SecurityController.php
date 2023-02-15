@@ -37,6 +37,6 @@ class SecurityController extends AbstractController
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): Response
     {
-        return $this->redirectToRoute('app_login');
+        return $this->render('security/login.html.twig');
     }
 }

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
@@ -17,21 +18,29 @@ class Produit
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le nom du produit est obligatoire")]
+    #[Assert\Regex(pattern: '/^[a-z\s]+$/i',htmlPattern: '^[a-zA-Z\s]+$',message:"Le nom du produit doit contenir que des lettres")]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message:"La description du produit est obligatoire")]
+    #[Assert\Length(min:10,minMessage:"Le nom du produit doit comporter au moins {{ limit }} caractéres")]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Le prix du produit est obligatoire")]
+    #[Assert\Regex(pattern: '/^\d+(\.\d{1,2})?$/',message:"Le prix du produit doit avoir max 2 chiffres apres la virgule")]
     private ?float $prixProduit = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"La quantite du produit est obligatoire")]
     private ?int $quantiteProduit = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable:true)]
     private ?string $imageProduit = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\GreaterThanOrEqual('today',message:"La date d'expiration doit être supérieur à la date d'aujourd'hui")]
     private ?\DateTimeInterface $dateExpiration = null;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
