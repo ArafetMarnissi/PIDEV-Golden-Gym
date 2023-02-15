@@ -29,7 +29,7 @@ class CommandeType extends AbstractType
                     'paiement par carte bancaire' => 'Carte bancaire',
                     'paiement à la livraison' => 'à la livraison',
                 ],
-                'expanded' => true,
+                'expanded' => false,
                 'multiple' => false,
 
             ])

@@ -4,6 +4,11 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+        <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+        <link rel="stylesheet" href="css/style1.css"> <!-- Resource style -->
+        <script src="js/modernizr.js"></script> <!-- Modernizr -->		
 		<title>GoldenGym</title>
 		<link
 		rel="icon" href="{{asset('img/logo1.png')}}" type="image/png">
@@ -18,6 +23,7 @@
 			<link rel="stylesheet" href="{{asset('vendors/owl-carousel/owl.theme.default.min.css')}}">
 			<link rel="stylesheet" href="{{asset('vendors/owl-carousel/owl.carousel.min.css')}}">
 			<link rel="stylesheet" href="{{asset('css/style.css')}}">
+			<link rel="stylesheet" href="{{asset('css/style1.css')}}">
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
 
@@ -62,7 +68,7 @@
 																																																																																																																																																																																																																																																																																																																																																																																																																								                -->
 									</li>
 									<li class="nav-item submenu dropdown">
-										<a href="" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Abonnement</a>
+										<a href="{{path('list_AbonnementC')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Abonnement</a>
 										<!--
 																																																																																																																																																																																																																																																																																																																																																																																																																								                <ul class="dropdown-menu">
 																																																																																																																																																																																																																																																																																																																																																																																																																								                  <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
