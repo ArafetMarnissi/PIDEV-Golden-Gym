@@ -6,6 +6,11 @@
 <br>
 <br>
 <div class="container">
+    {% if editmode %}
+       <h2> Modification d'un produit</h2>
+    {% else %}
+        <h2>Ajout d'un produit</h2>
+    {% endif %}
 
 {{form_start(formp,{'attr': {'novalidate': 'novalidate'}})}}
 {{form_row(formp.nom,{'attr': {'placeholder':'Nom Produit','class':'form-control-lg'}})}}
@@ -23,8 +28,6 @@
                 {% endif %}
                 </button>
                 {{form_end(formp)}}
-    <button class="btn btn-round btn-facebook" href="{{ path('list_produit') }}"> 
-    afficher</button>
     
 </div>
 
