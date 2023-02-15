@@ -1,0 +1,213 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Abonnements{% endblock %}
+{% block body %}
+	<div class="cd-pricing-container cd-full-width cd-secondary-theme">
+		<div class="cd-pricing-switcher">
+			<p class="fieldset">
+				<input type="radio" name="duration-1" value="monthly" id="monthly-1" checked>
+				<label for="monthly-1">Mensuel</label>
+				<input type="radio" name="duration-1" value="yearly" id="yearly-1">
+				<label for="yearly-1">Annuel</label>
+				<span class="cd-switch"></span>
+			</p>
+		</div> <!-- .cd-pricing-switcher -->
+		
+		<ul class="cd-pricing-list cd-bounce-invert">
+			<li>
+				<ul class="cd-pricing-wrapper">
+					{% for abonnement in abonnements %}
+					{% if abonnement.nomAbonnement =="Basic" and abonnement.dureeAbonnement == "Mensuel" %}
+				
+					<li data-type="monthly" class="is-visible">
+						<header class="cd-pricing-header">
+							<h2>{{ abonnement.nomAbonnement }}</h2>
+
+							<div class="cd-price">
+								<span class="cd-currency">dt</span>
+								<span class="cd-value">{{ abonnement.prixAbonnement }}</span>
+								<span class="cd-duration">{{ abonnement.dureeAbonnement }}</span>
+							</div>
+						</header> <!-- .cd-pricing-header -->
+
+						<div class="cd-pricing-body">
+							<ul class="cd-pricing-features">
+								<li><em>Tous</em> Les activités</li>
+								<li><em>Sans</em> Coach Privé</li>
+								<li><em>Sans</em> Nutritioniste</li>
+								<li><em>24/7</em> Accés au salle de sport</li>
+							</ul>
+						</div> <!-- .cd-pricing-body -->
+
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
+						</footer> <!-- .cd-pricing-footer -->
+					</li>
+					{% endif %}
+					{% endfor %}
+
+
+
+
+
+					<li data-type="yearly" class="is-hidden">
+					{% for abonnement in abonnements %}
+					{% if abonnement.nomAbonnement =="Basic" and abonnement.dureeAbonnement == "Annuel" %}
+						<header class="cd-pricing-header">
+							<h2>{{ abonnement.nomAbonnement }}</h2>
+							<div class="cd-price">
+								<span class="cd-currency">dt</span>
+								<span class="cd-value">{{ abonnement.prixAbonnement }}</span>
+								<span class="cd-duration">{{ abonnement.dureeAbonnement }}</span>
+							</div>
+						</header> <!-- .cd-pricing-header -->
+
+						<div class="cd-pricing-body">
+							<ul class="cd-pricing-features">
+								<li><em>Tous</em> Les activités</li>
+								<li><em>Sans</em> Coach Privé</li>
+								<li><em>Sans</em> Nutritioniste</li>
+								<li><em>24/7</em> Accés au salle de sport</li>
+							</ul>
+						</div> <!-- .cd-pricing-body -->
+
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
+						</footer> <!-- .cd-pricing-footer -->
+					</li>
+				</ul> <!-- .cd-pricing-wrapper -->
+			</li>
+			{% endif %}
+			{% endfor %}
+
+			<li class="cd-popular">
+				<ul class="cd-pricing-wrapper">
+				{% for abonnement in abonnements %}
+				{% if abonnement.nomAbonnement =="Pro" and abonnement.dureeAbonnement == "Mensuel" %}
+					<li data-type="monthly" class="is-visible">
+						<header class="cd-pricing-header">
+							<h2>{{ abonnement.nomAbonnement }}</h2>
+
+							<div class="cd-price">
+								<span class="cd-currency">dt</span>
+								<span class="cd-value">{{ abonnement.prixAbonnement }}</span>
+								<span class="cd-duration">{{ abonnement.dureeAbonnement }}</span>
+							</div>
+						</header> <!-- .cd-pricing-header -->
+
+						<div class="cd-pricing-body">
+							<ul class="cd-pricing-features">
+								<li><em>Tous</em> Les activités</li>
+								<li><em>Avec</em> Coach Privé</li>
+								<li><em>Sans</em> Nutritioniste</li>
+								<li><em>24/7</em> Accés au salle de sport</li>
+							</ul>
+						</div> <!-- .cd-pricing-body -->
+
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
+						</footer> <!-- .cd-pricing-footer -->
+					</li>
+					{% endif %}
+					{% endfor %}
+
+					<li data-type="yearly" class="is-hidden">
+					{% for abonnement in abonnements %}
+					{% if abonnement.nomAbonnement =="Pro" and abonnement.dureeAbonnement == "Annuel" %}
+						<header class="cd-pricing-header">
+							<h2>{{ abonnement.nomAbonnement }}</h2>
+
+							<div class="cd-price">
+								<span class="cd-currency">dt</span>
+								<span class="cd-value">{{ abonnement.prixAbonnement }}</span>
+								<span class="cd-duration">{{ abonnement.dureeAbonnement }}</span>
+							</div>
+						</header> <!-- .cd-pricing-header -->
+
+						<div class="cd-pricing-body">
+							<ul class="cd-pricing-features">
+								<li><em>Tous</em> Les activités</li>
+								<li><em>Avec</em> Coach Privé</li>
+								<li><em>Sans</em> Nutritioniste</li>
+								<li><em>24/7</em> Accés au salle de sport</li>
+							</ul>
+						</div> <!-- .cd-pricing-body -->
+
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
+						</footer> <!-- .cd-pricing-footer -->
+					</li>
+					{% endif %}
+					{% endfor %}
+
+				</ul> <!-- .cd-pricing-wrapper -->
+			</li>
+
+			<li>
+				<ul class="cd-pricing-wrapper">
+				{% for abonnement in abonnements %}
+				{% if abonnement.nomAbonnement =="Premium" and abonnement.dureeAbonnement == "Mensuel" %}
+					<li data-type="monthly" class="is-visible">
+						<header class="cd-pricing-header">
+							<h2>{{ abonnement.nomAbonnement }}</h2>
+
+							<div class="cd-price">
+								<span class="cd-currency">dt</span>
+								<span class="cd-value">{{ abonnement.prixAbonnement }}</span>
+								<span class="cd-duration">{{ abonnement.dureeAbonnement }}</span>
+							</div>
+						</header> <!-- .cd-pricing-header -->
+
+						<div class="cd-pricing-body">
+							<ul class="cd-pricing-features">
+								<li><em>Tous</em> Les activités</li>
+								<li><em>Avec</em> Coach Privé</li>
+								<li><em>Avec</em> Nutritioniste</li>
+								<li><em>24/7</em> Accés au salle de sport</li>
+							</ul>
+						</div> <!-- .cd-pricing-body -->
+
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
+						</footer>  <!-- .cd-pricing-footer -->
+					</li>
+					{% endif %}
+					{% endfor %}
+
+
+					<li data-type="yearly" class="is-hidden">
+					{% for abonnement in abonnements %}
+					{% if abonnement.nomAbonnement =="Premium" and abonnement.dureeAbonnement == "Annuel" %}					
+						<header class="cd-pricing-header">
+							<h2>{{ abonnement.nomAbonnement }}</h2>
+							<div class="cd-price">
+								<span class="cd-currency">dt</span>
+								<span class="cd-value">{{ abonnement.prixAbonnement }}</span>
+								<span class="cd-duration">{{ abonnement.dureeAbonnement }}</span>
+							</div>
+						</header> <!-- .cd-pricing-header -->
+
+						<div class="cd-pricing-body">
+							<ul class="cd-pricing-features">
+								<li><em>Tous</em> Les activités</li>
+								<li><em>Avec</em> Coach Privé</li>
+								<li><em>Avec</em> Nutritioniste</li>
+								<li><em>24/7</em> Accés au salle de sport</li>
+							</ul>
+						</div> <!-- .cd-pricing-body -->
+
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
+						</footer>  <!-- .cd-pricing-footer -->
+					</li>
+					{% endif %}
+					{% endfor %}					
+				</ul> <!-- .cd-pricing-wrapper -->
+			</li>
+		</ul> <!-- .cd-pricing-list -->
+	</div> <!-- .cd-pricing-container -->
+
+
+
+
+{% endblock %}
