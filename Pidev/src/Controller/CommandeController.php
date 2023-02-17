@@ -29,7 +29,7 @@ class CommandeController extends AbstractController
         $commande = new commande();
         //à changer
         $user = new user();
-        $user = $userRepository->find(177);
+        $user = $userRepository->find(2);
         $commande->setUser($user);
         //
         $form = $this->createForm(commandeType::class, $commande);
@@ -38,6 +38,7 @@ class CommandeController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($commande);
             $em->flush();
+            //parcourir le panier, pour chaque element du panier est instancié un objet ligne commande  
 
 
             return $this->redirectToRoute('Affichagecommande');

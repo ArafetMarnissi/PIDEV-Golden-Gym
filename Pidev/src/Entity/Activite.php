@@ -34,11 +34,11 @@ class Activite
     #[Assert\GreaterThanOrEqual('today',message:"La date de l'activité doit être supérieur à la date actuelle")]
     private ?\DateTimeInterface $DateActivite = null;
 
-    #[ORM\Column(length: 255)]
+    /*#[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Le nom du coach est obligatoire")]
     #[Assert\Length(min:2,minMessage:"Le nom du coach doit comporter au moins {{ limit }} caractéres")]
     #[Assert\Regex(pattern: '/^[a-z\s]+$/i',htmlPattern: '^[a-zA-Z\s]+$',message:"Le nom du coach doit contenir que des lettres")]
-    private ?string $coach = null;
+    private ?string $coach = null;*/
 
     #[ORM\Column]
     #[Assert\NotBlank(message:"Il faut donner le nombre de places")]
@@ -47,6 +47,12 @@ class Activite
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Image = null;
+
+    #[ORM\ManyToOne]
+    private ?Coach $Coach = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $TimeActivite = null;
 
     public function getId(): ?int
     {
@@ -101,7 +107,7 @@ class Activite
         return $this;
     }
 
-    public function getCoach(): ?string
+    /*public function getCoach(): ?string
     {
         return $this->coach;
     }
@@ -111,7 +117,7 @@ class Activite
         $this->coach = $coach;
 
         return $this;
-    }
+    }*/
 
     public function getNbrePlace(): ?int
     {
@@ -133,6 +139,30 @@ class Activite
     public function setImage(?string $Image): self
     {
         $this->Image = $Image;
+
+        return $this;
+    }
+
+    public function getCoach(): ?Coach
+    {
+        return $this->Coach;
+    }
+
+    public function setCoach(?Coach $Coach): self
+    {
+        $this->Coach = $Coach;
+
+        return $this;
+    }
+
+    public function getTimeActivite(): ?\DateTimeInterface
+    {
+        return $this->TimeActivite;
+    }
+
+    public function setTimeActivite(?\DateTimeInterface $TimeActivite): self
+    {
+        $this->TimeActivite = $TimeActivite;
 
         return $this;
     }

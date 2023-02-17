@@ -9,14 +9,14 @@
 <br>
 <br>
 <br>
-<center>
+<div class="container">
 <h1>Liste des abonnements</h1>
 <table class="table">
 <thead>
     <tr>
         <th>Id</th>
         <th>Nom</th>
-        <th>Prix</th>
+        <th>Prix(en dt)</th>
         <th>Durée</th>
     </tr>
     </thead>
@@ -30,12 +30,11 @@
         <td><a class="btn btn-round btn-twitter" href="{{ path('modifier_un_abonnement',{'id' : abonnement.id}) }}">Modifier</a></td>
         <td><a class="btn btn-round btn-twitter" href="{{ path('delete_un_abonnement',{'id' : abonnement.id}) }}">Supprimer</a></td>
         </td>
-        </tr>
+    </tr>
     {% endfor %}
 </table>
-<!--<button  class="btn btn-round btn-facebook" href="{{ path('abonnement_new') }}">Créer un nouvel abonnement</button>-->
 <form action="{{ path('abonnement_new') }}">
     <button class="btn btn-round btn-facebook">Créer un nouvel abonnement</button>
 </form>
-</center>
+</div>
 {% endblock %}

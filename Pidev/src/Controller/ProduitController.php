@@ -43,7 +43,7 @@ class ProduitController extends AbstractController
         $produit = new Produit;
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $brochureFile = $form->get('imageProduit')->getData();
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -84,7 +84,7 @@ class ProduitController extends AbstractController
         $produits = $repository->find($id);
         $form = $this->createForm(ProduitType::class, $produits);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $brochureFile = $form->get('imageProduit')->getData();
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -136,6 +136,23 @@ class ProduitController extends AbstractController
         return $this->render('produit/detailf.html.twig', [
             'produits' => $produits,
             'id' => $id,
+        ]);
+    }
+
+    #[Route('/listpag/{page?1}/{nbr?3}', name: 'list_produitpag')]
+    public function listpag(ManagerRegistry $doctrine,$page,$nbr): Response
+    {
+        $repository = $doctrine->getRepository(Produit::class);
+        $nbproduit=$repository->count([]);
+        $nbpage=ceil($nbproduit/3);
+        $produits = $repository->findBy([],[],$nbr,($page - 1)*$nbr);
+
+        return $this->render('produit/listpag.html.twig', [
+            'produit' => $produits,
+            'ispaginated'=> true,
+            'nbpage'=>$nbpage,
+            'page'=>$page,
+            'nbr'=>$nbr
         ]);
     }
 }

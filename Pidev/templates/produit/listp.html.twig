@@ -38,7 +38,7 @@
                 <td>{{p.prixproduit}}dt</td>
                 <td>{{p.quantiteproduit}}</td>
                 <td><img style="width:200px;" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt=""></td>
-                <td>{{p.dateexpiration|date("Y-m-d")}}</td>
+                <td>{{p.dateexpiration|date("d-m-Y")}}</td>
                 <td>
                 <a href="{{path('editp',{id:p.id})}}" class="btn btn-round btn-twitter">edit</a>
                 <a href="{{path('deletep',{id:p.id})}}" class="btn btn-round btn-twitter">supprimer</a>

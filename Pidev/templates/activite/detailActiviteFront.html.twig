@@ -13,12 +13,17 @@
                               <div class="blog_info text-right">
                                   <ul class="blog_meta list">
                                       <li>
-                                          Coach : {{ activites.coach }}
+                                          Coach : {{ activites.Coach.nomCoach }}
                                               <i class="lnr lnr-user"></i>
                                           
                                       </li>
                                       <li>
-                                          Date : {{ activites.DateActivite|date('Y-m-d')}}
+                                          Date : {{ activites.DateActivite|date('d-m-Y')}}
+                                              <i class="lnr lnr-calendar-full"></i>
+                                          
+                                      </li>
+                                       <li>
+                                          Time : {{ activites.TimeActivite|date('H:i')}}
                                               <i class="lnr lnr-calendar-full"></i>
                                           
                                       </li>
@@ -53,8 +58,8 @@
               <div class="col-lg-4">
                   <div class="blog_right_sidebar">
                       <aside class="single_sidebar_widget author_widget">
-                          <img class="author_img rounded-circle" src="{{ asset("img/blog/author.png") }}" alt="">
-                          <h4>{{ activites.coach }}</h4>
+                          <img class="author_img rounded-circle" src="{{ asset('img/activite/'~activites.Coach.Image)}}" alt="">
+                          <h4>{{ activites.Coach.nomCoach }}</h4>
                           <p>Coach</p>
                           <div class="social_icon">
                               <a href="#">
@@ -83,4 +88,4 @@
   </section>
   <br>
   <br>
-{%endblock%}
+{% endblock %}
