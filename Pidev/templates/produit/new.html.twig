@@ -7,11 +7,11 @@
 <br>
 <div class="container">
     {% if editmode %}
-       <h2> Modification d'un produit</h2>
+      <center><h1> Modifier un produit</h1></center>
     {% else %}
-        <h2>Ajout d'un produit</h2>
+        <center><h2>Ajouter un nouveau produit</h2></center>
     {% endif %}
-
+<br><br>
 {{form_start(formp,{'attr': {'novalidate': 'novalidate'}})}}
 {{form_row(formp.nom,{'attr': {'placeholder':'Nom Produit','class':'form-control-lg'}})}}
 {{form_row(formp.description,{'attr': {'placeholder':'Description','class':'form-control-lg'}})}}
@@ -24,7 +24,7 @@
                 {% if editmode %}
                     modifier
                 {% else %}
-                    ajouter
+                    Ajouter un nouveau produit
                 {% endif %}
                 </button>
                 {{form_end(formp)}}

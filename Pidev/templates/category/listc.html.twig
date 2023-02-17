@@ -4,11 +4,15 @@
 {% block content %}
 <div class="container">
 <br>
-<h1>Liste des categorie</h1>
-<form action="{{ path('addcat') }}">
-    <button class="btn btn-round btn-facebook">Ajouter</button>
-</form>
 <br>
+<br>
+<br>
+<br>
+<br>
+<center>
+<center>
+<h1>Liste des categorie</h1>
+</center>
 <br>
 <br>
 <table class="table">
@@ -45,5 +49,11 @@
         {% endfor %}
         </tbody>
     </table>
+    <center>
+    <form action="{{ path('addcat') }}">
+    <button class="btn btn-round btn-facebook">Ajouter une nouvelle categorie</button>
+    </form>
+    </center>
+    </center>
     </div>
 {% endblock %}
