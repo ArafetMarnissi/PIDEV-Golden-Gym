@@ -86,7 +86,7 @@
 										<a class="nav-link" href="contact.html">Contact</a>
 									</li>
 								</ul>
-
+					{% if not app.user %}
 								<ul class="nav-shop">
 									<li class="nav-item">
 										<a class="button button-header" href="#">Se connecter</a>
@@ -102,6 +102,8 @@
 									</li>
 
 								</ul>
+					{% endif %}
+
 
 							</div>
 						</div>

@@ -39,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $password = null;
     
-    public string $confirm_password;
+    public ?string $confirm_password = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nom = null;
@@ -126,7 +126,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
     
     
-    
+    public function setconfirm_password(string $confirm_password): self
+    {
+        $this->confirm_password = $confirm_password;
+
+        return $this;
+    }
 
    
 
