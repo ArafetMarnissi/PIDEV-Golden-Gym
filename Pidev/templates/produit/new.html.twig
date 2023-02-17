@@ -17,8 +17,8 @@
 {{form_row(formp.description,{'attr': {'placeholder':'Description','class':'form-control-lg'}})}}
 {{form_row(formp.prixProduit,{'attr': {'placeholder':'Prix','class':'form-control-lg'}})}}
 {{form_row(formp.quantiteProduit,{'attr': {'placeholder':'Quantite','class':'form-control-lg'}})}}
-{{form_row(formp.dateExpiration,{'attr': {'placeholder':'date Expiration','class':'form-control-lg'}})}}
-{{form_row(formp.category,{'attr': {'placeholder':'category','class':'form-control-lg'}})}}
+{{form_row(formp.dateExpiration,{'attr': {'placeholder':'date Expiration','class':'form-control-lg' }})}}
+{{form_row(formp.category,{'attr': {'placeholder':'category','class':'form-control-lg', 'class':"mr-sm-2" }})}}
 {{form_row(formp.imageProduit)}}
 <button type='submit' class="btn btn-round btn-facebook" >
                 {% if editmode %}
@@ -32,3 +32,4 @@
 </div>
 
 {% endblock %}
+

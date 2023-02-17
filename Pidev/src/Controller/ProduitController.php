@@ -139,12 +139,12 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/listpag/{page?1}/{nbr?3}', name: 'list_produitpag')]
+    #[Route('/listpag/{page?1}/{nbr?10}', name: 'list_produitpag')]
     public function listpag(ManagerRegistry $doctrine,$page,$nbr): Response
     {
         $repository = $doctrine->getRepository(Produit::class);
         $nbproduit=$repository->count([]);
-        $nbpage=ceil($nbproduit/3);
+        $nbpage=ceil($nbproduit/$nbr);
         $produits = $repository->findBy([],[],$nbr,($page - 1)*$nbr);
 
         return $this->render('produit/listpag.html.twig', [
