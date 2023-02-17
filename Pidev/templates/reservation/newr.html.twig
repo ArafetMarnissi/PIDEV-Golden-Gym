@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<center class="d-flex justify-content-center">
+<div >
+    <h1>Reserver</h1>
+    <br><br>
+    {{form_start(form,{'attr': {'novalidate': 'novalidate'}})}}           
+        <button type='submit' class="cd-select" href="{{ path('list_reservation') }}">Reserver</button>
+    {{form_end(form)}} 
+</div> 
+</center>    
+{% endblock %}

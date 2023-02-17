@@ -8,9 +8,6 @@
 <form action="{{ path('addcat') }}">
     <button class="btn btn-round btn-facebook">Ajouter</button>
 </form>
-<form action="{{ path('list_produit') }}">
-    <button class="btn btn-round btn-facebook">Afficher produit</button>
-</form>
 <br>
 <br>
 <br>
@@ -20,6 +17,7 @@
                 <th>Id</th>
                 <th>nom categorie</th>
                 <th>image categorie</th>
+                <th>produit de cette categorie</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -28,7 +26,13 @@
             <tr>
                 <td>{{ p.id }}</td>
                 <td>{{p.nomCategory}}</td>
-                <td><img style="width:200px;" src="{{asset('uploads/category/'~p.imageCategorie)}}" alt=""></td>
+                <td><img style="width:200px;" src="{{asset('uploads/categorie/'~p.imageCategorie)}}" alt=""></td>
+                <td>
+                    {% for prod in p.Produits %}
+                        <br>
+                       ~{{prod.nom}}
+                    {% endfor %}
+                </td>
                 <td>
                 <a href="{{path('deletecat',{id:p.id})}}" class="btn btn-round btn-twitter">supprimer</a>
                 <a href="{{path('editcat',{id:p.id})}}" class="btn btn-round btn-twitter">modifier</a>

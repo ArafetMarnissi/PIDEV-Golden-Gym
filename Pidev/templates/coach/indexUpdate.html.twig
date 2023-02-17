@@ -1,0 +1,22 @@
+{% extends 'baseback.html.twig' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+<center>
+<div>
+{{form_start(f,{'attr': {'novalidate': 'novalidate'}})}}
+{{form_row(f.nomCoach,{'attr': {'placeholder':'Nom Coach','class':'form-control-lg'}})}}
+{{form_row(f.ageCoach,{'attr': {'placeholder':'Age Coach','class':'form-control-lg'}})}}
+{{form_row(f.Image,{'attr': {'placeholder':'Image','class':'form-control-lg'}})}}
+<button type="submit" class="btn btn-round btn-facebook">Modifier</button>
+{{form_end(f)}}
+</div>
+</center>
+</div>
+{% endblock %}

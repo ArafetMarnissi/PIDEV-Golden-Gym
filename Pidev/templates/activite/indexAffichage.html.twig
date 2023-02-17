@@ -1,6 +1,61 @@
 {% extends 'baseback.html.twig' %}
 
 {% block content %}
+<<<<<<< HEAD
+<div class="container">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h1> Liste des Activites</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Duree</th>
+      <th scope="col">Date </th>
+      <th scope="col">Time </th>
+      <th scope="col">Coach </th>
+      <th scope="col">Nombre places </th>
+      <th scope="col">URL Image </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+    </tr>
+  </thead>
+  <tbody>
+  {%  for a in  activites %}
+    <tr>
+      <td scope="row">{{a.id}}</td>
+      <td>{{a.nomAcitivite}}</td>
+      <td>{{a.descriptionActivite}}</td>
+      <td>{{a.dureeActivite}}</td>
+      <td>{{a.DateActivite|date('d-m-Y')}}</td>
+      <td>{{a.TimeActivite|date('H:i')}}</td>
+      <td>{{a.Coach.nomCoach}}</td>
+      <td>{{a.nbrePlace}}</td>
+      <td>{{a.Image}}</td>
+          <td>  <a class="btn btn-sm btn-success" href="{{ path('updateActivite', {id:a.id})}}">Modifier</a></td>
+      <td>  <a class="btn btn-sm btn-danger" href="{{ path('deleteActivite', {id:a.id}) }}">Supprimer</a></td>
+  
+
+    </tr>
+ 
+    {%  endfor %}
+  </tbody>
+</table>
+<form action="{{ path('addActivite') }}">
+    <button class="btn btn-round btn-facebook">Ajouter</button>
+</form>
+
+</div>
+{% endblock %}
+=======
 	<div class="container">
 		<br>
 		<br>
@@ -61,3 +116,4 @@
 		</center>
 	</div>
 {% endblock %}
+>>>>>>> 0ec3db9f0d2b181a1abe84a12179e7dfba279e79
