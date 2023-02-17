@@ -8,19 +8,21 @@
 <br>
 <br>
 <div class="container">
-<center>
+<center><h1>Créer une nouvelle activité</h1></center>
+<br><br>
 <div>
 {{form_start(f,{'attr': {'novalidate': 'novalidate'}})}}
 {{form_row(f.nomAcitivite,{'attr': {'placeholder':'Nom Activite','class':'form-control-lg'}})}}
 {{form_row(f.descriptionActivite,{'attr': {'placeholder':'Description','class':'form-control-lg'}})}}
 {{form_row(f.dureeActivite,{'attr': {'placeholder':'Duree','class':'form-control-lg'}})}}
 {{form_row(f.DateActivite,{'attr': {'placeholder':'Date','class':'form-control-lg'}})}}
-{{form_row(f.coach,{'attr': {'placeholder':'Coach','class':'form-control-lg'}})}}
+{{form_row(f.TimeActivite,{'attr': {'placeholder':'Time','class':'form-control-lg'}})}}
+{{form_row(f.Coach,{'attr': {'placeholder':'Coach','class':'form-control-lg'}})}}
 {{form_row(f.nbrePlace,{'attr': {'placeholder':'Nombre places','class':'form-control-lg'}})}}
 {{form_row(f.Image,{'attr': {'placeholder':'Image','class':'form-control-lg'}})}}
-<button type="submit" class="btn btn-round btn-facebook">Ajouter</button>
+<center><button type="submit" class="btn btn-round btn-facebook">Ajouter une nouvelle activité</button></center>
 {{form_end(f)}}
 </div>
-</center>
+
 </div>
 {% endblock %}

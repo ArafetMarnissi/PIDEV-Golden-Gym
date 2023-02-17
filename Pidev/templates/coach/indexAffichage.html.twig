@@ -1,0 +1,47 @@
+{% extends 'baseback.html.twig' %}
+
+{% block content %}
+<div class="container">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+
+<h1> Liste des Coachs</h1>
+<br><br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Age</th>
+      <th scope="col">URL Image </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+    </tr>
+  </thead>
+  <tbody>
+  {%  for a in  coach %}
+    <tr>
+      <td scope="row">{{a.id}}</td>
+      <td>{{a.nomCoach}}</td>
+      <td>{{a.ageCoach}}</td>
+      <td><img style="width:100px;" src="{{asset('img/activite/'~a.image)}}" alt=""></td>
+          <td>  <a class="btn btn-round btn-twitter" href="{{ path('updateCoach', {id:a.id})}}">Modifier</a></td>
+      <td>  <a class="btn btn-round btn-twitter" href="{{ path('deleteCoach', {id:a.id}) }}">Supprimer</a></td>
+  
+
+    </tr>
+ 
+    {%  endfor %}
+  </tbody>
+</table>
+<form action="{{ path('addCoach') }}">
+    <button class="btn btn-round btn-facebook">Ajouter un nouveau coach</button>
+</form>
+</center>
+</div>
+{% endblock %}
