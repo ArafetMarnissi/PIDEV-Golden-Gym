@@ -1,5 +1,5 @@
 {% extends 'baseback.html.twig' %}
-{% form_theme formCommande 'bootstrap_5_layout.html.twig' %}
+{# {% form_theme formCommande 'bootstrap_5_layout.html.twig' %} #}
 {% block title %}Gestionnaire de Commandes
 {% endblock %}
 
@@ -19,8 +19,11 @@
 
 			<div>{{form_row(formCommande.prixCommande,{'attr': {'placeholder':'Prix de la commande',}})}}</div>
 
-			<div>{{form_row(formCommande.methodePaiement,{'attr': {'placeholder':'méthode de paiement'}})}}</div>
+
 			<div>{{form_row(formCommande.telephone,{'attr': {'placeholder':'votre numéro de téléphone'}})}}</div>
+			<div>{{form_row(formCommande.methodePaiement,{'attr': {'placeholder':'méthode de paiement'}})}}</div>
+
+
 			<button type='submit' class="btn btn-round btn-facebook" href="{{ path('Affichagecommande') }}">
 				{% if editMode %}
 					Enregistrer
@@ -34,4 +37,5 @@
 			</div>
 		</div>
 	</div>
-</center>{% endblock %}
+
+{% endblock %}

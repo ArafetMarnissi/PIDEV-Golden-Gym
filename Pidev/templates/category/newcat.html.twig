@@ -1,0 +1,29 @@
+{% extends 'baseback.html.twig' %}
+{% form_theme formc 'bootstrap_5_layout.html.twig' %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+    {% if editmode %}
+        <h2>Modification d'une categorie</h2>
+    {% else %}
+        <h2>Ajout d'une categorie</h2>
+    {% endif %}
+
+{{form_start(formc,{'attr': {'novalidate': 'novalidate'}})}}
+{{form_row(formc.nomCategory,{'attr': {'placeholder':'nom categorie','class':'form-control-lg'}})}}
+{{form_row(formc.imageCategorie)}}
+<button type='submit' class="btn btn-round btn-facebook" >
+                {% if editmode %}
+                    modifier
+                {% else %}
+                    ajouter
+                {% endif %}
+                </button>
+                {{form_end(formc)}}
+    
+</div>
+
+{% endblock %}

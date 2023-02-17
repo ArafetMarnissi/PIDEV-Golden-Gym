@@ -2,10 +2,11 @@
 
 {% block title %}gestion des produits{% endblock %}
 {% block content %}
+<div class="container">
 <br>
 <h1>Liste des produits</h1>
 <form action="{{ path('addp') }}">
-    <button class="btn btn-primary">Ajouter</button>
+    <button class="btn btn-round btn-facebook">Ajouter</button>
 </form>
 <br>
 <br>
@@ -22,6 +23,7 @@
                 <th>image produit</th>
                 <th>date expiration</th>
                 <th>actions</th>
+                <th></th>
 
 
             </tr>
@@ -36,12 +38,12 @@
                 <td>{{p.prixproduit}}dt</td>
                 <td>{{p.quantiteproduit}}</td>
                 <td><img style="width:200px;" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt=""></td>
-                <td>{{p.dateexpiration|date("Y-m-d")}}</td>
+                <td>{{p.dateexpiration|date("d-m-Y")}}</td>
                 <td>
-                <a href="{{path('editp',{id:p.id})}}">edit</a>
-                <a href="{{path('getid',{id:p.id})}}">show</a>
-                <a href="{{path('deletep',{id:p.id})}}">supprimer</a>
+                <a href="{{path('editp',{id:p.id})}}" class="btn btn-round btn-twitter">edit</a>
+                <a href="{{path('deletep',{id:p.id})}}" class="btn btn-round btn-twitter">supprimer</a>
                 </td>
+                <td><a href="{{path('getid',{id:p.id})}}" class="btn btn-round btn-twitter">show</a></td>
             </tr>
         {% else %}
             <tr>
@@ -50,4 +52,5 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 {% endblock %}

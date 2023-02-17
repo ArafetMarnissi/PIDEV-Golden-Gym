@@ -28,29 +28,27 @@ class ProduitController extends AbstractController
     #[Route('/listp', name: 'list_produit')]
     public function listp(ManagerRegistry $doctrine): Response
     {
-        $repository= $doctrine->getRepository(Produit::class);
-        $produits=$repository->findAll();
+        $repository = $doctrine->getRepository(Produit::class);
+        $produits = $repository->findAll();
         return $this->render('produit/listp.html.twig', [
             'produit' => $produits,
         ]);
     }
 
-    #[Route('/addp',name:'addp')]
-    public function addp (HttpFoundationRequest $request,ManagerRegistry $doctrine, SluggerInterface $slugger): Response
+    #[Route('/addp', name: 'addp')]
+    public function addp(HttpFoundationRequest $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
     {
         //$repository= $doctrine->getRepository(Produit::class);
         //$produits=$repository->findAll();
-        $produit=new Produit;
-        $form=$this->createForm(ProduitType::class,$produit);
-        $form->add('ajouter',SubmitType::class);
+        $produit = new Produit;
+        $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
-        if ($form->isSubmitted())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $brochureFile = $form->get('imageProduit')->getData();
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $brochureFile->guessExtension();
                 try {
                     $brochureFile->move(
                         $this->getParameter('produit_image'),
@@ -60,48 +58,60 @@ class ProduitController extends AbstractController
                 }
                 $produit->setImageProduit($newFilename);
             }
-            $em=$doctrine->getManager();
+            $em = $doctrine->getManager();
             $em->persist($produit);
             $em->flush();
             return $this->redirectToRoute('list_produit');
         }
-        return $this->renderForm('produit/new.html.twig',['formp'=>$form]);
+        return $this->renderForm('produit/new.html.twig', ['formp' => $form, "editmode" => $produit->getid() !== null]);
     }
 
-    #[Route('/deletep/{id}',name: 'deletep')]
-    public function deletep (ManagerRegistry $doctrine,$id):Response
-    {  
-        $repository=$doctrine->getRepository(Produit::class);
-        $produit=$repository->find($id);
-        $em=$doctrine->getManager();
+    #[Route('/deletep/{id}', name: 'deletep')]
+    public function deletep(ManagerRegistry $doctrine, $id): Response
+    {
+        $repository = $doctrine->getRepository(Produit::class);
+        $produit = $repository->find($id);
+        $em = $doctrine->getManager();
         $em->remove($produit);
         $em->flush();
         return $this->redirectToRoute('list_produit');
     }
 
     #[Route('/editp/{id}', name: 'editp')]
-    public function editp(HttpFoundationRequest $request,ManagerRegistry $doctrine,$id ): Response
-    {  
-        $repository= $doctrine->getRepository(Produit::class);
-        $produits=$repository->find($id);
-       $form=$this->createForm(ProduitType::class,$produits);
-       $form->add('modifier',SubmitType::class);
-       $form->handleRequest($request);
-       if($form->isSubmitted())
-       {
-        $em=$doctrine->getManager();
-        $produits->setnom($form->get('nom')->getData());
-        $em->flush();
-        return $this->redirectToRoute('list_produit');
-       }
-       return $this->renderForm('produit/new.html.twig',['formp'=>$form]);
+    public function editp(HttpFoundationRequest $request, ManagerRegistry $doctrine, $id, SluggerInterface $slugger): Response
+    {
+        $repository = $doctrine->getRepository(Produit::class);
+        $produits = $repository->find($id);
+        $form = $this->createForm(ProduitType::class, $produits);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $brochureFile = $form->get('imageProduit')->getData();
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $brochureFile->guessExtension();
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('produit_image'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                }
+                $produits->setImageProduit($newFilename);
+            }
+            $em = $doctrine->getManager();
+            $produits->setnom($form->get('nom')->getData());
+            $em->flush();
+            return $this->redirectToRoute('list_produit');
+        }
+        return $this->renderForm('produit/new.html.twig', ['formp' => $form, "editmode" => $produits->getid() !== null]);
     }
 
     #[Route('/get/{id}', name: 'getid')]
-    public function show_id(ManagerRegistry $doctrine,$id): Response
+    public function show_id(ManagerRegistry $doctrine, $id): Response
     {
-        $repository= $doctrine->getRepository(produit::class);
-        $produits=$repository->find($id);
+        $repository = $doctrine->getRepository(produit::class);
+        $produits = $repository->find($id);
         return $this->render('produit/detail.html.twig', [
             'produits' => $produits,
             'id' => $id,
@@ -111,21 +121,38 @@ class ProduitController extends AbstractController
     #[Route('/listpf', name: 'list_produit_front')]
     public function listpf(ManagerRegistry $doctrine): Response
     {
-        $repository= $doctrine->getRepository(Produit::class);
-        $produits=$repository->findAll();
+        $repository = $doctrine->getRepository(Produit::class);
+        $produits = $repository->findAll();
         return $this->render('produit/listpf.html.twig', [
             'produit' => $produits,
         ]);
     }
 
     #[Route('/getf/{id}', name: 'gtidf')]
-    public function show_idf(ManagerRegistry $doctrine,$id): Response
+    public function show_idf(ManagerRegistry $doctrine, $id): Response
     {
-        $repository= $doctrine->getRepository(produit::class);
-        $produits=$repository->find($id);
+        $repository = $doctrine->getRepository(produit::class);
+        $produits = $repository->find($id);
         return $this->render('produit/detailf.html.twig', [
             'produits' => $produits,
             'id' => $id,
+        ]);
+    }
+
+    #[Route('/listpag/{page?1}/{nbr?3}', name: 'list_produitpag')]
+    public function listpag(ManagerRegistry $doctrine,$page,$nbr): Response
+    {
+        $repository = $doctrine->getRepository(Produit::class);
+        $nbproduit=$repository->count([]);
+        $nbpage=ceil($nbproduit/3);
+        $produits = $repository->findBy([],[],$nbr,($page - 1)*$nbr);
+
+        return $this->render('produit/listpag.html.twig', [
+            'produit' => $produits,
+            'ispaginated'=> true,
+            'nbpage'=>$nbpage,
+            'page'=>$page,
+            'nbr'=>$nbr
         ]);
     }
 }

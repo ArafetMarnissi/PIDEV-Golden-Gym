@@ -1,0 +1,49 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}gestion des produits{% endblock %}
+{% block content %}
+<div class="container">
+<br>
+<h1>Liste des categorie</h1>
+<form action="{{ path('addcat') }}">
+    <button class="btn btn-round btn-facebook">Ajouter</button>
+</form>
+<br>
+<br>
+<br>
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>nom categorie</th>
+                <th>image categorie</th>
+                <th>produit de cette categorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for p in produit %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{p.nomCategory}}</td>
+                <td><img style="width:200px;" src="{{asset('uploads/categorie/'~p.imageCategorie)}}" alt=""></td>
+                <td>
+                    {% for prod in p.Produits %}
+                        <br>
+                       ~{{prod.nom}}
+                    {% endfor %}
+                </td>
+                <td>
+                <a href="{{path('deletecat',{id:p.id})}}" class="btn btn-round btn-twitter">supprimer</a>
+                <a href="{{path('editcat',{id:p.id})}}" class="btn btn-round btn-twitter">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}
