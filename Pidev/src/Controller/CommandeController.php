@@ -29,6 +29,10 @@ class CommandeController extends AbstractController
     #[Route('/ajouterCommande', name: 'ajouter_commande')]
     public function  add(ManagerRegistry $doctrine, Request  $request, UserRepository $userRepository,SessionInterface $session, ProduitRepository $produitRepository): Response
     {
+        $total=$this->CalculPrixTotal($session,$produitRepository);
+        
+
+
         $commande = new commande();
         //recupérer l id de utilisateur connecté
         $user = $this->getUser();
@@ -37,6 +41,7 @@ class CommandeController extends AbstractController
        }
        // ajouter l utilisateur a la commande
         $commande->setUser($userRepository->find($id));
+        $commande->setPrixCommande($total);
         
 
         $form = $this->createForm(commandeType::class, $commande);
@@ -69,7 +74,7 @@ class CommandeController extends AbstractController
         }
         return $this->renderForm(
             "commande/add_edit_Commande.html.twig",
-            ["formCommande" => $form, "editMode" => $commande->getId() !== null]
+            ["formCommande" => $form, "editMode" => $commande->getId() !== null,'PrixTotal'=>$total]
         );
     }
 
@@ -86,9 +91,12 @@ class CommandeController extends AbstractController
     #[Route('/updatecommande/{id}', name: 'modifier_commande')]
     public function  update(ManagerRegistry $doctrine, $id,  Request  $request): Response
     {
+        
         $commande = $doctrine
             ->getRepository(commande::class)
             ->find($id);
+            $total=$commande->getPrixCommande();
+            
         $form = $this->createForm(commandeType::class, $commande);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -100,7 +108,8 @@ class CommandeController extends AbstractController
             "commande/add_edit_Commande.html.twig",
             [
                 "formCommande" => $form,
-                "editMode" => $commande->getId() !== null
+                "editMode" => $commande->getId() !== null,
+                'PrixTotal'=>$total
             ]
         );
     }
@@ -114,6 +123,25 @@ class CommandeController extends AbstractController
         $em->remove($commande);
         $em->flush();
         return $this->redirectToRoute('Affichagecommande');
+    }
+
+    ///claculer le prix totale des produits dans le panier
+    public function CalculPrixTotal(SessionInterface $session, ProduitRepository $produitRepository){
+        $panier = $session->get('panier', []);
+        $panierWithData = [];
+        foreach ($panier as $id => $quantity) {
+            $panierWithData[] = [
+                'product' => $produitRepository->find($id),
+                'quantity' => $quantity
+            ];
+        }
+        $total = 0;
+        foreach ($panierWithData as $item) {
+            $total += $item['product']->getPrixProduit() * $item['quantity'];
+            
+        }
+        return $total;
+
     }
 
   

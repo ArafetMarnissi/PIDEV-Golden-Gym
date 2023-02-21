@@ -21,7 +21,7 @@ class CommandeType extends AbstractType
         $builder
 
             ->add('AdresseLivraison')
-            ->add('prixCommande')
+            
             ->add('methodePaiement', ChoiceType::class, [
                 'label' => 'Méthode de paiement',
                 'choices' => [

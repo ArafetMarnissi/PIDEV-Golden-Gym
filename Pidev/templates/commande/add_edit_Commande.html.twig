@@ -9,11 +9,7 @@
 		{% if editMode %}
 			<center><h2>Modifier une commande</h2></center>
 		{% else %}
-<<<<<<< HEAD
 			<h2>Passer une commande</h2>
-=======
-			<center><h2>Créer une nouvelle commande</h2></center>
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 		{% endif %}
 
 		<div>
@@ -21,13 +17,13 @@
 			{{form_start(formCommande,{'attr': {'novalidate': 'novalidate'}})}}
 			<div>{{form_row(formCommande.AdresseLivraison,{'attr': {'placeholder':'Rue , ville , gouvernement','class':'form-control'}})}}</div>
 
-			<div>{{form_row(formCommande.prixCommande,{'attr': {'placeholder':'Prix de la commande',}})}}</div>
+			{# <div>{{form_row(formCommande.prixCommande,{'attr': {'placeholder':'Prix de la commande',}})}}</div> #}
 
 
 			<div>{{form_row(formCommande.telephone,{'attr': {'placeholder':'votre numéro de téléphone'}})}}</div>
 			<div>{{form_row(formCommande.methodePaiement,{'attr': {'placeholder':'méthode de paiement'}})}}</div>
 
-
+			<div class="text-right"><h3> Prix Total : {{PrixTotal }}</h3></div>
 			<center><button type='submit' class="btn btn-round btn-facebook" href="{{ path('Affichagecommande') }}">
 				{% if editMode %}
 					Enregistrer

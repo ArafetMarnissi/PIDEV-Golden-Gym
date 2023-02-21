@@ -37,7 +37,7 @@ class PanierController extends AbstractController
         }
         $session->set('panier', $panier);
 
-        return $this->redirectToRoute("list_produitpag");
+        return $this->redirectToRoute("app_panier");
     }
     ///Retirer le produit du panier
     #[Route('/panier/remove{id}', name: 'removePrPa')]
