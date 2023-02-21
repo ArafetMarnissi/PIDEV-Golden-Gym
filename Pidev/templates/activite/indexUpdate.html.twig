@@ -8,7 +8,8 @@
 <br>
 <br>
 <div class="container">
-<center>
+<center><h1>Modifier une activité</h1></center>
+<br><br>
 <div>
 {{form_start(f,{'attr': {'novalidate': 'novalidate'}})}}
 {{form_row(f.nomAcitivite,{'attr': {'placeholder':'Nom Activite','class':'form-control-lg'}})}}
@@ -19,9 +20,9 @@
 {{form_row(f.Coach,{'attr': {'placeholder':'Coach','class':'form-control-lg'}})}}
 {{form_row(f.nbrePlace,{'attr': {'placeholder':'Nombre places','class':'form-control-lg'}})}}
 {{form_row(f.Image,{'attr': {'placeholder':'Image','class':'form-control-lg'}})}}
-<button type="submit" class="btn btn-round btn-facebook">Modifier</button>
+<center><button type="submit" class="btn btn-round btn-facebook">Modifier</button></center>
 {{form_end(f)}}
 </div>
-</center>
+
 </div>
 {% endblock %}

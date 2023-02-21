@@ -11,33 +11,7 @@
                       <article class="row blog_item">
                           <div class="col-md-3">
                               <div class="blog_info text-right">
-                                  <ul class="blog_meta list">
-                                      <li>
-                                          Coach : {{ activites.Coach.nomCoach }}
-                                              <i class="lnr lnr-user"></i>
-                                          
-                                      </li>
-                                      <li>
-                                          Date : {{ activites.DateActivite|date('d-m-Y')}}
-                                              <i class="lnr lnr-calendar-full"></i>
-                                          
-                                      </li>
-                                       <li>
-                                          Time : {{ activites.TimeActivite|date('H:i')}}
-                                              <i class="lnr lnr-calendar-full"></i>
-                                          
-                                      </li>
-                                      <li>
-                                         Nombre de places : {{ activites.nbrePlace }}
-                                              <i class="lnr lnr-eye"></i>
-                                          
-                                      </li>
-                                      <li>
-                                         Durée : {{ activites.dureeActivite }}
-                                              <i class="lnr lnr-bubble"></i>
-                                          
-                                      </li>
-                                  </ul>
+
                               </div>
                           </div>
                           <div class="col-md-9">
@@ -75,9 +49,15 @@
                                 <i class="fab fa-behance"></i>
                               </a>
                           </div>
-                          <p>Boot camps have its supporters andit sdetractors. Some people do not understand why you should
-                              have to spend money on boot camp when you can get. Boot camps have itssuppor ters andits
-                              detractors.
+                          <p>  
+                              <br>
+                               Date : {{ activites.DateActivite|date('d F Y')}}
+                              <br>
+                                Time : {{ activites.TimeActivite|date('H:i')}}
+                               <br>
+                                Nombre de places : {{ activites.nbrePlace }}
+                               <br>
+                                Durée : {{ activites.dureeActivite }}
                           </p>
                           
                       </aside>
