@@ -3,14 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Commande;
+use App\Entity\LigneCommande;
 use App\Entity\User;
 use App\Form\CommandeType;
+use App\Repository\ProduitRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CommandeController extends AbstractController
 {
@@ -24,22 +27,43 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/ajouterCommande', name: 'ajouter_commande')]
-    public function  add(ManagerRegistry $doctrine, Request  $request, UserRepository $userRepository): Response
+    public function  add(ManagerRegistry $doctrine, Request  $request, UserRepository $userRepository,SessionInterface $session, ProduitRepository $produitRepository): Response
     {
         $commande = new commande();
-        //à changer
-        $user = new user();
-        $user = $userRepository->find(2);
-        $commande->setUser($user);
-        //
+        //recupérer l id de utilisateur connecté
+        $user = $this->getUser();
+        if ($user instanceof \App\Entity\User) {
+        $id = $user->getId();
+       }
+       // ajouter l utilisateur a la commande
+        $commande->setUser($userRepository->find($id));
+        
+
         $form = $this->createForm(commandeType::class, $commande);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $doctrine->getManager();
             $em->persist($commande);
             $em->flush();
+            
             //parcourir le panier, pour chaque element du panier est instancié un objet ligne commande  
 
+            $panier = $session->get('panier', []);
+            foreach ($panier as $id => $quantity) {
+               
+                
+                $LingeCommande= new LigneCommande();
+                $LingeCommande->setCommande($commande);
+                $LingeCommande->setProduits($produitRepository->find($id));
+                $LingeCommande->setPrixUnitaire($produitRepository->find($id)->getPrixProduit());
+                $LingeCommande->setQuantiteProduit($quantity);
+                $em->persist($LingeCommande);
+                $em->flush();
+                unset($panier[$id]);
+                $session->set('panier', $panier);
+
+            }
+           
 
             return $this->redirectToRoute('Affichagecommande');
         }
@@ -91,4 +115,6 @@ class CommandeController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('Affichagecommande');
     }
+
+  
 }

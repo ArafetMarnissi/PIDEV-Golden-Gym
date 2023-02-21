@@ -58,9 +58,19 @@
 		</table>
 		
 		
-		<div></div>
 
-		{# <span class="js">quantite</span> #}
+		
+
+		<div class="text-right">
+		{# <a id ="" href="{{path('ajouter_commande') }}"  class="btn btn-danger btn-sm btn-large">Commander
+			<i class="fa fa-angle-right" aria-hidden="true"></i>
+		</a> #}
+		<a class="button button-hero" href="{{path('ajouter_commande') }}">Commander <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+		</div>
+		<br>
+		<br>
+
+	
 	{% else %}
 		<p>
 			votre panier est vide !

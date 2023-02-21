@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,9 +14,15 @@
 		<link
 		rel="icon" href="{{asset('img/logo1.png')}}" type="image/png">
 
+		
+
+
+
+
+
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 		{% block stylesheets %}
-
+			
 			<link rel="stylesheet" href="{{asset('vendors/bootstrap/bootstrap.min.css')}}">
 			<link rel="stylesheet" href="{{asset('vendors/fontawesome/css/all.min.css')}}">
 			<link rel="stylesheet" href="{{asset('vendors/themify-icons/themify-icons.css')}}">
@@ -23,7 +30,7 @@
 			<link rel="stylesheet" href="{{asset('vendors/owl-carousel/owl.theme.default.min.css')}}">
 			<link rel="stylesheet" href="{{asset('vendors/owl-carousel/owl.carousel.min.css')}}">
 			<link rel="stylesheet" href="{{asset('css/style.css')}}">
-			<link rel="stylesheet" href="{{asset('css/style1.css')}}">
+			{# <link rel="stylesheet" href="{{asset('css/style1.css')}}"> #}
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
 
@@ -40,100 +47,163 @@
 		{% endblock %}
 
 		{% block header %}
+{% if app.user %}
 
-			<header class="header_area">
-				<div class="main_menu">
-					<nav class="navbar navbar-expand-lg navbar-light">
-						<div class="container">
-							<a class="navbar-brand logo_h" href="{{path('home-page')}}"><img width="140" height="50" src="{{asset('img/logo1.png')}}" alt=""></a>
-							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-							<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-								<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-									<li class="nav-item active">
-										<a class="nav-link" href="{{path('home-page')}}">Acceuil</a>
-									</li>
-									<li class="nav-item submenu dropdown">
-										<a href="{{path('list_produit_front')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Magasin</a>
-										<!-- <ul class="dropdown-menu">
-																																																																																																																																																																																																																																																																																																																																																																																																																								                  <li class="nav-item"><a class="nav-link" href="category.html"> Category</a></li>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                  <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                </ul>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                -->
-									</li>
-									<li class="nav-item submenu dropdown">
-										<a href="{{path('list_AbonnementC')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Abonnement</a>
-										<!--
-																																																																																																																																																																																																																																																																																																																																																																																																																								                <ul class="dropdown-menu">
-																																																																																																																																																																																																																																																																																																																																																																																																																								                  <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                  <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                </ul>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                -->
-									</li>
-									<li class="nav-item submenu dropdown">
-										<a href="{{path('AffichageActiviteF')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Activités</a>
-										<!--
-																																																																																																																																																																																																																																																																																																																																																																																																																								                <ul class="dropdown-menu">
-																																																																																																																																																																																																																																																																																																																																																																																																																								                  <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                  <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                </ul>
-																																																																																																																																																																																																																																																																																																																																																																																																																								                -->
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="contact.html">Contact</a>
-									</li>
-								</ul>
 
-								{% if app.user
-								
-								%}
+	<header class="header_area">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container">
+					<a class="navbar-brand logo_h" href="{{path('home-page')}}"><img width="140" height="50" src="{{asset('img/logo1.png')}}" alt=""></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+							<li class="nav-item active">
+								<a class="nav-link" href="{{path('home-page')}}">Acceuil</a>
+							</li>
+							<li class="nav-item submenu dropdown">
+								<a href="{{path('list_produit_front')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Magasin</a>
+								<!-- <ul class="dropdown-menu">
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="category.html"> Category</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                </ul>
+																																																																																																																																																																																																																																																																																																																																																				                -->
+							</li>
+							<li class="nav-item submenu dropdown">
+								<a href="{{path('list_AbonnementC')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Abonnement</a>
+								<!--
+																																																																																																																																																																																																																																																																																																																																																				                <ul class="dropdown-menu">
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                </ul>
+																																																																																																																																																																																																																																																																																																																																																				                -->
+							</li>
+							<li class="nav-item submenu dropdown">
+								<a href="{{path('AffichageActiviteF')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Activités</a>
+								<!--
+																																																																																																																																																																																																																																																																																																																																																				                <ul class="dropdown-menu">
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                </ul>
+																																																																																																																																																																																																																																																																																																																																																				                -->
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="contact.html">Contact</a>
+							</li>
+							   <li class="nav-item submenu dropdown">
+                                    <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i></a>
+                                    <ul class="dropdown-menu">
+                                         <li class="nav-item"><a class="nav-link">Bonjour,
+                                        <span class="section-intro__style">{{ app.user.nom }}
+                                        </span></a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ path('afficher_details_user', {id:app.user.id}) }}"> Consulter Profil</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                                    </ul>
+                                  </li>
+						</ul>
 
-									<div>Bonjour,
-										<span class="section-intro__style">{{ app.user.nom }}
+							<ul class="nav-shop">
+
+								<li class="nav-item">
+									<a href="{{ path('app_panier') }}">
+										<i class="ti-shopping-cart"></i>
+										<span class="nav-shop__circle">0
 										</span>
-										<a class="btn btn-sm btn-success" href="{{ path('afficher_details_user', {id:app.user.id}) }}">Consulter Profil</a>
-										<a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
-									</div>
-									<ul class="nav-shop">
+									</a>
+								</li>
 
-										<li class="nav-item">
-											<a href="{{ path('app_panier') }}">
-												<i class="ti-shopping-cart"></i>
-												<span class="nav-shop__circle">0
-												</span>
-											</a>
-										</li>
+							</ul>
 
-									</ul>
-
-								{% else %}
-									<ul class="nav-shop">
-										<li class="nav-item">
-											<a class="button button-header" href="{{path('app_login')}}">Se connecter</a>
-										</li>
-										<li class="nav-item">
-											<a href="{{ path('app_panier') }}">
-												<i class="ti-shopping-cart"></i>
-												<span class="nav-shop__circle">0
-												</span>
-											</a>
-										</li>
-
-									</ul>
-								{% endif %}
-							</div>
-						</div>
-					</nav>
+						
+					</div>
 				</div>
-			</header>
-		{% endblock %}
+			</nav>
+		</div>
+	</header>
+
+{% else %}
+
+	<header class="header_area">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container">
+					<a class="navbar-brand logo_h" href="{{path('home-page')}}"><img width="140" height="50" src="{{asset('img/logo1.png')}}" alt=""></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+							<li class="nav-item active">
+								<a class="nav-link" href="{{path('home-page')}}">Acceuil</a>
+							</li>
+							<li class="nav-item submenu dropdown">
+								<a href="{{path('list_produit_front')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Magasin</a>
+								<!-- <ul class="dropdown-menu">
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="category.html"> Category</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                </ul>
+																																																																																																																																																																																																																																																																																																																																																				                -->
+							</li>
+							<li class="nav-item submenu dropdown">
+								<a href="{{path('list_AbonnementC')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Abonnement</a>
+								<!--
+																																																																																																																																																																																																																																																																																																																																																				                <ul class="dropdown-menu">
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                </ul>
+																																																																																																																																																																																																																																																																																																																																																				                -->
+							</li>
+							<li class="nav-item submenu dropdown">
+								<a href="{{path('AffichageActiviteF')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Activités</a>
+								<!--
+																																																																																																																																																																																																																																																																																																																																																				                <ul class="dropdown-menu">
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
+																																																																																																																																																																																																																																																																																																																																																				                </ul>
+																																																																																																																																																																																																																																																																																																																																																				                -->
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="contact.html">Contact</a>
+							</li>
+						</ul>
+
+
+						
+							 <ul class="nav-shop">
+								<li class="nav-item">
+									<a class="button button-header" href="{{path('app_login')}}">Se connecter</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{ path('app_panier') }}">
+										<i class="ti-shopping-cart"></i>
+										<span class="nav-shop__circle">0
+										</span>
+									</a>
+								</li>
+
+							</ul> 
+						
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+{% endif %}
+{% endblock %}
 	</head>
 	<body>
 

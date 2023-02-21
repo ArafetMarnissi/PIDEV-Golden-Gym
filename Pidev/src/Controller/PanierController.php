@@ -50,7 +50,7 @@ class PanierController extends AbstractController
         $session->set('panier', $panier);
        $totalPrix= $this->AfficherPanier($session, $produitRepository)[1];
         return $this->json(['id'=>$id,'total'=>$totalPrix],200);
-        // return $this->redirectToRoute("app_panier");
+        
         
     }
      //// décrémenter la quntite de produit passer en parametre
