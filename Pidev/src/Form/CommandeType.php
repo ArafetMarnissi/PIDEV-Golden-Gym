@@ -21,7 +21,7 @@ class CommandeType extends AbstractType
         $builder
 
             ->add('AdresseLivraison')
-            ->add('prixCommande')
+            
             ->add('methodePaiement', ChoiceType::class, [
                 'label' => 'Méthode de paiement',
                 'choices' => [
@@ -29,7 +29,7 @@ class CommandeType extends AbstractType
                     'paiement par carte bancaire' => 'Carte bancaire',
                     'paiement à la livraison' => 'à la livraison',
                 ],
-                'expanded' => false,
+                'expanded' => true,
                 'multiple' => false,
 
             ])
