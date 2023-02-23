@@ -139,7 +139,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/listpag/{page?1}/{nbr?10}', name: 'list_produitpag')]
+    #[Route('/listpag/{page?1}/{nbr?3}', name: 'list_produitpag')]
     public function listpag(ManagerRegistry $doctrine,$page,$nbr): Response
     {
         $repository = $doctrine->getRepository(Produit::class);

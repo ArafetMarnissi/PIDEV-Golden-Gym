@@ -168,7 +168,8 @@
 								<div class="col-md-6 col-lg-4">
 									<div class="card text-center card-product">
 										<div class="card-product__img">
-											<img class="card-img" style="width:250px;" src="{{asset('uploads/produits/'~cats.imageproduit)}}" alt="">
+											<img class="card-img" style="width:250px; height:250px " src="{{asset('uploads/produits/'~cats.imageproduit)}}" alt="">
+											{% if cats.quantiteproduit >=1 %}
 											<ul
 												class="card-product__imgOverlay">
 												<!--<li><button><i class="ti-search"></i></button></li>-->
@@ -179,6 +180,7 @@
 												</li>
 												<!-- <li><button><i class="ti-heart"></i></button></li>-->
 											</ul>
+											{% endif %}
 										</div>
 										<div class="card-body">
 											<p>{{cat.nomCategory}}</p>

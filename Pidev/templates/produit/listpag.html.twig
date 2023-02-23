@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'home.html.twig' %}
 {% block body %}
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="category">
@@ -8,13 +8,13 @@
 					<h1>Shop
 					</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
-						<ol class="breadcrumb">
+						<!--<ol class="breadcrumb">
 							<li class="breadcrumb-item">
 								<a href="#">Home</a>
 							</li>
 							<li class="breadcrumb-item active" aria-current="page">Shop
 							</li>
-						</ol>
+						</ol>-->
 					</nav>
 				</div>
 			</div>
@@ -168,7 +168,8 @@
 								<div class="col-md-6 col-lg-4">
 									<div class="card text-center card-product">
 										<div class="card-product__img">
-											<img class="card-img" style="width:250px;" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt="">
+											<img class="card-img" style="width:250px;height:250px" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt="">
+											{% if p.quantiteproduit >=1 %}
 											<ul
 												class="card-product__imgOverlay">
 												<!--<li><button><i class="ti-search"></i></button></li>-->
@@ -179,6 +180,7 @@
 												</li>
 												<!-- <li><button><i class="ti-heart"></i></button></li>-->
 											</ul>
+											{% endif %}
 										</div>
 										<div class="card-body">
 											<p>{{p.category.nomCategory}}</p>

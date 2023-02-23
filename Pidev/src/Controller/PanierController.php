@@ -37,7 +37,7 @@ class PanierController extends AbstractController
         }
         $session->set('panier', $panier);
 
-        return $this->redirectToRoute("list_produitpag");
+        return $this->redirectToRoute("app_panier");
     }
     ///Retirer le produit du panier
     #[Route('/panier/remove{id}', name: 'removePrPa')]
@@ -104,6 +104,7 @@ class PanierController extends AbstractController
                 'quantity' => $quantity
             ];
         }
+        
         $total = 0;
         foreach ($panierWithData as $item) {
             $total += $item['product']->getPrixProduit() * $item['quantity'];

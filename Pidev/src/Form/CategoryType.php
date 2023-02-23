@@ -16,17 +16,17 @@ class CategoryType extends AbstractType
         $builder
             ->add('nomCategory')
             ->add('imageCategorie', FileType::class, [
-                'label' => 'image only',
+                'label' => 'image seulement',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'application/jpeg',
-                            'application/jpg',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid image',
+                        // 'mimeTypes' => [
+                        //     'application/jpeg',
+                        //     'application/jpg',
+                        // ],
+                        'mimeTypesMessage' => 'merci de telecharger une photo valide',
                     ])
                 ],
             ])

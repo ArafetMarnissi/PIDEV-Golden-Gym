@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230217215645 extends AbstractMigration
+final class Version20230218114240 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,6 +24,9 @@ final class Version20230217215645 extends AbstractMigration
         $this->addSql('ALTER TABLE activite ADD coach_id INT DEFAULT NULL, ADD time_activite TIME DEFAULT NULL, DROP coach');
         $this->addSql('ALTER TABLE activite ADD CONSTRAINT FK_B87555153C105691 FOREIGN KEY (coach_id) REFERENCES coach (id)');
         $this->addSql('CREATE INDEX IDX_B87555153C105691 ON activite (coach_id)');
+        $this->addSql('ALTER TABLE commande ADD user_id INT NOT NULL');
+        $this->addSql('ALTER TABLE commande ADD CONSTRAINT FK_6EEAA67DA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+        $this->addSql('CREATE INDEX IDX_6EEAA67DA76ED395 ON commande (user_id)');
     }
 
     public function down(Schema $schema): void
@@ -33,5 +36,8 @@ final class Version20230217215645 extends AbstractMigration
         $this->addSql('DROP TABLE coach');
         $this->addSql('DROP INDEX IDX_B87555153C105691 ON activite');
         $this->addSql('ALTER TABLE activite ADD coach VARCHAR(255) NOT NULL, DROP coach_id, DROP time_activite');
+        $this->addSql('ALTER TABLE commande DROP FOREIGN KEY FK_6EEAA67DA76ED395');
+        $this->addSql('DROP INDEX IDX_6EEAA67DA76ED395 ON commande');
+        $this->addSql('ALTER TABLE commande DROP user_id');
     }
 }
