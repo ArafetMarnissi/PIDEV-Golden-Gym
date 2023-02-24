@@ -41,7 +41,7 @@ class CategoryController extends AbstractController
         $produit=new Category;
         $form=$this->createForm(CategoryType::class,$produit);
         $form->handleRequest($request);
-        if ($form->isSubmitted() )
+        if ($form->isSubmitted() && $form->isValid())
         {
             $brochureFile = $form->get('imageCategorie')->getData();
             if ($brochureFile) {
@@ -83,7 +83,7 @@ class CategoryController extends AbstractController
         $produits=$repository->find($id);
        $form=$this->createForm(CategoryType::class,$produits);
        $form->handleRequest($request);
-       if($form->isSubmitted())
+       if($form->isSubmitted() && $form->isValid())
        {
         $brochureFile = $form->get('imageCategorie')->getData();
             if ($brochureFile) {
@@ -105,5 +105,26 @@ class CategoryController extends AbstractController
         return $this->redirectToRoute('list_cat');
        }
        return $this->renderForm('category/newcat.html.twig',['formc'=>$form,"editmode"=>$produits->getid()!==null]);
+    }
+
+    #[Route('/getcatf/{id}', name: 'gtcatf')]
+    public function show_catf(ManagerRegistry $doctrine, $id): Response
+    {
+        $repository = $doctrine->getRepository(Category::class);
+        $categorie = $repository->find($id);
+        return $this->render('category/listprodcat.html.twig', [
+            'cat' => $categorie,
+            'id' => $id,
+        ]);
+    }
+
+    #[Route('/listcf', name: 'listcf')]
+    public function listcf(ManagerRegistry $doctrine): Response
+    {
+        $repository= $doctrine->getRepository(Category::class);
+        $produits=$repository->findAll();
+        return $this->render('category/listcatfront.html.twig', [
+            'produit' => $produits,
+        ]);
     }
 }

@@ -4,7 +4,12 @@
 <br>
 <br>
 <br>
-<h2>La liste des utilisateurs : </h2>
+<br>
+<br>
+<br>
+<center>
+<h1>La liste des utilisateurs </h1>
+</center>
 <center>
 <table class="table">
   <thead>
@@ -31,8 +36,8 @@
       <td> {{ role }}</td>
       {% endif %}
       {% endfor %}
-          <td>  <a class="btn btn-sm btn-success" href="{{ path('update_user', {id:user.id}) }}">Modifier</a></td>
-      <td>  <a class="btn btn-sm btn-danger" href="{{ path('delete_user', {id:user.id}) }}">Supprimer</a></td>
+          <td>  <a class="btn btn-round btn-twitter" href="{{ path('update_user', {id:user.id}) }}">Modifier</a></td>
+      <td>  <a class="btn btn-round btn-twitter" href="{{ path('delete_user', {id:user.id}) }}">Supprimer</a></td>
   
 
     </tr>

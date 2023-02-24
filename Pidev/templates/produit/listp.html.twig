@@ -4,16 +4,15 @@
 {% block content %}
 <div class="container">
 <br>
-<h1>Liste des produits</h1>
-<form action="{{ path('addp') }}">
-    <button class="btn btn-round btn-facebook">Ajouter</button>
-</form>
-<form action="{{ path('list_cat') }}">
-    <button class="btn btn-round btn-facebook">Afficher categorie</button>
-</form>
 <br>
 <br>
 <br>
+<br>
+<br>
+<center><h1>Liste des produits</h1></center>
+<br>
+<br>
+
 <table class="table">
         <thead>
             <tr>
@@ -39,14 +38,20 @@
                 <td>{{ p.nom }}</td>
                 <td>{{p.description}}</td>
                 <td>{{p.prixproduit}}dt</td>
-                <td>{{p.quantiteproduit}}</td>
-                <td><img style="width:200px;" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt=""></td>
-                <td>{{p.dateexpiration|date("Y-m-d")}}</td>
+                {% if p.quantiteproduit >5 %}
+                <td bgcolor="green">{{p.quantiteproduit}}</td>
+                {% elseif p.quantiteproduit <= 0 %}
+                <td bgcolor="red">{{p.quantiteproduit}}</td>
+                {% else %}
+                <td bgcolor="ff8000">{{p.quantiteproduit}}</td>
+                {% endif %}
+                <td><img style="width:200px; height:200px" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt=""></td>
+                <td>{{p.dateexpiration|date("d-m-Y")}}</td>
                 <td>
-                <a href="{{path('editp',{id:p.id})}}" class="btn btn-round btn-twitter">edit</a>
+                <a href="{{path('editp',{id:p.id})}}" class="btn btn-round btn-twitter">modifier</a>
                 <a href="{{path('deletep',{id:p.id})}}" class="btn btn-round btn-twitter">supprimer</a>
                 </td>
-                <td><a href="{{path('getid',{id:p.id})}}" class="btn btn-round btn-twitter">show</a></td>
+                <td><a href="{{path('getid',{id:p.id})}}" class="btn btn-round btn-twitter">afficher</a></td>
             </tr>
         {% else %}
             <tr>
@@ -55,5 +60,10 @@
         {% endfor %}
         </tbody>
     </table>
+    <center>
+    <form action="{{ path('addp') }}">
+    <button class="btn btn-round btn-facebook">Ajouter un nouveau produit</button>
+    </form>
+    </center>
     </div>
 {% endblock %}

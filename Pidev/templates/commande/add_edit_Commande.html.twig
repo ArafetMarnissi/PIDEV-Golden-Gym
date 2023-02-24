@@ -1,30 +1,30 @@
-{% extends 'baseback.html.twig' %}
+{% extends 'base.html.twig' %}
 {# {% form_theme formCommande 'bootstrap_5_layout.html.twig' %} #}
 {% block title %}Gestionnaire de Commandes
 {% endblock %}
 
-{% block content %}
+{% block body %}
 
 	<div class="container">
 		{% if editMode %}
-			<h2>Modifier commande</h2>
+			<center><h2>Modifier une commande</h2></center>
 		{% else %}
-			<h2>Création d'une commande</h2>
+			<h2>Passer une commande</h2>
 		{% endif %}
 
 		<div>
 
 			{{form_start(formCommande,{'attr': {'novalidate': 'novalidate'}})}}
-			<div>{{form_row(formCommande.AdresseLivraison,{'attr': {'placeholder':'Rue , ville , gouvernement'}})}}</div>
+			<div>{{form_row(formCommande.AdresseLivraison,{'attr': {'placeholder':'Rue , ville , gouvernement','class':'form-control'}})}}</div>
 
-			<div>{{form_row(formCommande.prixCommande,{'attr': {'placeholder':'Prix de la commande',}})}}</div>
+			{# <div>{{form_row(formCommande.prixCommande,{'attr': {'placeholder':'Prix de la commande',}})}}</div> #}
 
 
 			<div>{{form_row(formCommande.telephone,{'attr': {'placeholder':'votre numéro de téléphone'}})}}</div>
 			<div>{{form_row(formCommande.methodePaiement,{'attr': {'placeholder':'méthode de paiement'}})}}</div>
 
-
-			<button type='submit' class="btn btn-round btn-facebook" href="{{ path('Affichagecommande') }}">
+			<div class="text-right"><h3> Prix Total : {{PrixTotal }}</h3></div>
+			<center><button type='submit' class="btn btn-round btn-facebook" href="{{ path('Affichagecommande') }}">
 				{% if editMode %}
 					Enregistrer
 				{% else %}
@@ -32,7 +32,7 @@
 				{% endif %}
 
 
-			</button>
+			</button></center>
 			<div>{{form_end(formCommande)}}
 			</div>
 		</div>

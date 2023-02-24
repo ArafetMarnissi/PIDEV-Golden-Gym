@@ -3,14 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Commande;
+use App\Entity\LigneCommande;
 use App\Entity\User;
 use App\Form\CommandeType;
+use App\Repository\ProduitRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CommandeController extends AbstractController
 {
@@ -24,28 +27,54 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/ajouterCommande', name: 'ajouter_commande')]
-    public function  add(ManagerRegistry $doctrine, Request  $request, UserRepository $userRepository): Response
+    public function  add(ManagerRegistry $doctrine, Request  $request, UserRepository $userRepository,SessionInterface $session, ProduitRepository $produitRepository): Response
     {
+        $total=$this->CalculPrixTotal($session,$produitRepository);
+        
+
+
         $commande = new commande();
-        //à changer
-        $user = new user();
-        $user = $userRepository->find(2);
-        $commande->setUser($user);
-        //
+        //recupérer l id de utilisateur connecté
+        $user = $this->getUser();
+        if ($user instanceof \App\Entity\User) {
+        $id = $user->getId();
+       }
+       // ajouter l utilisateur a la commande
+        $commande->setUser($userRepository->find($id));
+        $commande->setPrixCommande($total);
+        
+
         $form = $this->createForm(commandeType::class, $commande);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $doctrine->getManager();
             $em->persist($commande);
             $em->flush();
+            
             //parcourir le panier, pour chaque element du panier est instancié un objet ligne commande  
 
+            $panier = $session->get('panier', []);
+            foreach ($panier as $id => $quantity) {
+               
+                
+                $LingeCommande= new LigneCommande();
+                $LingeCommande->setCommande($commande);
+                $LingeCommande->setProduits($produitRepository->find($id));
+                $LingeCommande->setPrixUnitaire($produitRepository->find($id)->getPrixProduit());
+                $LingeCommande->setQuantiteProduit($quantity);
+                $em->persist($LingeCommande);
+                $em->flush();
+                unset($panier[$id]);
+                $session->set('panier', $panier);
+
+            }
+           
 
             return $this->redirectToRoute('Affichagecommande');
         }
         return $this->renderForm(
             "commande/add_edit_Commande.html.twig",
-            ["formCommande" => $form, "editMode" => $commande->getId() !== null]
+            ["formCommande" => $form, "editMode" => $commande->getId() !== null,'PrixTotal'=>$total]
         );
     }
 
@@ -62,9 +91,12 @@ class CommandeController extends AbstractController
     #[Route('/updatecommande/{id}', name: 'modifier_commande')]
     public function  update(ManagerRegistry $doctrine, $id,  Request  $request): Response
     {
+        
         $commande = $doctrine
             ->getRepository(commande::class)
             ->find($id);
+            $total=$commande->getPrixCommande();
+            
         $form = $this->createForm(commandeType::class, $commande);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -76,7 +108,8 @@ class CommandeController extends AbstractController
             "commande/add_edit_Commande.html.twig",
             [
                 "formCommande" => $form,
-                "editMode" => $commande->getId() !== null
+                "editMode" => $commande->getId() !== null,
+                'PrixTotal'=>$total
             ]
         );
     }
@@ -91,4 +124,25 @@ class CommandeController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('Affichagecommande');
     }
+
+    ///claculer le prix totale des produits dans le panier
+    public function CalculPrixTotal(SessionInterface $session, ProduitRepository $produitRepository){
+        $panier = $session->get('panier', []);
+        $panierWithData = [];
+        foreach ($panier as $id => $quantity) {
+            $panierWithData[] = [
+                'product' => $produitRepository->find($id),
+                'quantity' => $quantity
+            ];
+        }
+        $total = 0;
+        foreach ($panierWithData as $item) {
+            $total += $item['product']->getPrixProduit() * $item['quantity'];
+            
+        }
+        return $total;
+
+    }
+
+  
 }

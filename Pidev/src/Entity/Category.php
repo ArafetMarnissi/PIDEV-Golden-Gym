@@ -6,7 +6,11 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+<<<<<<< HEAD
 
+=======
+>>>>>>> d430ee19228b8f77280caca86de2dd489fdb102b
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
@@ -16,6 +20,8 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Le nom du categorie est obligatoire")]
+    #[Assert\Regex(pattern: '/^[a-z\s]+$/i',htmlPattern: '^[a-zA-Z\s]+$',message:"Le nom du categorie doit contenir que des lettres")]
     private ?string $nomCategory = null;
 
     #[ORM\Column(length: 255,nullable:true)]

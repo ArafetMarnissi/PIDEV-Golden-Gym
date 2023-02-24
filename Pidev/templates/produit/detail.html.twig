@@ -4,14 +4,15 @@
 <div class="container">
 <table class="table">
 <tbody>
+<center><h1>Detail du produit {{ produits.id }}</h1></center>
             <tr>
                 <th>image</th>
                 <td><img style="width:200px;" src="{{asset('uploads/produits/'~produits.imageproduit)}}" alt=""></td>
             </tr>
-            <tr>
+            <!--<tr>
                 <th>id</th>
                 <td>{{ produits.id }}</td>
-            </tr>
+            </tr>-->
             <tr>
                 <th>nomCategory</th>
                 <td>{{produits.category.nomCategory}}</td>
@@ -34,21 +35,21 @@
             </tr>
             <tr>
                 <th>date_expiration</th>
-                <td>{{produits.dateexpiration|date("Y-m-d")}}</td>
+                <td>{{produits.dateexpiration|date("d-m-Y")}}</td>
             </tr>
             <tr>
                 <th>actions</th>
                 <td>
-                <a href="{{path('editp',{id:produits.id})}}" class="btn btn-round btn-twitter">edit</a>
+                <a href="{{path('editp',{id:produits.id})}}" class="btn btn-round btn-twitter">modifier</a>
                 <a href="{{path('deletep',{id:produits.id})}}" class="btn btn-round btn-twitter">supprimer</a>
                 </td>
             </tr>
         </tbody>
 </table>
-
+<center>
 <form action="{{ path('list_produit') }}">
     <button class="btn btn-round btn-facebook">afficher</button>
 </form>
-
+</center>
 </div>
 {% endblock %}

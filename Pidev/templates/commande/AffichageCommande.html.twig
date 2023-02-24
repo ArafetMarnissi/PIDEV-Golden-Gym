@@ -13,7 +13,7 @@
 		<br>
 		{# <table class="table" style="width: 50%; margin: 0 auto;"> #}
 		<center>
-			<h2>Liste des Commandes</h2>
+			<h1>Liste des Commandes</h1>
 			<table class="table">
 				<thead>
 					<tr>
@@ -37,18 +37,18 @@
 
 
 						<td>
-							<a class="btn btn-sm btn-success" href="{{ path('modifier_commande',{'id' : commande.id}) }}">Modifier</a>
+							<a class="btn btn-round btn-twitter" href="{{ path('modifier_commande',{'id' : commande.id}) }}">Modifier</a>
 						</td>
 						<td>
-							<a class="btn btn-sm btn-danger" href="{{ path('supprimer_commande',{'id' : commande.id}) }}">Supprimer</a>
+							<a class="btn btn-round btn-twitter" href="{{ path('supprimer_commande',{'id' : commande.id}) }}">Supprimer</a>
 						</td>
 					</tr>
 				{% endfor %}
 			</table>
 
-			<div class="container">
-				<a class="btn btn-round btn-facebook" href="{{ path('ajouter_commande') }}">Ajouter Commande</a>
-			</div>
+			{# <div class="container">
+				<a class="btn btn-round btn-facebook" href="{{ path('ajouter_commande') }}">Ajouter une nouvelle commande</a>
+			</div> #}
 		</center>
 	</div>
 
