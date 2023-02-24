@@ -50,9 +50,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Commande::class, orphanRemoval: true)]
     private Collection $commandes;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reservation::class)]
+    private Collection $ReservationClient;
+
+    #[ORM\Column]
+    private ?bool $EnableReservation = false;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
+        $this->ReservationClient = new ArrayCollection();
     }
    
     
@@ -203,4 +210,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservationClient(): Collection
+    {
+        return $this->ReservationClient;
+    }
+
+    public function addReservationClient(Reservation $reservationClient): self
+    {
+        if (!$this->ReservationClient->contains($reservationClient)) {
+            $this->ReservationClient->add($reservationClient);
+            $reservationClient->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservationClient(Reservation $reservationClient): self
+    {
+        if ($this->ReservationClient->removeElement($reservationClient)) {
+            // set the owning side to null (unless already changed)
+            if ($reservationClient->getUser() === $this) {
+                $reservationClient->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isEnableReservation(): ?bool
+    {
+        return $this->EnableReservation;
+    }
+
+    public function setEnableReservation(bool $EnableReservation): self
+    {
+        $this->EnableReservation = $EnableReservation;
+
+        return $this;
+    }
+    // public function getEnableReservation(bool $EnableReservation): self
+    // {
+    //     return $this->EnableReservation();
+    // }
 }

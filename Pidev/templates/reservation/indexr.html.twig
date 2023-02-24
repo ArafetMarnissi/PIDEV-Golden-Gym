@@ -38,10 +38,15 @@
 								<li><em>24/7</em> Accés au salle de sport</li>
 							</ul>
 						</div> <!-- .cd-pricing-body -->
-
+						{% if app.user %}
 						<footer class="cd-pricing-footer">
 							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
 						</footer> <!-- .cd-pricing-footer -->
+						{% else %}
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="{{path('app_login')}}">Select</a>
+						</footer>		
+						{% endif %}				
 					</li>
 					{% endif %}
 					{% endfor %}
@@ -71,9 +76,15 @@
 							</ul>
 						</div> <!-- .cd-pricing-body -->
 
+						{% if app.user %}
 						<footer class="cd-pricing-footer">
 							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
 						</footer> <!-- .cd-pricing-footer -->
+						{% else %}
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="{{path('app_login')}}">Select</a>
+						</footer>		
+						{% endif %}		
 					</li>
 				</ul> <!-- .cd-pricing-wrapper -->
 			</li>
@@ -104,9 +115,15 @@
 							</ul>
 						</div> <!-- .cd-pricing-body -->
 
+						{% if app.user %}
 						<footer class="cd-pricing-footer">
 							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
 						</footer> <!-- .cd-pricing-footer -->
+						{% else %}
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="{{path('app_login')}}">Select</a>
+						</footer>		
+						{% endif %}		
 					</li>
 					{% endif %}
 					{% endfor %}
@@ -133,9 +150,15 @@
 							</ul>
 						</div> <!-- .cd-pricing-body -->
 
+						{% if app.user %}
 						<footer class="cd-pricing-footer">
 							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
 						</footer> <!-- .cd-pricing-footer -->
+						{% else %}
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="{{path('app_login')}}">Select</a>
+						</footer>		
+						{% endif %}		
 					</li>
 					{% endif %}
 					{% endfor %}
@@ -167,9 +190,15 @@
 							</ul>
 						</div> <!-- .cd-pricing-body -->
 
-						<footer class="cd-pricing-footer">
-							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
-						</footer>  <!-- .cd-pricing-footer -->
+						{% if app.user %}
+							<footer class="cd-pricing-footer">
+								<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
+							</footer> <!-- .cd-pricing-footer -->
+						{% else %}
+							<footer class="cd-pricing-footer">
+								<a class="cd-select" href="{{path('app_login')}}">Select</a>
+							</footer>		
+						{% endif %}		
 					</li>
 					{% endif %}
 					{% endfor %}
@@ -196,9 +225,15 @@
 							</ul>
 						</div> <!-- .cd-pricing-body -->
 
+						{% if app.user %}
 						<footer class="cd-pricing-footer">
 							<a class="cd-select" href="{{ path('reservation_new',{'id':abonnement.id} ) }}">Select</a>
-						</footer>  <!-- .cd-pricing-footer -->
+						</footer> <!-- .cd-pricing-footer -->
+						{% else %}
+						<footer class="cd-pricing-footer">
+							<a class="cd-select" href="{{path('app_login')}}">Select</a>
+						</footer>		
+						{% endif %}		
 					</li>
 					{% endif %}
 					{% endfor %}					

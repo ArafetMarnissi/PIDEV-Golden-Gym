@@ -1,14 +1,36 @@
-{% extends 'base.html.twig' %}
+{% extends 'home.html.twig' %}
 
 {% block body %}
 
 <center class="d-flex justify-content-center">
 <div >
-    <h1>Reserver</h1>
     <br><br>
-    {{form_start(form,{'attr': {'novalidate': 'novalidate'}})}}           
-        <button type='submit' class="cd-select" href="{{ path('list_reservation') }}">Reserver</button>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+{# {% if app.session.flashBag.has('error') %}
+    <div class="alert alert-danger">
+        {{ app.session.flashBag.get('error')[0] }}
+    </div>
+{% endif %} #}
+    {{form_start(form,{'attr': {'novalidate': 'novalidate'}})}}   
+        {% if reservations is empty %}
+            <button type='submit' class="cd-select" href="{{ path('list_reservation') }}">Reserver</button>      
+        {% else %}
+                {% set lastReservation = reservations|last %}
+                {% if lastReservation.isAbonnementExpired() %}
+                    <button type='submit' class="cd-select" href="{{ path('list_reservation') }}">Reserver</button>      
+                {% else %}
+                    <a class="alert alert-danger" href="{{ path('list_reservation') }}">Votre abonnement n'est pas expiré</a>                
+                {% endif %}
+        {% endif %}    
     {{form_end(form)}} 
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
 </div> 
 </center>    
 {% endblock %}
