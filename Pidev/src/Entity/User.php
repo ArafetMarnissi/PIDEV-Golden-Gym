@@ -41,14 +41,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     
     public ?string $confirm_password = null;
 
+    #[Assert\NotBlank(message:"Le nom est obligatoire")]
+
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nom = null;
 
+    #[Assert\NotBlank(message:"Le prénom est obligatoire")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $prenom = null;
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Commande::class, orphanRemoval: true)]
     private Collection $commandes;
+
+    #[ORM\Column]
+    private ?int $PrivateKey = null;
+
+    #[ORM\Column]
+    private ?bool $Status = null;
 
     public function __construct()
     {
@@ -205,6 +215,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $commande->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPrivateKey(): ?int
+    {
+        return $this->PrivateKey;
+    }
+
+    public function setPrivateKey(int $PrivateKey): self
+    {
+        $this->PrivateKey = $PrivateKey;
+
+        return $this;
+    }
+
+    public function isStatus(): ?bool
+    {
+        return $this->Status;
+    }
+
+    public function setStatus(bool $Status): self
+    {
+        $this->Status = $Status;
 
         return $this;
     }

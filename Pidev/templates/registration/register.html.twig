@@ -17,7 +17,8 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner register_form_inner">
 						<h3>Créer un compte</h3>
-						{{form_start(form)}}
+
+{{form_start(form,{'attr': {'novalidate': 'novalidate'}})}}
 
 <div class="col-md-12 form-group">
                         {{form_row(form.email,{'attr': {'placeholder':'Email','class':'form-control'}})}}
@@ -46,6 +47,8 @@
 			</div>
 		</div>
 	</section>
+
+
     {% endblock %}
 
 

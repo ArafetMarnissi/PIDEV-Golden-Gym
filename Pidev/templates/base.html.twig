@@ -90,16 +90,6 @@
 										<a class="nav-link" href="contact.html">Contact</a>
 									</li>
 								</ul>
-<<<<<<< HEAD
-					{% if not app.user %}
-								<ul class="nav-shop">
-									<li class="nav-item">
-										<a class="button button-header" href="#">Se connecter</a>
-									</li>
-									<li class="nav-item">
-										<a href="{{ path('app_panier') }}">
-											<button>
-=======
 
 								{% if app.user
 								
@@ -115,20 +105,13 @@
 
 										<li class="nav-item">
 											<a href="{{ path('app_panier') }}">
->>>>>>> 32c82e105223a23072c0802c1ffcfa26f8cea17f
 												<i class="ti-shopping-cart"></i>
 												<span class="nav-shop__circle">0
 												</span>
 											</a>
 										</li>
 
-<<<<<<< HEAD
-								</ul>
-					{% endif %}
-
-=======
 									</ul>
->>>>>>> 32c82e105223a23072c0802c1ffcfa26f8cea17f
 
 								{% else %}
 									<ul class="nav-shop">
