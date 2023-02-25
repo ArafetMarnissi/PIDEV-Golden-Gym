@@ -29,6 +29,7 @@ class Produit
 
     #[ORM\Column]
     #[Assert\NotBlank(message:"Le prix du produit est obligatoire")]
+    #[Assert\Positive(message:"Le prix du produit doit être positif")]
     #[Assert\Regex(pattern: '/^\d+(\.\d{1,2})?$/',message:"Le prix du produit doit avoir max 2 chiffres apres la virgule")]
     private ?float $prixProduit = null;
 

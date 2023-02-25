@@ -22,7 +22,7 @@ class ProduitType extends AbstractType
             ->add('quantiteProduit')
             //->add('imageProduit')
             ->add('imageProduit', FileType::class, [
-                'label' => 'image only',
+                'label' => 'image seulement',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

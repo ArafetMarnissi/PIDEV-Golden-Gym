@@ -144,7 +144,7 @@ class ProduitController extends AbstractController
     {
         $repository = $doctrine->getRepository(Produit::class);
         $nbproduit=$repository->count([]);
-        $nbpage=ceil($nbproduit/3);
+        $nbpage=ceil($nbproduit/$nbr);
         $produits = $repository->findBy([],[],$nbr,($page - 1)*$nbr);
 
         return $this->render('produit/listpag.html.twig', [

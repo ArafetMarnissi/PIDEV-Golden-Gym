@@ -12,6 +12,10 @@ use App\Controller\SubmitType;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use App\Entity\User;
+use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ReservationController extends AbstractController
 {
@@ -27,10 +31,12 @@ class ReservationController extends AbstractController
     public function list(ManagerRegistry $doctrine): Response 
     {
         $repository= $doctrine->getRepository(Abonnement::class);
+        $repo= $doctrine->getRepository(Reservation::class);
         $abonnements=$repository->FindAll(); 
+        $reservationss=$repo->FindAll();
 
         return $this->render('reservation/indexr.html.twig', [
-            'abonnements' => $abonnements,
+            'abonnements' => $abonnements, 'reservationss' => $reservationss,
 
         ]);
 
@@ -51,36 +57,61 @@ class ReservationController extends AbstractController
     }
 
 
-    #[Route('/newr/{id}', name: 'reservation_new')]
-    public function newr(Request $request,$id,ManagerRegistry $doctrine): Response
+#[Route('/newr/{id}', name: 'reservation_new')]
+public function newr(Request $request, $id, ManagerRegistry $doctrine, UserRepository $userRepository, SessionInterface $session): Response
 {
     $reservation = new Reservation();
-    $abonnement= new Abonnement();
-    $repository= $doctrine->getRepository(Abonnement::class);
-    $abonnement=$repository->find($id);
+    $abonnement = new Abonnement();
+    $repository = $doctrine->getRepository(Abonnement::class);
+    $repo = $doctrine->getRepository(Reservation::class);
+    $abonnement = $repository->find($id);
     $reservation->setReservationAbonnement($abonnement);
+    $reservations = $repo->FindAll();
+    $rep = $doctrine->getRepository(Reservation::class)->findOneBy([
+        'user' => $reservation->getUser(),
+        'ReservationAbonnement' => $reservation->getReservationAbonnement(),
+    ]);
+
+    $user = $this->getUser();
+    if ($user instanceof \App\Entity\User) {
+        $idu = $user->getId();
+        $enable = $user->isEnableReservation();
+    }
+    $reservation->setUser($userRepository->find($idu));
 
     $form = $this->createForm(ReservationType::class, $reservation);
     $form->handleRequest($request);
-    $date = new \DateTime('@'.strtotime('now'));
-    $datefm = new \DateTime('@'.strtotime('now +30 days'));
-    $datefa = new \DateTime('@'.strtotime('now +365 days'));
+    $date = new \DateTime('@' . strtotime('now'));
+    $datefm = new \DateTime('@' . strtotime('now +1 months'));
+    $datefa = new \DateTime('@' . strtotime('now +1 years'));
+
+    $hasReservation = ($rep !== null);
 
     if ($form->isSubmitted() && $form->isValid()) {
         $reservation->setDateDebut($date);
-        if($abonnement->getDureeAbonnement()== "Annuel"){$reservation->setDateFin($datefa);}
-        if($abonnement->getDureeAbonnement()== "Mensuel"){$reservation->setDateFin($datefm);}    
-        $entityManager = $this->getDoctrine()->getManager();
+        if ($abonnement->getDureeAbonnement() == "Annuel") {
+            $reservation->setDateFin($datefa);
+        }
+        if ($abonnement->getDureeAbonnement() == "Mensuel") {
+            $reservation->setDateFin($datefm);
+        }
+
+        $entityManager = $doctrine->getManager();
         $entityManager->persist($reservation);
         $entityManager->flush();
+        $enable == true;
+        $this->addFlash('success', 'La réservation a été ajoutée avec succès.');
 
         return $this->redirectToRoute('list_reservation');
     }
 
     return $this->render('reservation/newr.html.twig', [
-        'form' => $form->createView()
+        'form' => $form->createView(),
+        'reservations' => $reservations,
+        'hasReservation' => $hasReservation,
     ]);
 }
+
 
 
 #[Route('/deleter/{id}',name:'delete_une_reservation')]
@@ -92,15 +123,6 @@ public function deleter (ManagerRegistry $doctrine, $id):Response
     $em->flush();
     return $this->redirectToRoute('list_reservation');
 }
-
-
-
-
-
-
-
-
-
 
 
 
