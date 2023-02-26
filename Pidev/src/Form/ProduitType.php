@@ -28,13 +28,10 @@ class ProduitType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
-<<<<<<< HEAD
                         // 'mimeTypes' => [
                         //     'application/jpeg',
                         //     'application/jpg',
                         // ],
-=======
->>>>>>> 5f668aea2ccc9e7fa1880a1e338dfeb4e27236bb
                         'mimeTypesMessage' => 'Please upload a valid image',
                     ])
                 ],

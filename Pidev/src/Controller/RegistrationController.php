@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use App\Form\UserType;
+use App\Repository\CoachRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler;
@@ -20,10 +21,12 @@ class RegistrationController extends AbstractController
     private $passwordEncoder;
 
     #[Route('/home', name: 'home-page')]
-    public function hello(): Response
+    public function hello(CoachRepository $repository): Response
     {
+        $coach=$repository->findAll();
         return $this->render('home.html.twig', [
             'controller_name' => 'RegistrationController',
+            'coach' => $coach,
         ]);
     }
     public function __construct(UserPasswordHasherInterface $passwordEncoder)

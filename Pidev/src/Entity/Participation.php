@@ -21,6 +21,9 @@ class Participation
     #[ORM\JoinColumn(nullable: false)]
     private ?Activite $activite = null;
 
+    #[ORM\ManyToOne(inversedBy: 'participations')]
+    private ?User $User = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +49,18 @@ class Participation
     public function setActivite(?Activite $activite): self
     {
         $this->activite = $activite;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }

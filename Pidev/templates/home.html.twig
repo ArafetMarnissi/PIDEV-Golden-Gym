@@ -16,51 +16,60 @@
 							<li class="nav-item active">
 								<a class="nav-link" href="{{path('home-page')}}">Acceuil</a>
 							</li>
-							<li class="nav-item submenu dropdown">
-								<a href="{{path('list_produit_front')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Magasin</a>
-								<!-- <ul class="dropdown-menu">
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="category.html"> Category</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                </ul>
-																																																																																																																																																																																																																																																																																																																																																				                -->
+							<li class="nav-item">
+								<a href="{{path('list_produit_front')}}" class="nav-link">Magasin</a>
 							</li>
-							<li class="nav-item submenu dropdown">
-								<a href="" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Abonnement</a>
-								<!--
-																																																																																																																																																																																																																																																																																																																																																				                <ul class="dropdown-menu">
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                </ul>
-																																																																																																																																																																																																																																																																																																																																																				                -->
+							<li class="nav-item">
+								<a href="{{path('list_AbonnementC')}}" class="nav-link">Abonnement</a>
 							</li>
-							<li class="nav-item submenu dropdown">
-								<a href="{{path('AffichageActiviteF')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Activités</a>
-								<!--
-																																																																																																																																																																																																																																																																																																																																																				                <ul class="dropdown-menu">
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                </ul>
-																																																																																																																																																																																																																																																																																																																																																				                -->
+							<li class="nav-item">
+								<a href="{{path('AffichageActiviteF')}}" class="nav-link">Activités</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{path('activite_planning')}}" class="nav-link">Planning</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="contact.html">Contact</a>
 							</li>
+							{% if app.user %}
+							<li class="nav-item submenu dropdown">
+                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">Profil</a>
+                                 <ul class="dropdown-menu">
+								 <li class="nav-item"><a class="nav-link">Bonjour,
+								<span class="section-intro__style">{{ app.user.nom }}
+								</span></a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ path('afficher_details_user', {id:app.user.id}) }}"> Consulter Profil</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ path('AffichageParticipationUser') }}"> Mes participations</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                                </ul>
+                            </li>
 						</ul>
 
-						{% if app.user
-								
-								%}
-
-							<div>Bonjour,
+						
+						<!-- <li class="nav-item submenu dropdown">
+                			<a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  				aria-expanded="false">Profil</a>
+                			<ul class="dropdown-menu">
+                  			<li class="nav-item"><a class="nav-link">Bonjour,
+								<span class="section-intro__style">{{ app.user.nom }}
+								</span></a></li>
+                  			<li class="nav-item"><a class="nav-link" href="{{ path('afficher_details_user', {id:app.user.id}) }}">Consulter Profil</a></li>
+                			<li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
+							</ul>
+						</li>-->
+						<!--<li class="nav-item submenu dropdown">
+                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">Profil</a>
+                                 <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="{{ path('afficher_details_user', {id:app.user.id}) }}"> Consulter Profil</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                                </ul>
+                            </li>-->
+							<!--<div>Bonjour,
 								<span class="section-intro__style">{{ app.user.nom }}
 								</span>
 								<a class="btn btn-sm btn-success" href="{{ path('afficher_details_user', {id:app.user.id}) }}">Consulter Profil</a>
 								<a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
-							</div>
+							</div>-->
 							<ul class="nav-shop">
 
 								<li class="nav-item">
@@ -121,116 +130,31 @@
 	<section class="section-margin calc-60px">
 		<div class="container">
 			<div class="section-intro pb-60px">
-				<p>Bienvenue à GOLDENGYM</p>
+				<p>Bienvenue à GoldenGYM</p>
 				<h2>Notre
 					<span class="section-intro__style">Gallerie</span>
 				</h2>
 			</div>
+			
 			<div class="owl-carousel owl-theme" id="bestSellerCarousel">
+			{% for c in coach %}
 				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product1.jpg" alt="">
+					<center><div class="card-product__img">
+						<img class="img-fluid" style="width: 120px;height: 120px;" src="{{asset('img/activite/'~c.Image)}}" alt="post">
 						<ul class="card-product__imgOverlay"></ul>
 					</div>
+					
 					<div class="card-body">
-						<p>Accessories</p>
+						<p>Coach</p>
 						<h4 class="card-product__title">
-							<a href="single-product.html">Quartz Belt Watch</a>
+							<a href="single-product.html">{{ c.nomCoach }}</a>
 						</h4>
-					</div>
+						
+					</div></center>
 				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product2.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Beauty</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Women Freshwash</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product3.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Decor</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Room Flash Light</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product4.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Decor</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Room Flash Light</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product1.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Accessories</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Quartz Belt Watch</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product2.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Beauty</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Women Freshwash</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product3.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Decor</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Room Flash Light</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product4.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Decor</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Room Flash Light</a>
-						</h4>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
+			
 		</div>
 	</section>
 	<!-- ================ Best Selling item  carousel end ================= -->

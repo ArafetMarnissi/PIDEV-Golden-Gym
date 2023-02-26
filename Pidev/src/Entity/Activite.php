@@ -54,6 +54,19 @@ class Activite
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $TimeActivite = null;
 
+    #[ORM\Column(length: 7, nullable: true)]
+    private ?string $background_color = null;
+
+    #[ORM\Column(length: 7, nullable: true)]
+    private ?string $border_color = null;
+
+    #[ORM\Column(length: 7, nullable: true)]
+    private ?string $text_color = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $end = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -166,4 +179,53 @@ class Activite
 
         return $this;
     }
+
+    public function getBackgroundColor(): ?string
+    {
+        return $this->background_color;
+    }
+
+    public function setBackgroundColor(?string $background_color): self
+    {
+        $this->background_color = $background_color;
+
+        return $this;
+    }
+
+    public function getBorderColor(): ?string
+    {
+        return $this->border_color;
+    }
+
+    public function setBorderColor(?string $border_color): self
+    {
+        $this->border_color = $border_color;
+
+        return $this;
+    }
+
+    public function getTextColor(): ?string
+    {
+        return $this->text_color;
+    }
+
+    public function setTextColor(?string $text_color): self
+    {
+        $this->text_color = $text_color;
+
+        return $this;
+    }
+
+    public function getEnd(): ?\DateTimeInterface
+    {
+        return $this->end;
+    }
+
+    public function setEnd(?\DateTimeInterface $end): self
+    {
+        $this->end = $end;
+
+        return $this;
+    }
+
 }

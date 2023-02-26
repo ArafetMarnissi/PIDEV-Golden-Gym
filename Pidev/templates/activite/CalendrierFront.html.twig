@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+			<link rel="stylesheet" href="{{asset('vendors/bootstrap/bootstrap.min.css')}}">
+			<link rel="stylesheet" href="{{asset('vendors/fontawesome/css/all.min.css')}}">
+			<link rel="stylesheet" href="{{asset('vendors/themify-icons/themify-icons.css')}}">
+			<link rel="stylesheet" href="{{asset('vendors/nice-select/nice-select.css')}}">
+			<link rel="stylesheet" href="{{asset('vendors/owl-carousel/owl.theme.default.min.css')}}">
+			<link rel="stylesheet" href="{{asset('vendors/owl-carousel/owl.carousel.min.css')}}">
+			<link rel="stylesheet" href="{{asset('css/style.css')}}">
+			<link rel="stylesheet" href="{{asset('css/style1.css')}}">
+			{{ encore_entry_link_tags('app') }}
+
+                    <style>
+        #calendrier{
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+
+		{% endblock %}
+
+		{% block javascripts %}
+			<script src="{{asset('vendors/jquery/jquery-3.2.1.min.js')}}"></script>
+			<script src="{{asset('vendors/bootstrap/bootstrap.bundle.min.js')}}"></script>
+			<script src="{{asset('vendors/skrollr.min.js')}}"></script>
+			<script src="{{asset('vendors/owl-carousel/owl.carousel.min.js')}}"></script>
+			<script src="{{asset('vendors/nice-select/jquery.nice-select.min.js')}}"></script>
+			<script src="{{asset('vendors/jquery.ajaxchimp.min.js')}}"></script>
+			<script src="{{asset('vendors/mail-script.js')}}"></script>
+			<script src="{{asset('js/main.js')}}"></script>
+			{{ encore_entry_script_tags('app') }}
+
+                    <script>
+        window.onload = () => {
+            let calendarElt = document.querySelector("#calendrier")
+            let calendar = new FullCalendar.Calendar(calendarElt, {
+                initialView : 'timeGridWeek',
+                locale: 'fr',  
+                timeZone: 'Africa/Tunis',
+                headerToolbar: {
+                    start: 'prev,next',
+                    center: 'title',
+                    end: 'timeGridWeek,dayGridMonth',
+                },
+                events: {{ data|raw }}
+            })
+            calendar.render()
+        }
+    </script>
+		{% endblock %}
+
+
+{% block body %}
+
+
+    <br>
+    <br>
+    <br>
+    
+    <div id="calendrier">
+    </div>
+
+    <br>
+    <br>
+{% endblock %}
+

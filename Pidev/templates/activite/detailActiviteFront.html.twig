@@ -11,7 +11,13 @@
                       <article class="row blog_item">
                           <div class="col-md-3">
                               <div class="blog_info text-right">
-
+                              {% if app.user %}
+                              {% if activites.nbrePlace != 0 and enable == false %}
+                                <a class="button button-blog" href="{{path('addParticipation',{'id':activites.id})}}">Participer</a>
+                              {% endif %}
+                              {% else %}
+                                <a class="button button-blog" href="{{path('app_login')}}">Participer</a>
+                              {% endif %}
                               </div>
                           </div>
                           <div class="col-md-9">
@@ -53,7 +59,7 @@
                               <br>
                                Date : {{ activites.DateActivite|date('d F Y')}}
                               <br>
-                                Time : {{ activites.TimeActivite|date('H:i')}}
+                                Heure : {{ activites.TimeActivite|date('H:i')}}
                                <br>
                                 Nombre de places : {{ activites.nbrePlace }}
                                <br>

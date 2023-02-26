@@ -1,0 +1,48 @@
+{% extends 'baseback.html.twig' %}
+
+{% block content %}
+<div class="container">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+<h1> Liste des Activites</h1>
+</center>
+<br><br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Date </th>
+      <th scope="col">Activite ID </th>
+      <th scope="col">User ID </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+    </tr>
+  </thead>
+  <tbody>
+  {%  for a in  part %}
+    <tr>
+      <td scope="row">{{a.id}}</td>
+      <td>{{a.dateParticipation|date('d F Y')}}</td>
+      <td>{{a.activite.id}}</td>
+      <td>{{a.User.id}}</td>
+      <td>  <a class="btn btn-round btn-twitter" href="{{ path('deleteParticipation', {id:a.id}) }}">Supprimer</a></td>
+  
+
+    </tr>
+ 
+    {%  endfor %}
+  </tbody>
+</table>
+
+</div>
+
+{% endblock %}
+
+
+
+

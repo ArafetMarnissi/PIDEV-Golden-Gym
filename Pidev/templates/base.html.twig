@@ -14,6 +14,7 @@
 		rel="icon" href="{{asset('img/logo1.png')}}" type="image/png">
 
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
 		{% block stylesheets %}
 
 			<link rel="stylesheet" href="{{asset('vendors/bootstrap/bootstrap.min.css')}}">
@@ -26,7 +27,7 @@
 			<link rel="stylesheet" href="{{asset('css/style1.css')}}">
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
-
+			<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
 		{% block javascripts %}
 			<script src="{{asset('vendors/jquery/jquery-3.2.1.min.js')}}"></script>
 			<script src="{{asset('vendors/bootstrap/bootstrap.bundle.min.js')}}"></script>
@@ -87,20 +88,44 @@
 																																																																																																																																																																																																																																																																																																																																																																																																																								                -->
 									</li>
 									<li class="nav-item">
+										<a href="{{path('activite_planning')}}" class="nav-link">Planning</a>
+									</li>
+									<li class="nav-item">
 										<a class="nav-link" href="contact.html">Contact</a>
 									</li>
-								</ul>
+								 {% if app.user %}
+								  <li class="nav-item submenu dropdown">
+                                	<a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">Profil</a>
+                                	<ul class="dropdown-menu">
+								 		<li class="nav-item"><a class="nav-link">Bonjour,
+										<span class="section-intro__style">{{ app.user.nom }}
+										</span></a></li>
+                                    	<li class="nav-item"><a class="nav-link" href="{{ path('afficher_details_user', {id:app.user.id}) }}"> Consulter Profil</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{ path('AffichageParticipationUser') }}"> Mes participations</a></li>
+                                    	<li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                                	</ul>
+                            	  </li>
+							</ul>
 
-								{% if app.user
-								
-								%}
 
-									<div>Bonjour,
+
+									<!--<div>Bonjour,
 										<span class="section-intro__style">{{ app.user.nom }}
 										</span>
 										<a class="btn btn-sm btn-success" href="{{ path('afficher_details_user', {id:app.user.id}) }}">Consulter Profil</a>
 										<a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
-									</div>
+									</div>-->
+									 <!--<li class="nav-item submenu dropdown">
+                						<a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  							aria-expanded="false">Profil</a>
+                						<ul class="dropdown-menu">
+                  							<li class="nav-item"><a class="nav-link">Bonjour,
+										<span class="section-intro__style">{{ app.user.nom }}
+										</span></a></li>
+                  						<li class="nav-item"><a class="nav-link" href="{{ path('afficher_details_user', {id:app.user.id}) }}">Consulter Profil</a></li>
+                						<li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
+										</ul>
+									</li>-->
 									<ul class="nav-shop">
 
 										<li class="nav-item">
