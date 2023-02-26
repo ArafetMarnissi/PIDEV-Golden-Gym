@@ -1,0 +1,41 @@
+{% extends 'home.html.twig' %}
+{% block body %}
+<!-- ================ start banner area ================= -->	
+  <section class="blog-banner-area" id="blog">
+    <div class="container h-100">
+      <div class="blog-banner">
+        <div class="text-center">
+          <h1>Categorie</h1>
+          <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <!--<li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Blog</li>-->
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ end banner area ================= -->
+
+<section class="blog_categorie_area">
+    <div class="container">
+      <div class="row">
+         {% for p in produit %}
+            <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
+            <a href="{{ path('prodbycat',{id:p.id})}}">
+                <div class="categories_post">
+                    <img class="card-img rounded-0" height="237" style="width: 360px;" src="{{asset('uploads/categorie/'~p.imageCategorie)}}" alt="post">
+                    <div class="categories_details">
+                        <div class="categories_text">
+                                <h5>{{p.nomCategory}}</h5>
+                        </div>
+                    </div>
+                 </div>
+                 </a>
+             </div>
+        {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

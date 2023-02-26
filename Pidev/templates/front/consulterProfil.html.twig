@@ -1,13 +1,23 @@
 {% extends 'base.html.twig' %}
+
 {% block body %}
 
+{% if app.user and 'ROLE_CLIENT' in app.user.roles %}
+{% if app.user.Status ==  0 %}
+{% set x="non confirmé" %}
+{% else %}
+{% set x="confirmé" %}
 
+{% endif %}
 
 {{form_start(form)}}
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{app.user.nom}} {{app.user.prenom}}</span><span class="text-black-50">{{app.user.username}}</span><span> </span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{app.user.nom}} {{app.user.prenom}}</span><span class="text-black-50">{{app.user.username}}</span><span> Votre compte est : <h2> {{ x }}  </h2></span><span>
+            {% if app.user.Status == 0 %}
+             <a href="{{ path ('confirm_account')}}">Confirmer mon compte </a>  {% endif %}</span></div>
+            
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -33,7 +43,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12">
-                                        <label class="labels">Changer votre mot de passe</label>
+                                        <label class="labels">Entrer votre mot de passe pour modifier</label>
 
   {{form_row(form.password,{'attr': {'placeholder':'Mot de passe','class':'form-control'}})}}                    </div>
                 </div>
@@ -51,6 +61,11 @@
 </div>
 {{form_end(form)}}
 
+{% else %}
+<div class="container rounded bg-white mt-5 mb-5">
 
+<h1 class"h1">ACCESS DENIED<h1>
 
+</div>
+{% endif %}
 {% endblock %}

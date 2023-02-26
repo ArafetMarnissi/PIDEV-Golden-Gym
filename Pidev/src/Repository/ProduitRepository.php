@@ -39,6 +39,13 @@ class ProduitRepository extends ServiceEntityRepository
         }
     }
 
+    public function Findprodbycat($n)
+    {
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager->createQuery("SELECT p FROM App\Entity\Produit p JOIN p.category c WHERE c.id=:n")->setParameter('n',$n);
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Produit[] Returns an array of Produit objects
 //     */

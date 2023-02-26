@@ -39,24 +39,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $password = null;
     
-    public string $confirm_password;
+    public ?string $confirm_password = null;
+
+    #[Assert\NotBlank(message:"Le nom est obligatoire")]
+
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nom = null;
 
+    #[Assert\NotBlank(message:"Le prénom est obligatoire")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $prenom = null;
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Commande::class, orphanRemoval: true)]
     private Collection $commandes;
 
-    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Participation::class)]
-    private Collection $participations;
+    #[ORM\Column]
+    private ?int $PrivateKey = null;
+
+    #[ORM\Column]
+    private ?bool $Status = null;
 
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
-        $this->participations = new ArrayCollection();
+        $this->ReservationClient = new ArrayCollection();
     }
    
     
@@ -130,7 +137,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
     
     
-    
+    public function setconfirm_password(string $confirm_password): self
+    {
+        $this->confirm_password = $confirm_password;
+
+        return $this;
+    }
 
    
 
@@ -208,32 +220,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Participation>
-     */
-    public function getParticipations(): Collection
+    public function getPrivateKey(): ?int
     {
-        return $this->participations;
+        return $this->PrivateKey;
     }
 
-    public function addParticipation(Participation $participation): self
+    public function setPrivateKey(int $PrivateKey): self
     {
-        if (!$this->participations->contains($participation)) {
-            $this->participations->add($participation);
-            $participation->setUser($this);
-        }
+        $this->PrivateKey = $PrivateKey;
 
         return $this;
     }
 
-    public function removeParticipation(Participation $participation): self
+    public function isStatus(): ?bool
     {
-        if ($this->participations->removeElement($participation)) {
-            // set the owning side to null (unless already changed)
-            if ($participation->getUser() === $this) {
-                $participation->setUser(null);
-            }
-        }
+        return $this->Status;
+    }
+
+    public function setStatus(bool $Status): self
+    {
+        $this->Status = $Status;
 
         return $this;
     }

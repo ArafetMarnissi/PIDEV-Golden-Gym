@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'home.html.twig' %}
 {% block body %}
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="blog">
@@ -7,17 +7,83 @@
 				<div class="text-center">
 					<h1>Shop Single</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb">
+           <!-- <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Shop Single</li>
-            </ol>
+            </ol>-->
           </nav>
 				</div>
 			</div>
     </div>
 	</section>
 	<!-- ================ end banner area ================= -->
+<style>
+			#stars
+			{
+				width:200px;
+				height:200px;
+				margin:50px auto;	
+			}
+			lt
+			{
+				display:inline-block;
+				{# font-size:20px; #}
+				padding:1px;
+				color:#ccc;
+			}
+			.hovered-stars
+			{
+				color:#FFCC36;
+			}
+			.clicked-stars
+			{
+				color:sandybrown;
+			}
+</style>
 
+<script>
+var data;
+	$(document).ready(function(){
+		$("lt").mouseover(function(){
+			var current = $(this);
+			$("lt").each(function(index){
+				$(this).addClass("hovered-stars");
+				if(index == current.index())
+				{
+					return false;
+				}
+			})
+		})
+		$("lt").mouseleave(function(){
+			$("lt").removeClass("hovered-stars");
+		});
+		$("lt i").click(function(){
+			$("lt").removeClass("clicked-stars");
+			$(".hovered-stars").addClass("clicked-stars");
+			var val=$(".clicked-stars").length;
+			
+			console.log(val);
+			
+		
+		$.ajax({
+            type: "POST",
+            url: "{{path('star',{id:produits.id})}}",
+            data: {value:val},
+			dataType: "json",
+            success: function(response) {
+                console.log(response);
+				$("#msg").html((response.toFixed(2))+"/5");
+            },
+			error: function(jqXHR, status, error) {
+            console.log(error);
+			
+        }
+        });
+		
+		});
+	
+	})
+</script>
 
   <!--================Single Product Area =================-->
 	<div class="product_image_area">
@@ -26,7 +92,7 @@
 				<div class="col-lg-6">
 					<div class="owl-carousel owl-theme s_Product_carousel">
 						<div class="single-prd-item">
-							<img class="img-fluid" src="{{asset('uploads/produits/'~produits.imageproduit)}}" alt="">
+							<img class="img-fluid" style="width:400px; height:400px " src="{{asset('uploads/produits/'~produits.imageproduit)}}" alt="">
 						</div>
 						<!-- <div class="single-prd-item">
 							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
@@ -36,28 +102,46 @@
 						</div> -->
 					</div>
 				</div>
+				
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
 						<h3>{{produits.nom}}</h3>
 						<h2>{{produits.prixproduit}}TND</h2>
 						<ul class="list">
-							<li><a class="active" href="#"><span>Category</span> : {{produits.category.nomCategory}}</a></li>
-							<li><a href="#"><span>Availibility</span> : In Stock</a></li>
+							<li><span>Category</span> : {{produits.category.nomCategory}}</li>
+							{% if produits.quantiteproduit >=1 %}
+								<li><span>Availibility</span> : In Stock</li>
+							{% else %}
+								<li><span>Availibility :</span><font color="red">  out of Stock </font></li>
+							{% endif %}
 						</ul>
 						<p>{{produits.description}}</p>
+						{% if produits.quantiteproduit >=1 %}
 						<div class="product_count">
-              <label for="qty">Quantity:</label>
-              <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+              				<label for="qty">Quantity:</label>
+             				 <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
 							 class="increase items-count" type="button"><i class="ti-angle-left"></i></button>
 							<input type="text" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:" class="input-text qty">
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-               class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
+               					class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
+							
 							<a class="button primary-btn" href="#">Add to Cart</a>               
 						</div>
-						<div class="card_area d-flex align-items-center">
+						<div id="stars">
+							<ul>
+								<lt><i value="1" class="fa fa-star fa-fw"></i></lt>
+								<lt><i value="2" class="fa fa-star fa-fw"></i></lt>
+								<lt><i value="3" class="fa fa-star fa-fw"></i></lt>
+								<lt><i value="4" class="fa fa-star fa-fw"></i></lt>
+								<lt><i value="5" class="fa fa-star fa-fw"></i></lt>
+								<div id="msg">{{produits.note | number_format(2) }}/5</div>
+							</ul>
+						</div>
+						{% endif %}
+						<!--<div class="card_area d-flex align-items-center">
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
-						</div>
+						</div>-->
 					</div>
 				</div>
 			</div>

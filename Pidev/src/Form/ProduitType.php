@@ -22,16 +22,23 @@ class ProduitType extends AbstractType
             ->add('quantiteProduit')
             //->add('imageProduit')
             ->add('imageProduit', FileType::class, [
-                'label' => 'image only',
+                'label' => 'image seulement',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
+<<<<<<< HEAD
                         // 'mimeTypes' => [
                         //     'application/jpeg',
                         //     'application/jpg',
                         // ],
+=======
+                        //'mimeTypes' => [
+                        //    'application/jpeg',
+                        //    'application/jpg',
+                        //],
+>>>>>>> 1213d9525b7eadf4aa41dfe910b2a11495cc8c84
                         'mimeTypesMessage' => 'Please upload a valid image',
                     ])
                 ],

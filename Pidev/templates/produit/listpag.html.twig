@@ -8,13 +8,13 @@
 					<h1>Shop
 					</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
-						<ol class="breadcrumb">
+						<!--<ol class="breadcrumb">
 							<li class="breadcrumb-item">
 								<a href="#">Home</a>
 							</li>
 							<li class="breadcrumb-item active" aria-current="page">Shop
 							</li>
-						</ol>
+						</ol>-->
 					</nav>
 				</div>
 			</div>
@@ -167,8 +167,13 @@
 							{% for p in produit %}
 								<div class="col-md-6 col-lg-4">
 									<div class="card text-center card-product">
+									{% if p.quantiteproduit ==0 %}
 										<div class="card-product__img">
-											<img class="card-img" style="width:250px;" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt="">
+											<img class="card-img" style="width:250px;height:250px" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt="">
+											
+											{% else %}
+											<div class="card-product__img">
+											<img class="card-img" style="width:250px;height:250px" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt="">
 											<ul
 												class="card-product__imgOverlay">
 												<!--<li><button><i class="ti-search"></i></button></li>-->
@@ -179,6 +184,7 @@
 												</li>
 												<!-- <li><button><i class="ti-heart"></i></button></li>-->
 											</ul>
+											{% endif %}
 										</div>
 										<div class="card-body">
 											<p>{{p.category.nomCategory}}</p>
@@ -193,8 +199,11 @@
 						</div>
 				    </section>
                     {% if ispaginated %}
+                    
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination">
+                    
+                        <ul class="pagination" >
+                        
                             {% if page != 1 %}
                                 <li class="page-item"><a class="page-link" href="{{path('list_produitpag',{page:page - 1,nbr:nbr})}}">Previous</a></li>
                             {% endif %}
@@ -206,8 +215,11 @@
                             {% if page != nbpage %}
                                 <li class="page-item"><a class="page-link" href="{{path('list_produitpag',{page:page + 1,nbr:nbr})}}">Next</a></li>
                             {% endif %}
+                            
                         </ul>
+                        
                     </nav>
+                    
                     {% endif %} 
 				<!-- End Best Seller -->
 			</div>
