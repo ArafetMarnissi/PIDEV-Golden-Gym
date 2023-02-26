@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AbonnementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -28,8 +30,16 @@ class Abonnement
     #[Assert\NotBlank(message:"La durée de l'abonnement est obligatoire")]
     private ?string $dureeAbonnement = null;
 
-    #[ORM\OneToOne(mappedBy: 'ReservationAbonnement', cascade: ['persist', 'remove'])]
-    private ?Reservation $reservation = null;
+    #[ORM\OneToMany(mappedBy: 'ReservationAbonnement', targetEntity: Reservation::class)]
+    private Collection $reservation;
+
+    public function __construct()
+    {
+        $this->reservation = new ArrayCollection();
+    }
+
+    // #[ORM\OneToOne(mappedBy: 'ReservationAbonnement', cascade: ['persist', 'remove'])]
+    // private ?Reservation $reservation = null;
 
     public function getId(): ?int
     {
@@ -72,25 +82,60 @@ class Abonnement
         return $this;
     }
 
-    public function getReservation(): ?Reservation
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservation(): Collection
     {
         return $this->reservation;
     }
 
-    public function setReservation(?Reservation $reservation): self
+    public function addReservation(Reservation $reservation): self
     {
-        // unset the owning side of the relation if necessary
-        if ($reservation === null && $this->reservation !== null) {
-            $this->reservation->setReservationAbonnement(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($reservation !== null && $reservation->getReservationAbonnement() !== $this) {
+        if (!$this->reservation->contains($reservation)) {
+            $this->reservation->add($reservation);
             $reservation->setReservationAbonnement($this);
         }
 
-        $this->reservation = $reservation;
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservation->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getReservationAbonnement() === $this) {
+                $reservation->setReservationAbonnement(null);
+            }
+        }
 
         return $this;
     }
+
+
+
+
+    // public function getReservation(): ?Reservation
+    // {
+    //     return $this->reservation;
+    // }
+
+    // public function setReservation(?Reservation $reservation): self
+    // {
+    //     // unset the owning side of the relation if necessary
+    //     if ($reservation === null && $this->reservation !== null) {
+    //         $this->reservation->setReservationAbonnement(null);
+    //     }
+
+    //     // set the owning side of the relation if necessary
+    //     if ($reservation !== null && $reservation->getReservationAbonnement() !== $this) {
+    //         $reservation->setReservationAbonnement($this);
+    //     }
+
+    //     $this->reservation = $reservation;
+
+    //     return $this;
+    // }
+
+
 }

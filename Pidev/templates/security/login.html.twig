@@ -17,8 +17,16 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
-
-
+    {% if app.session.flashBag.has('success') %}
+<div class="alert alert-success">
+{{ app.session.flashBag.get('success')[0] }}
+</div>
+{% endif %}
+{% if app.session.flashBag.has('error') %}
+    <div class="alert alert-danger">
+        {{ app.session.flashBag.get('error')[0] }}
+    </div>
+{% endif %}
     <h1 class="h3 mb-3 font-weight-normal">Se Connecter</h1>
     <label for="inputEmail">Email</label>
     <input type="email"  name="email" id="inputEmail" class="form-control" autocomplete="email" width="100" height="48" required autofocus>
