@@ -23,7 +23,7 @@
       <div class="row">
          {% for p in produit %}
             <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
-            <a href="{{ path('gtcatf',{id:p.id})}}">
+            <a href="{{ path('prodbycat',{id:p.id})}}">
                 <div class="categories_post">
                     <img class="card-img rounded-0" height="237" style="width: 360px;" src="{{asset('uploads/categorie/'~p.imageCategorie)}}" alt="post">
                     <div class="categories_details">
