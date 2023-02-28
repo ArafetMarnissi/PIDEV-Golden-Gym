@@ -21,7 +21,7 @@ class AbonnementType extends AbstractType
                     'Pro' => 'Pro',
                     'Premium' => 'Premium',
                 ],
-                'expanded' => true,
+                'expanded' => false,
                 'multiple' => false,
 
             ])
@@ -32,7 +32,7 @@ class AbonnementType extends AbstractType
                     'Mensuel' => 'Mensuel',
                     'Annuel' => 'Annuel',
                 ],
-                'expanded' => true,
+                'expanded' => false,
                 'multiple' => false,
 
             ])

@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Activite;
+use App\Entity\Participation;
 use App\Form\ActiviteType;
+use App\Repository\ParticipationRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -87,6 +89,15 @@ class ActiviteController extends AbstractController
         ]);
     }
 
+    public function en(ParticipationRepository $repository2,$id,$user) : Bool
+    {
+        $enable=$repository2->FindPartById($id,$user);
+        if ($enable == NULL){
+        return false;
+        }else{ 
+        return true;
+        }
+    } 
 
     #[Route('activiteFront/get/{id}', name: 'getidFront')]
     public function show_id(ManagerRegistry $doctrine, $id): Response
@@ -96,6 +107,7 @@ class ActiviteController extends AbstractController
         return $this->render('activite/detailActiviteFront.html.twig', [
             'activites' => $Activites,
             'id' => $id,
+            'enable' => $this->en($doctrine->getRepository(Participation::class),$id,$this->getUser()),
         ]);
     }
 
@@ -152,5 +164,32 @@ class ActiviteController extends AbstractController
         $em->remove($activite);
         $em->flush();
         return $this->redirectToRoute('AffichageActivite');
+    }
+
+    #[Route('/activite/planning', name: 'activite_planning')]
+    public function index1(ManagerRegistry $doctrine): Response
+    {
+        $repository = $doctrine->getRepository(Activite::class);
+        $Activites = $repository->findAll();
+        
+        $list = [];
+        foreach($Activites as $act)
+        {
+            $start = $act->getDateActivite()->format('Y-m-d').' '.$act->getTimeActivite()->format('H:i:s');
+            $end = $act->getDateActivite()->format('Y-m-d').' '.$act->getEnd()->format('H:i:s');
+            $list[] = [
+                'id' => $act->getId(),
+                'start' => $start,
+                'end' => $end,
+                'title' => $act->getNomAcitivite(),
+                'description' => $act->getNbrePlace(),
+                'backgroundColor' => $act->getBackgroundColor(),
+                'borderColor' => $act->getBorderColor(),
+                'textColor' => $act->getTextColor(),
+            ];
+        }
+        $data = json_encode($list);
+        return $this->render('activite/CalendrierFront.html.twig', compact('data')
+        )  ;
     }
 }

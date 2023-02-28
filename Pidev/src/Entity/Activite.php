@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ActiviteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: ActiviteRepository::class)]
 class Activite
@@ -53,6 +55,28 @@ class Activite
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $TimeActivite = null;
+
+    #[ORM\Column(length: 7, nullable: true)]
+    private ?string $background_color = null;
+
+    #[ORM\Column(length: 7, nullable: true)]
+    private ?string $border_color = null;
+
+    #[ORM\Column(length: 7, nullable: true)]
+    private ?string $text_color = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $end = null;
+
+    #[ORM\OneToMany(mappedBy: 'activite', targetEntity: Participation::class,orphanRemoval: true)]
+    private Collection $Participation;
+
+    public function __construct()
+    {
+        $this->Participation = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -166,4 +190,87 @@ class Activite
 
         return $this;
     }
+
+    public function getBackgroundColor(): ?string
+    {
+        return $this->background_color;
+    }
+
+    public function setBackgroundColor(?string $background_color): self
+    {
+        $this->background_color = $background_color;
+
+        return $this;
+    }
+
+    public function getBorderColor(): ?string
+    {
+        return $this->border_color;
+    }
+
+    public function setBorderColor(?string $border_color): self
+    {
+        $this->border_color = $border_color;
+
+        return $this;
+    }
+
+    public function getTextColor(): ?string
+    {
+        return $this->text_color;
+    }
+
+    public function setTextColor(?string $text_color): self
+    {
+        $this->text_color = $text_color;
+
+        return $this;
+    }
+
+    public function getEnd(): ?\DateTimeInterface
+    {
+        return $this->end;
+    }
+
+    public function setEnd(?\DateTimeInterface $end): self
+    {
+        $this->end = $end;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Participation>
+     */
+    public function getParticipation(): Collection
+    {
+        return $this->Participation;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->Participation->contains($participation)) {
+            $this->Participation->add($participation);
+            $participation->setActivite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->Participation->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getActivite() === $this) {
+                $participation->setActivite(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    
+   
+
 }

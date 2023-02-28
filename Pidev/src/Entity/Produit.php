@@ -51,6 +51,9 @@ class Produit
     #[ORM\OneToMany(mappedBy: 'Produits', targetEntity: LigneCommande::class, orphanRemoval: true)]
     private Collection $ligneCommandes;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $note = 0;
+
     public function __construct()
     {
         $this->ligneCommandes = new ArrayCollection();
@@ -174,4 +177,21 @@ class Produit
 
         return $this;
     }
+
+    public function isproduitExpired(): bool
+    {
+        return $this->getDateExpiration() && $this->getDateExpiration() < new \DateTime('@' . strtotime('now'));
+    }
+
+    public function getNote(): ?float
+    {
+        return $this->note;
+    }
+
+    public function setNote(?float $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }   
 }

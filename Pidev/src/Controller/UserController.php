@@ -6,11 +6,15 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserController extends AbstractController
 {
@@ -30,10 +34,16 @@ class UserController extends AbstractController
         ]);
     }
     #[Route('/UserProfile/{id}',name:'afficher_details_user')]
-    public function updateProfil(ManagerRegistry $doctrine , HttpFoundationRequest $req ,$id )
+    public function updateProfil(ManagerRegistry $doctrine , HttpFoundationRequest $req ,$id,SessionInterface $session)
     {
+/* 
+
+    $user=$this->getUser();
     
-        
+    dd("");
+    */
+
+
     $repository= $doctrine->getRepository(User::class);
     $user=$repository->find($id);
      $form = $this-> createForm(UserType::class,$user);
@@ -85,7 +95,7 @@ class UserController extends AbstractController
      }
 
     return $this->renderForm("user/modifierUser.html.twig",['form'=>$form,'users'=>$user]);
-    }
+    } 
     
 
   

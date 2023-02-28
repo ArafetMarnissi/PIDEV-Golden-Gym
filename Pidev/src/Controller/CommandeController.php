@@ -222,10 +222,10 @@ class CommandeController extends AbstractController
         ));
 
         
-            $transport = Transport::fromDsn('smtp://goldengym@outlook.fr:arafet332810@smtp.office365.com:587');
+            $transport = Transport::fromDsn('smtp://khalilherma6@outlook.fr:KhAlIl332810@smtp.office365.com:587');
             $mailer = new Mailer($transport); 
             $email = (new Email());
-            $email->from('goldengym@outlook.fr');
+            $email->from('khalilherma6@outlook.fr');
             $email->to($UserEmail);
             $email->subject('[GoldenGym] Confirmation de commande');
 

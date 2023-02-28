@@ -22,20 +22,18 @@ class ProduitType extends AbstractType
             ->add('quantiteProduit')
             //->add('imageProduit')
             ->add('imageProduit', FileType::class, [
-                'label' => 'image seulement',
+                'label' => 'image only',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '10M',
-                        //  'mimeTypes' => [
-                        //     'imageProduit/gif',
-                        //     'imageProduit/jpeg',
-                        //     'imageProduit/jpg',
-                        //     'imageProduit/png',
-                        //  ],
-                        'mimeTypesMessage' => 'merci de telecharger une photo valide',
-                        ]),
+                        'maxSize' => '1024k',
+                        // 'mimeTypes' => [
+                        //     'application/jpeg',
+                        //     'application/jpg',
+                        // ],
+                        'mimeTypesMessage' => 'Please upload a valid image',
+                    ])
                 ],
             ])
             ->add('dateExpiration')

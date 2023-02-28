@@ -17,8 +17,12 @@ class Participation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateParticipation = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    
+
+    #[ORM\ManyToOne(inversedBy: 'participations')]
+    private ?User $User = null;
+
+    #[ORM\ManyToOne(inversedBy: 'Participation')]
     private ?Activite $activite = null;
 
     public function getId(): ?int
@@ -46,6 +50,18 @@ class Participation
     public function setActivite(?Activite $activite): self
     {
         $this->activite = $activite;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }

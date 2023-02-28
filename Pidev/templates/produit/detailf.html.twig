@@ -17,7 +17,73 @@
     </div>
 	</section>
 	<!-- ================ end banner area ================= -->
+<style>
+			#stars
+			{
+				width:200px;
+				height:200px;
+				margin:50px auto;	
+			}
+			lt
+			{
+				display:inline-block;
+				{# font-size:20px; #}
+				padding:1px;
+				color:#ccc;
+			}
+			.hovered-stars
+			{
+				color:#FFCC36;
+			}
+			.clicked-stars
+			{
+				color:sandybrown;
+			}
+</style>
 
+<script>
+var data;
+	$(document).ready(function(){
+		$("lt").mouseover(function(){
+			var current = $(this);
+			$("lt").each(function(index){
+				$(this).addClass("hovered-stars");
+				if(index == current.index())
+				{
+					return false;
+				}
+			})
+		})
+		$("lt").mouseleave(function(){
+			$("lt").removeClass("hovered-stars");
+		});
+		$("lt i").click(function(){
+			$("lt").removeClass("clicked-stars");
+			$(".hovered-stars").addClass("clicked-stars");
+			var val=$(".clicked-stars").length;
+			
+			console.log(val);
+			
+		
+		$.ajax({
+            type: "POST",
+            url: "{{path('star',{id:produits.id})}}",
+            data: {value:val},
+			dataType: "json",
+            success: function(response) {
+                console.log(response);
+				$("#msg").html((response.toFixed(2))+"/5");
+            },
+			error: function(jqXHR, status, error) {
+            console.log(error);
+			
+        }
+        });
+		
+		});
+	
+	})
+</script>
 
   <!--================Single Product Area =================-->
 	<div class="product_image_area">
@@ -59,7 +125,17 @@
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
                					class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
 							
-							<a id="addCart"class="button primary-btn" href="{{ path('cart_add',{id:produits.id}) }}">Add to Cart</a>               
+							<a class="button primary-btn" href="#">Add to Cart</a>               
+						</div>
+						<div id="stars">
+							<ul>
+								<lt><i value="1" class="fa fa-star fa-fw"></i></lt>
+								<lt><i value="2" class="fa fa-star fa-fw"></i></lt>
+								<lt><i value="3" class="fa fa-star fa-fw"></i></lt>
+								<lt><i value="4" class="fa fa-star fa-fw"></i></lt>
+								<lt><i value="5" class="fa fa-star fa-fw"></i></lt>
+								<div id="msg">{{produits.note | number_format(2) }}/5</div>
+							</ul>
 						</div>
 						{% endif %}
 						<!--<div class="card_area d-flex align-items-center">
