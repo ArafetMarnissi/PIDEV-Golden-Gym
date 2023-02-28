@@ -232,7 +232,7 @@ class CommandeController extends AbstractController
             //si on veut ajouter un pdf facture pour que le client peur la telecharger
             // $email->attachFromPath('C:/Users/marni/OneDrive/Bureau/New folder/PIDEV-Golden-Gym/Pidev/public/img/logo1.png');
             ///image
-            $email->embed(fopen('C:/Users/marni/OneDrive/Bureau/New folder/PIDEV-Golden-Gym/Pidev/public/img/logo1.png', 'r'), 'nature');
+            $email->embed(fopen('../public/img/logo1.png', 'r'), 'nature');
             
             ///
 

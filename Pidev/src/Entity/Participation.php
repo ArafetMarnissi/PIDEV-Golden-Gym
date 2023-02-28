@@ -28,6 +28,7 @@ class Participation
     public function getId(): ?int
     {
         return $this->id;
+        
     }
 
     public function getDateParticipation(): ?\DateTimeInterface
