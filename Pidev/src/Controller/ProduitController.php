@@ -43,6 +43,16 @@ class ProduitController extends AbstractController
             }
 
         }
+        for($i=0;$i<$nb;$i++){
+            if($produits[$i]->getQuantiteProduit()<6 && $produits[$i]->getQuantiteProduit()!=0)
+            {
+                $repository->sms($produits[$i]->getNom());
+            }
+            else if ($produits[$i]->getQuantiteProduit()==0 )
+            {
+                $repository->sms1($produits[$i]->getNom());
+            }
+        }
         $prod = $repository->findAll();
         return $this->render('produit/listp.html.twig', [
             'produit' => $prod,
