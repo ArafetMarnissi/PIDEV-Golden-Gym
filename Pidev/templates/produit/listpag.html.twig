@@ -1,5 +1,7 @@
-{% extends 'base.html.twig' %}
+{% extends 'home.html.twig' %}
+
 {% block body %}
+
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
@@ -8,13 +10,13 @@
 					<h1>Shop
 					</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
-						<ol class="breadcrumb">
+						<!--<ol class="breadcrumb">
 							<li class="breadcrumb-item">
 								<a href="#">Home</a>
 							</li>
 							<li class="breadcrumb-item active" aria-current="page">Shop
 							</li>
-						</ol>
+						</ol>-->
 					</nav>
 				</div>
 			</div>
@@ -168,17 +170,19 @@
 								<div class="col-md-6 col-lg-4">
 									<div class="card text-center card-product">
 										<div class="card-product__img">
-											<img class="card-img" style="width:250px;" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt="">
+											<img class="card-img" style="width:250px;height:250px" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt="">
+											{% if p.quantiteproduit >=1 %}
 											<ul
 												class="card-product__imgOverlay">
 												<!--<li><button><i class="ti-search"></i></button></li>-->
 												<li>
-													<a href="{{ path('cart_add',{id:p.id}) }}">
+													<a href="{{ path('cart_add',{id:p.id}) }}" class ="buttonAddToCart">
 														<i class="fas fa-shopping-cart"></i>
 													</a>
 												</li>
 												<!-- <li><button><i class="ti-heart"></i></button></li>-->
 											</ul>
+											{% endif %}
 										</div>
 										<div class="card-body">
 											<p>{{p.category.nomCategory}}</p>
@@ -219,5 +223,36 @@
 			</div>
 		</div>
 	</div>
+	
 </section>
+{# partie java script pour l ajout d'un produit au panier #}
+<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+<script>
+const spans_quantity = document.querySelectorAll("span#spanAddQuantity");
+
+
+
+//script pour le button AddToCart
+	function onClickBtnAddToCart(event) {
+		event.preventDefault();
+		const url = this.href;
+		//supprimer le produit
+		axios.get(url).then(function (response) {
+			// console.log(response.data);
+			spans_quantity.forEach(span => {
+			span.textContent=response.data.quantity;
+			});
+
+		});
+	}
+
+	document.querySelectorAll('a.buttonAddToCart').forEach(function (link) {
+		link.addEventListener('click', onClickBtnAddToCart);
+	});
+
+
+</script>
+
+
+
 <!-- ================ category section end ================= -->{% endblock %}

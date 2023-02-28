@@ -41,7 +41,7 @@ class CategoryController extends AbstractController
         $produit=new Category;
         $form=$this->createForm(CategoryType::class,$produit);
         $form->handleRequest($request);
-        if ($form->isSubmitted() )
+        if ($form->isSubmitted() && $form->isValid())
         {
             $brochureFile = $form->get('imageCategorie')->getData();
             if ($brochureFile) {
@@ -83,7 +83,7 @@ class CategoryController extends AbstractController
         $produits=$repository->find($id);
        $form=$this->createForm(CategoryType::class,$produits);
        $form->handleRequest($request);
-       if($form->isSubmitted())
+       if($form->isSubmitted() && $form->isValid())
        {
         $brochureFile = $form->get('imageCategorie')->getData();
             if ($brochureFile) {

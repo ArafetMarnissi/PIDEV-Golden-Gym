@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historiques de Vos Commandes
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<br>
+		<br>
+		<br>
+		
+		{# <table class="table" style="width: 50%; margin: 0 auto;"> #}
+		<center>
+        
+
+        <div class="bg-light p-3">
+			<h1>Historiques de Vos Commandes</h1>
+            <br>
+            {% if commandes | length > 0 %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><h4>Numéro de Commande</h4></th>
+                            <th><h4>Date Commande</h4></th>
+                            <th><h4>Adresse De Livraison</h4></th>
+                            <th><h4>Prix Commande</h4></th>
+                            <th><h4>Méthode de Paiement</h4></th>
+                            <th><h4>Téléphone</h4></th>
+
+                        </tr>
+                    </thead>
+                    {% set numCommande = 0 %}
+                    {% for commande in commandes %}
+                    {% set numCommande = numCommande + 1 %}
+                        <tr>
+                            <td>{{ numCommande }}</td>
+                            <td>{{ commande.dateCommande|date("d/m/Y") }}</td>
+                            <td>{{ commande.AdresseLivraison }}</td>
+                            <td>{{ commande.prixCommande }}</td>
+                            <td>{{ commande.methodePaiement }}</td>
+                            <td>{{ commande.telephone }}</td>
+
+
+                            <td>
+                           {# calculer la diffrence entre la date courent et la da de commande #}
+                            {% set current_time = "now"|date("Y-m-d H:i:s") %}
+                            {% set commande_date = commande.dateCommande|date("Y-m-d H:i:s") %}
+
+                            {% set current_datetime = date(current_time) %}
+                            {% set commande_datetime = date(commande_date) %}
+
+                            {% set date_diff = current_datetime.diff(commande_datetime) %}
+                            {% set diff_in_hours = date_diff.format("%h") %}
+                            {# tester sur la différence #}
+                            {% if diff_in_hours <1 %}
+                                <a class="btn btn-success" href="{{ path('modifier_commandeClient',{'id' : commande.id}) }}">Modifier</a>
+                            {% endif %}
+                            
+
+                            
+                                
+                            </td>
+                            <td>
+                                <a class="btn btn-info" href="{{ path('detaisCommandeClient',{'id' : commande.id}) }}">Détails</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+            <p class="alert alert-danger">Vous n' avez pas de commande !</p> 
+            {% endif %}
+		</div>
+		</center>
+	</div>
+
+<br>
+<br>
+<br>
+{% endblock %}
+
+

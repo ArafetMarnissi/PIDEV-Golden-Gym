@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-
+<br><br><br>
 	<div class="container">
 		{% if editMode %}
 			<center><h2>Modifier une commande</h2></center>
@@ -15,16 +15,20 @@
 		<div>
 
 			{{form_start(formCommande,{'attr': {'novalidate': 'novalidate'}})}}
-			<div>{{form_row(formCommande.AdresseLivraison,{'attr': {'placeholder':'Rue , ville , gouvernement','class':'form-control'}})}}</div>
+			<div>{{ form_label(formCommande.AdresseLivraison, 'Adresse de livraison') }}
+			{{ form_widget(formCommande.AdresseLivraison, {'attr': {'placeholder': 'Rue, ville, gouvernement'}}) }}</div>
 
 			{# <div>{{form_row(formCommande.prixCommande,{'attr': {'placeholder':'Prix de la commande',}})}}</div> #}
 
 
-			<div>{{form_row(formCommande.telephone,{'attr': {'placeholder':'votre numéro de téléphone'}})}}</div>
+			<div>
+			{{ form_label(formCommande.telephone, 'Téléphone') }}
+			{{form_widget(formCommande.telephone,{'attr': {'placeholder':'votre numéro de téléphone'}})}}</div>
 			<div>{{form_row(formCommande.methodePaiement,{'attr': {'placeholder':'méthode de paiement'}})}}</div>
 
-			<div class="text-right"><h3> Prix Total : {{PrixTotal }}</h3></div>
-			<center><button type='submit' class="btn btn-round btn-facebook" href="{{ path('Affichagecommande') }}">
+			<div class="text-right"><h3> Prix Total : {{PrixTotal}}DT</h3></div>
+			<center><button type='submit' class="button button-hero">
+			
 				{% if editMode %}
 					Enregistrer
 				{% else %}
@@ -37,5 +41,7 @@
 			</div>
 		</div>
 	</div>
-
+<br>
+<br>
+<br>
 {% endblock %}

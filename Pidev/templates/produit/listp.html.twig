@@ -38,8 +38,14 @@
                 <td>{{ p.nom }}</td>
                 <td>{{p.description}}</td>
                 <td>{{p.prixproduit}}dt</td>
-                <td>{{p.quantiteproduit}}</td>
-                <td><img style="width:200px;" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt=""></td>
+                {% if p.quantiteproduit >5 %}
+                <td bgcolor="green">{{p.quantiteproduit}}</td>
+                {% elseif p.quantiteproduit <= 0 %}
+                <td bgcolor="red">{{p.quantiteproduit}}</td>
+                {% else %}
+                <td bgcolor="ff8000">{{p.quantiteproduit}}</td>
+                {% endif %}
+                <td><img style="width:200px; height:200px" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt=""></td>
                 <td>{{p.dateexpiration|date("d-m-Y")}}</td>
                 <td>
                 <a href="{{path('editp',{id:p.id})}}" class="btn btn-round btn-twitter">modifier</a>
