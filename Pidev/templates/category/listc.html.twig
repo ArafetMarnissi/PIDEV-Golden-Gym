@@ -4,6 +4,7 @@
 {% block content %}
 <div class="container">
 <br>
+<<<<<<< HEAD
 <h1>Liste des produits</h1>
 <form action="{{ path('addcat') }}">
     <button class="btn btn-round btn-facebook">Ajouter</button>
@@ -11,12 +12,29 @@
 <br>
 <br>
 <br>
+=======
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+<center>
+<h1>Liste des categorie</h1>
+</center>
+<br>
+<br>
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>nom categorie</th>
                 <th>image categorie</th>
+<<<<<<< HEAD
+=======
+                <th>produit de cette categorie</th>
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
                 <th>actions</th>
             </tr>
         </thead>
@@ -25,7 +43,17 @@
             <tr>
                 <td>{{ p.id }}</td>
                 <td>{{p.nomCategory}}</td>
+<<<<<<< HEAD
                 <td><img style="width:200px;" src="{{asset('uploads/category/'~p.imageCategorie)}}" alt=""></td>
+=======
+                <td><img style="width:200px;" src="{{asset('uploads/categorie/'~p.imageCategorie)}}" alt=""></td>
+                <td>
+                    {% for prod in p.Produits %}
+                        <br>
+                       ~{{prod.nom}}
+                    {% endfor %}
+                </td>
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
                 <td>
                 <a href="{{path('deletecat',{id:p.id})}}" class="btn btn-round btn-twitter">supprimer</a>
                 <a href="{{path('editcat',{id:p.id})}}" class="btn btn-round btn-twitter">modifier</a>
@@ -38,5 +66,14 @@
         {% endfor %}
         </tbody>
     </table>
+<<<<<<< HEAD
+=======
+    <center>
+    <form action="{{ path('addcat') }}">
+    <button class="btn btn-round btn-facebook">Ajouter une nouvelle categorie</button>
+    </form>
+    </center>
+    </center>
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
     </div>
 {% endblock %}

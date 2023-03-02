@@ -3,7 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Commande;
+<<<<<<< HEAD
 use App\Form\CommandeType;
+=======
+use App\Entity\User;
+use App\Form\CommandeType;
+use App\Repository\UserRepository;
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +18,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommandeController extends AbstractController
 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
     #[Route('/commande', name: 'app_commande')]
     public function index(): Response
     {
@@ -21,15 +31,30 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/ajouterCommande', name: 'ajouter_commande')]
+<<<<<<< HEAD
     public function  add(ManagerRegistry $doctrine, Request  $request): Response
     {
         $commande = new commande();
+=======
+    public function  add(ManagerRegistry $doctrine, Request  $request, UserRepository $userRepository): Response
+    {
+        $commande = new commande();
+        //à changer
+        $user = new user();
+        $user = $userRepository->find(2);
+        $commande->setUser($user);
+        //
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
         $form = $this->createForm(commandeType::class, $commande);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $doctrine->getManager();
             $em->persist($commande);
             $em->flush();
+<<<<<<< HEAD
+=======
+            //parcourir le panier, pour chaque element du panier est instancié un objet ligne commande  
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 
 
             return $this->redirectToRoute('Affichagecommande');

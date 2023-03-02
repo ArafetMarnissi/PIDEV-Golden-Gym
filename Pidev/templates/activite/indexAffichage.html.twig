@@ -10,7 +10,12 @@
 <br>
 <center>
 <h1> Liste des Activites</h1>
+<<<<<<< HEAD
 
+=======
+</center>
+<br><br>
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 <table class="table">
   <thead>
     <tr>
@@ -19,6 +24,10 @@
       <th scope="col">Description</th>
       <th scope="col">Duree</th>
       <th scope="col">Date </th>
+<<<<<<< HEAD
+=======
+      <th scope="col">Time </th>
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
       <th scope="col">Coach </th>
       <th scope="col">Nombre places </th>
       <th scope="col">URL Image </th>
@@ -33,12 +42,22 @@
       <td>{{a.nomAcitivite}}</td>
       <td>{{a.descriptionActivite}}</td>
       <td>{{a.dureeActivite}}</td>
+<<<<<<< HEAD
       <td>{{a.DateActivite|date('Y-m-d')}}</td>
       <td>{{a.coach}}</td>
       <td>{{a.nbrePlace}}</td>
       <td>{{a.Image}}</td>
           <td>  <a class="btn btn-sm btn-success" href="{{ path('updateActivite', {id:a.id})}}">Modifier</a></td>
       <td>  <a class="btn btn-sm btn-danger" href="{{ path('deleteActivite', {id:a.id}) }}">Supprimer</a></td>
+=======
+      <td>{{a.DateActivite|date('d F Y')}}</td>
+      <td>{{a.TimeActivite|date('H:i')}}</td>
+      <td>{{a.Coach.nomCoach}}</td>
+      <td>{{a.nbrePlace}}</td>
+      <td><img style="width:100px;" src="{{asset('img/activite/'~a.image)}}" alt=""></td>
+          <td>  <a class="btn btn-round btn-twitter" href="{{ path('updateActivite', {id:a.id})}}">Modifier</a></td>
+      <td>  <a class="btn btn-round btn-twitter" href="{{ path('deleteActivite', {id:a.id}) }}">Supprimer</a></td>
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
   
 
     </tr>
@@ -46,9 +65,27 @@
     {%  endfor %}
   </tbody>
 </table>
+<<<<<<< HEAD
 <form action="{{ path('addActivite') }}">
     <button class="btn btn-round btn-facebook">Ajouter</button>
 </form>
 </center>
 </div>
 {% endblock %}
+=======
+<center>
+<form action="{{ path('addActivite') }}">
+    <button class="btn btn-round btn-facebook">Ajouter une nouvelle activité</button>
+</form>
+</center>
+
+</div>
+<<<<<<< HEAD
+{% endblock %}
+<<<<<<< HEAD
+=======
+=======
+{% endblock %}
+>>>>>>> 55b4d98c663c6b7e3f80d305797dc311214392bd
+>>>>>>> 5f668aea2ccc9e7fa1880a1e338dfeb4e27236bb
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1

@@ -1,0 +1,36 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Réserver Abonnement{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+<h1></h1>
+<table class="table">
+<thead>
+    <tr>
+        <th>Id</th>
+        <th>Date Debut</th>
+        <th>Date Fin</th>
+    </tr>
+    </thead>
+    {% for reservation in reservations %}
+    <tr>
+        <td>{{ reservation.id }}</td>
+        <td>{{ reservation.DateDebut|date('Y-m-d') }}</td>
+        <td>{{ reservation.DateFin|date('Y-m-d') }}</td>
+        <td>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{# <form action="{{ path('reservation_new',{'id':reservation.abonnement.id}) }}">
+    <button class="btn btn-round btn-facebook">Renouveller</button>
+</form> #}
+</div>
+{% endblock %}

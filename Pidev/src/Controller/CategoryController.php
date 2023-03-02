@@ -106,4 +106,28 @@ class CategoryController extends AbstractController
        }
        return $this->renderForm('category/newcat.html.twig',['formc'=>$form,"editmode"=>$produits->getid()!==null]);
     }
+<<<<<<< HEAD
+=======
+
+    #[Route('/getcatf/{id}', name: 'gtcatf')]
+    public function show_catf(ManagerRegistry $doctrine, $id): Response
+    {
+        $repository = $doctrine->getRepository(Category::class);
+        $categorie = $repository->find($id);
+        return $this->render('category/listprodcat.html.twig', [
+            'cat' => $categorie,
+            'id' => $id,
+        ]);
+    }
+
+    #[Route('/listcf', name: 'listcf')]
+    public function listcf(ManagerRegistry $doctrine): Response
+    {
+        $repository= $doctrine->getRepository(Category::class);
+        $produits=$repository->findAll();
+        return $this->render('category/listcatfront.html.twig', [
+            'produit' => $produits,
+        ]);
+    }
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 }

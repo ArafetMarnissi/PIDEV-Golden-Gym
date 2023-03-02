@@ -11,8 +11,11 @@
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
+<<<<<<< HEAD
         "dompdf/dompdf": "^2.0",
         "mpdf/mpdf": "^6.1",
+=======
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.16",
         "sensio/framework-extra-bundle": "^6.1",
@@ -35,7 +38,11 @@
         "symfony/process": "5.4.*",
         "symfony/property-access": "5.4.*",
         "symfony/property-info": "5.4.*",
+<<<<<<< HEAD
         "symfony/runtime": "5.4.*",
+=======
+        "symfony/runtime": "^6.2",
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
         "symfony/security-bundle": "5.4.*",
         "symfony/serializer": "5.4.*",
         "symfony/string": "5.4.*",

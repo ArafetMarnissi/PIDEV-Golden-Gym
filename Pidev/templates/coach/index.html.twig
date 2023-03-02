@@ -1,0 +1,23 @@
+{% extends 'baseback.html.twig' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+<center><h1>Créer une nouveau coach</h1></center>
+<br><br>
+<div>
+{{form_start(f,{'attr': {'novalidate': 'novalidate'}})}}
+{{form_row(f.nomCoach,{'attr': {'placeholder':'Nom Coach','class':'form-control-lg'}})}}
+{{form_row(f.ageCoach,{'attr': {'placeholder':'Age Coach','class':'form-control-lg'}})}}
+{{form_row(f.Image,{'attr': {'placeholder':'Image','class':'form-control-lg'}})}}
+<center><button type="submit" class="btn btn-round btn-facebook">Ajouter un nouveau coach</button></center>
+{{form_end(f)}}
+</div>
+
+</div>
+{% endblock %}

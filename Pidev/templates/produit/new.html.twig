@@ -6,19 +6,34 @@
 <br>
 <br>
 <div class="container">
+<<<<<<< HEAD
 
+=======
+    {% if editmode %}
+      <center><h1> Modifier un produit</h1></center>
+    {% else %}
+        <center><h2>Ajouter un nouveau produit</h2></center>
+    {% endif %}
+<br><br>
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 {{form_start(formp,{'attr': {'novalidate': 'novalidate'}})}}
 {{form_row(formp.nom,{'attr': {'placeholder':'Nom Produit','class':'form-control-lg'}})}}
 {{form_row(formp.description,{'attr': {'placeholder':'Description','class':'form-control-lg'}})}}
 {{form_row(formp.prixProduit,{'attr': {'placeholder':'Prix','class':'form-control-lg'}})}}
 {{form_row(formp.quantiteProduit,{'attr': {'placeholder':'Quantite','class':'form-control-lg'}})}}
+<<<<<<< HEAD
 {{form_row(formp.dateExpiration,{'attr': {'placeholder':'date Expiration','class':'form-control-lg'}})}}
 {{form_row(formp.category,{'attr': {'placeholder':'category','class':'form-control-lg'}})}}
+=======
+{{form_row(formp.dateExpiration,{'attr': {'placeholder':'date Expiration','class':'form-control-lg' }})}}
+{{form_row(formp.category,{'attr': {'placeholder':'category','class':'form-control-lg', 'class':"mr-sm-2" }})}}
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 {{form_row(formp.imageProduit)}}
 <button type='submit' class="btn btn-round btn-facebook" >
                 {% if editmode %}
                     modifier
                 {% else %}
+<<<<<<< HEAD
                     ajouter
                 {% endif %}
                 </button>
@@ -29,3 +44,14 @@
 </div>
 
 {% endblock %}
+=======
+                    Ajouter un nouveau produit
+                {% endif %}
+                </button>
+                {{form_end(formp)}}
+    
+</div>
+
+{% endblock %}
+
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1

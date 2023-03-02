@@ -28,13 +28,19 @@ class ProduitController extends AbstractController
     #[Route('/listp', name: 'list_produit')]
     public function listp(ManagerRegistry $doctrine): Response
     {
+<<<<<<< HEAD
         $repository= $doctrine->getRepository(Produit::class);
         $produits=$repository->findAll();
+=======
+        $repository = $doctrine->getRepository(Produit::class);
+        $produits = $repository->findAll();
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
         return $this->render('produit/listp.html.twig', [
             'produit' => $produits,
         ]);
     }
 
+<<<<<<< HEAD
     #[Route('/addp',name:'addp')]
     public function addp (HttpFoundationRequest $request,ManagerRegistry $doctrine, SluggerInterface $slugger): Response
     {
@@ -45,11 +51,26 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() )
         {
+=======
+    #[Route('/addp', name: 'addp')]
+    public function addp(HttpFoundationRequest $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
+    {
+        //$repository= $doctrine->getRepository(Produit::class);
+        //$produits=$repository->findAll();
+        $produit = new Produit;
+        $form = $this->createForm(ProduitType::class, $produit);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
             $brochureFile = $form->get('imageProduit')->getData();
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
+<<<<<<< HEAD
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+=======
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $brochureFile->guessExtension();
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
                 try {
                     $brochureFile->move(
                         $this->getParameter('produit_image'),
@@ -59,11 +80,16 @@ class ProduitController extends AbstractController
                 }
                 $produit->setImageProduit($newFilename);
             }
+<<<<<<< HEAD
             $em=$doctrine->getManager();
+=======
+            $em = $doctrine->getManager();
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
             $em->persist($produit);
             $em->flush();
             return $this->redirectToRoute('list_produit');
         }
+<<<<<<< HEAD
         return $this->renderForm('produit/new.html.twig',['formp'=>$form,"editmode"=>$produit->getid()!==null]);
     }
 
@@ -73,12 +99,24 @@ class ProduitController extends AbstractController
         $repository=$doctrine->getRepository(Produit::class);
         $produit=$repository->find($id);
         $em=$doctrine->getManager();
+=======
+        return $this->renderForm('produit/new.html.twig', ['formp' => $form, "editmode" => $produit->getid() !== null]);
+    }
+
+    #[Route('/deletep/{id}', name: 'deletep')]
+    public function deletep(ManagerRegistry $doctrine, $id): Response
+    {
+        $repository = $doctrine->getRepository(Produit::class);
+        $produit = $repository->find($id);
+        $em = $doctrine->getManager();
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
         $em->remove($produit);
         $em->flush();
         return $this->redirectToRoute('list_produit');
     }
 
     #[Route('/editp/{id}', name: 'editp')]
+<<<<<<< HEAD
     public function editp(HttpFoundationRequest $request,ManagerRegistry $doctrine,$id,SluggerInterface $slugger ): Response
     {  
         $repository= $doctrine->getRepository(Produit::class);
@@ -92,6 +130,20 @@ class ProduitController extends AbstractController
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+=======
+    public function editp(HttpFoundationRequest $request, ManagerRegistry $doctrine, $id, SluggerInterface $slugger): Response
+    {
+        $repository = $doctrine->getRepository(Produit::class);
+        $produits = $repository->find($id);
+        $form = $this->createForm(ProduitType::class, $produits);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $brochureFile = $form->get('imageProduit')->getData();
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $brochureFile->guessExtension();
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
                 try {
                     $brochureFile->move(
                         $this->getParameter('produit_image'),
@@ -101,6 +153,7 @@ class ProduitController extends AbstractController
                 }
                 $produits->setImageProduit($newFilename);
             }
+<<<<<<< HEAD
         $em=$doctrine->getManager();
         $produits->setnom($form->get('nom')->getData());
         $em->flush();
@@ -114,6 +167,21 @@ class ProduitController extends AbstractController
     {
         $repository= $doctrine->getRepository(produit::class);
         $produits=$repository->find($id);
+=======
+            $em = $doctrine->getManager();
+            $produits->setnom($form->get('nom')->getData());
+            $em->flush();
+            return $this->redirectToRoute('list_produit');
+        }
+        return $this->renderForm('produit/new.html.twig', ['formp' => $form, "editmode" => $produits->getid() !== null]);
+    }
+
+    #[Route('/get/{id}', name: 'getid')]
+    public function show_id(ManagerRegistry $doctrine, $id): Response
+    {
+        $repository = $doctrine->getRepository(produit::class);
+        $produits = $repository->find($id);
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
         return $this->render('produit/detail.html.twig', [
             'produits' => $produits,
             'id' => $id,
@@ -123,21 +191,53 @@ class ProduitController extends AbstractController
     #[Route('/listpf', name: 'list_produit_front')]
     public function listpf(ManagerRegistry $doctrine): Response
     {
+<<<<<<< HEAD
         $repository= $doctrine->getRepository(Produit::class);
         $produits=$repository->findAll();
+=======
+        $repository = $doctrine->getRepository(Produit::class);
+        $produits = $repository->findAll();
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
         return $this->render('produit/listpf.html.twig', [
             'produit' => $produits,
         ]);
     }
 
     #[Route('/getf/{id}', name: 'gtidf')]
+<<<<<<< HEAD
     public function show_idf(ManagerRegistry $doctrine,$id): Response
     {
         $repository= $doctrine->getRepository(produit::class);
         $produits=$repository->find($id);
+=======
+    public function show_idf(ManagerRegistry $doctrine, $id): Response
+    {
+        $repository = $doctrine->getRepository(produit::class);
+        $produits = $repository->find($id);
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
         return $this->render('produit/detailf.html.twig', [
             'produits' => $produits,
             'id' => $id,
         ]);
     }
+<<<<<<< HEAD
+=======
+
+    #[Route('/listpag/{page?1}/{nbr?10}', name: 'list_produitpag')]
+    public function listpag(ManagerRegistry $doctrine,$page,$nbr): Response
+    {
+        $repository = $doctrine->getRepository(Produit::class);
+        $nbproduit=$repository->count([]);
+        $nbpage=ceil($nbproduit/$nbr);
+        $produits = $repository->findBy([],[],$nbr,($page - 1)*$nbr);
+
+        return $this->render('produit/listpag.html.twig', [
+            'produit' => $produits,
+            'ispaginated'=> true,
+            'nbpage'=>$nbpage,
+            'page'=>$page,
+            'nbr'=>$nbr
+        ]);
+    }
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 }

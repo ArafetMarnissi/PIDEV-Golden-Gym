@@ -369,7 +369,11 @@ template {
   }
 
   abbr[title]::after {
+<<<<<<< HEAD
     content: " ("attr(title) ")";
+=======
+    content: " (" attr(title) ")";
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
   }
 
   pre {
@@ -2502,7 +2506,11 @@ select.form-control-lg:not([size]):not([multiple]),
 }
 
 .form-check-input:disabled~.form-check-label {
+<<<<<<< HEAD
   color: #6c757d;
+=======
+  color: #d30755;
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 }
 
 .form-check-label {
@@ -11571,7 +11579,11 @@ fieldset[disabled] .form-group.is-focused .form-check .form-check-label {
 }
 
 .form-check .form-check-input:checked~.form-check-sign .check:before {
+<<<<<<< HEAD
   color: #FFFFFF;
+=======
+  color: red;
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
   box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px;
   animation: checkboxOn 0.3s forwards;
 }

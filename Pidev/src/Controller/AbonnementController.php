@@ -48,6 +48,10 @@ public function list(ManagerRegistry $doctrine): Response
     $repository= $doctrine->getRepository(Abonnement::class);
     $abonnements=$repository->FindAll(); 
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
     return $this->render('abonnement/index.html.twig', [
         'abonnements' => $abonnements,
 

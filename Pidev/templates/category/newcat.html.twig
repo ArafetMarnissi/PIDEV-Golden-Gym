@@ -6,6 +6,7 @@
 <br>
 <br>
 <div class="container">
+<<<<<<< HEAD
 
 {{form_start(formc,{'attr': {'novalidate': 'novalidate'}})}}
 {{form_row(formc.nomCategory,{'attr': {'placeholder':'nom categorie','class':'form-control-lg'}})}}
@@ -20,6 +21,26 @@
                 {{form_end(formc)}}
     <button class="btn btn-round btn-facebook" href="{{ path('list_cat') }}"> 
     afficher</button>
+=======
+    {% if editmode %}
+        <center><h1>Modifier une categorie</h1></center>
+    {% else %}
+        <center><h1>Créer une nouvelle categorie</h1></center>
+    {% endif %}
+<br>
+<br>
+{{form_start(formc,{'attr': {'novalidate': 'novalidate'}})}}
+{{form_row(formc.nomCategory,{'attr': {'placeholder':'nom categorie','class':'form-control-lg'}})}}
+{{form_row(formc.imageCategorie)}}
+<center><button type='submit' class="btn btn-round btn-facebook" >
+                {% if editmode %}
+                    modifier
+                {% else %}
+                    ajouter une nouvelle categorie
+                {% endif %}
+                </button></center>
+                {{form_end(formc)}}
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
     
 </div>
 

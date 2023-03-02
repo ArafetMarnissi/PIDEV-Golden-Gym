@@ -52,10 +52,20 @@ class Commande
         min: 8,
         max: 8,
         minMessage: 'votre numéro de téléphone n\'est pas valide',
+<<<<<<< HEAD
 
     )]
     private ?string $telephone = null;
 
+=======
+    )]
+    private ?string $telephone = null;
+
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $User = null;
+
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
     public function __construct()
     {
         $this->dateCommande = new DateTime();
@@ -158,4 +168,19 @@ class Commande
 
         return $this;
     }
+<<<<<<< HEAD
+=======
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
+
+        return $this;
+    }
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 }

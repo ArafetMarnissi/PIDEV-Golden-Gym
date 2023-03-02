@@ -1,5 +1,9 @@
 {% extends 'baseback.html.twig' %}
+<<<<<<< HEAD
 {% form_theme formCommande 'bootstrap_5_layout.html.twig' %}
+=======
+{# {% form_theme formCommande 'bootstrap_5_layout.html.twig' %} #}
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 {% block title %}Gestionnaire de Commandes
 {% endblock %}
 
@@ -7,9 +11,15 @@
 
 	<div class="container">
 		{% if editMode %}
+<<<<<<< HEAD
 			<h2>Modifier commande</h2>
 		{% else %}
 			<h2>Création d'une commande</h2>
+=======
+			<center><h2>Modifier une commande</h2></center>
+		{% else %}
+			<center><h2>Créer une nouvelle commande</h2></center>
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 		{% endif %}
 
 		<div>
@@ -19,9 +29,18 @@
 
 			<div>{{form_row(formCommande.prixCommande,{'attr': {'placeholder':'Prix de la commande',}})}}</div>
 
+<<<<<<< HEAD
 			<div>{{form_row(formCommande.methodePaiement,{'attr': {'placeholder':'méthode de paiement'}})}}</div>
 			<div>{{form_row(formCommande.telephone,{'attr': {'placeholder':'votre numéro de téléphone'}})}}</div>
 			<button type='submit' class="btn btn-round btn-facebook" href="{{ path('Affichagecommande') }}">
+=======
+
+			<div>{{form_row(formCommande.telephone,{'attr': {'placeholder':'votre numéro de téléphone'}})}}</div>
+			<div>{{form_row(formCommande.methodePaiement,{'attr': {'placeholder':'méthode de paiement'}})}}</div>
+
+
+			<center><button type='submit' class="btn btn-round btn-facebook" href="{{ path('Affichagecommande') }}">
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 				{% if editMode %}
 					Enregistrer
 				{% else %}
@@ -29,9 +48,18 @@
 				{% endif %}
 
 
+<<<<<<< HEAD
 			</button>
+=======
+			</button></center>
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 			<div>{{form_end(formCommande)}}
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
 </center>{% endblock %}
+=======
+
+{% endblock %}
+>>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
