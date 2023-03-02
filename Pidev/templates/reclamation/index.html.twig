@@ -1,0 +1,43 @@
+  {% extends 'base.html.twig' %}
+
+{% block  body %}
+<h1><center> Veuillez remplir le formulaire çi dessous afin de passer votre réclamation </center></h1>
+{% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+        {{message}}
+    {% endfor %}
+<br>
+<br>
+<br>
+
+
+<div class="container">
+<center>
+<div>
+{{form_start(form,{'attr': {'novalidate': 'novalidate'}})}}
+
+ {{ form_row(form.dateReclamtion,{'attr': {'placeholder':'Date reclamation','class':'form-control-lg'}})}}<br>
+{{ form_row(form.descriptionReclamation,{'attr': {'placeholder':'Description reclamation','class':'form-control-lg'}})}}<br>
+{{ form_row(form.type_reclamation,{'attr': {'placeholder':'Type reclamation','class':'form-control-lg'}})}}
+
+<br>
+   
+<button type="submit" class="btn btn-round btn-facebook">Ajouter</button>
+
+{{form_end(form)}}
+</div>
+</center>
+</div>
+
+<a href="{{path('listee') }}"><button type="submit" class="btn btn-round btn-facebook">Consulter mes réponses</button></a>
+ {# {%  for a in  reponses %}
+   <td> {{ a.dateReponse | date('d-m-y')}} </td>
+        <td> {{ a.descriptionreponse }} </td>
+   <button type="submit" class="btn btn-primary"> <a href="{{ path('listreponse',{'id' : a.id})}}"> Consulter mes réponses </button>
+    </tr>
+     
+       {% endfor %} #}
+
+{% endblock %}
+
+

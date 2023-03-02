@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block  body %}
+<div class=container>
+<br>
+<br>
+<br>
+
+<center>
+<h1> Liste des réponses des réclamations</h1>
+<br>
+<table class="table">
+    <tr>
+    <thead>
+        <th scope="col"> Date reponse</th>
+        <th scope="col"> Description reponse</th>
+    </thead> 
+    <tbody> 
+    </tr>
+    
+    {% for a in reponses %}
+    <tr>
+
+        <td> {{ a.dateReponse | date('d-m-y')}} </td>
+        <td> {{ a.descriptionreponse }} </td>
+     
+           <td> <a class="btn btn-sm btn-danger" href="{{ path('deleteReponse',{'id' : a.id}) }}">Supprimer </a></td>
+    </tr>
+         {% endfor %}
+       
+    </table>
+    </center>
+  {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+        {{message}}
+    {% endfor %}
+   
+
+{% endblock %}

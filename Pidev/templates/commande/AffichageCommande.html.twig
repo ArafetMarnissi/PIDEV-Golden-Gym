@@ -1,0 +1,48 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Liste des Commandes
+{% endblock %}
+
+{% block content %}
+	<center>
+		<div class="container">
+			<h2>Liste des Commandes</h2>
+		</div>
+		<div class="container">
+			<table class="table" style="width: 50%; margin: 0 auto;">
+				<thead>
+					<tr>
+						<th>Id_Commande</th>
+						<th>Adresse_Livraison</th>
+						<th>prix_Commande</th>
+						<th>methode_Paiement</th>
+						<th>téléphone</th>
+
+					</tr>
+				</thead>
+				{% for commande in commandes %}
+					<tr>
+						<td>{{ commande.id }}</td>
+						<td>{{ commande.AdresseLivraison }}</td>
+						<td>{{ commande.prixCommande }}</td>
+						<td>{{ commande.methodePaiement }}</td>
+						<td>{{ commande.telephone }}</td>
+
+
+						<td>
+							<a class="btn btn-round btn-twitter" href="{{ path('modifier_commande',{'id' : commande.id}) }}">Modifier</a>
+						</td>
+						<td>
+							<a class="btn btn-round btn-twitter" href="{{ path('supprimer_commande',{'id' : commande.id}) }}">Supprimer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+		<div class="container">
+			<a class="btn btn-round btn-facebook" href="{{ path('ajouter_commande') }}">Ajouter Commande</a>
+		</div>
+	</center>
+
+
+{% endblock %}

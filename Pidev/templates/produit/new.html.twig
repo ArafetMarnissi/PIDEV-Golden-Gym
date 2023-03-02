@@ -1,0 +1,31 @@
+{% extends 'baseback.html.twig' %}
+{% form_theme formp 'bootstrap_5_layout.html.twig' %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+
+{{form_start(formp,{'attr': {'novalidate': 'novalidate'}})}}
+{{form_row(formp.nom,{'attr': {'placeholder':'Nom Produit','class':'form-control-lg'}})}}
+{{form_row(formp.description,{'attr': {'placeholder':'Description','class':'form-control-lg'}})}}
+{{form_row(formp.prixProduit,{'attr': {'placeholder':'Prix','class':'form-control-lg'}})}}
+{{form_row(formp.quantiteProduit,{'attr': {'placeholder':'Quantite','class':'form-control-lg'}})}}
+{{form_row(formp.dateExpiration,{'attr': {'placeholder':'date Expiration','class':'form-control-lg'}})}}
+{{form_row(formp.category,{'attr': {'placeholder':'category','class':'form-control-lg'}})}}
+{{form_row(formp.imageProduit)}}
+<button type='submit' class="btn btn-round btn-facebook" >
+                {% if editmode %}
+                    modifier
+                {% else %}
+                    ajouter
+                {% endif %}
+                </button>
+                {{form_end(formp)}}
+    <button class="btn btn-round btn-facebook" href="{{ path('list_produit') }}"> 
+    afficher</button>
+    
+</div>
+
+{% endblock %}

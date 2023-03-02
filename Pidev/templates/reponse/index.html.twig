@@ -1,0 +1,25 @@
+
+
+{% extends 'baseback.html.twig' %}
+{% block  content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+<center>
+<div>
+{{form_start(form,{'attr': {'novalidate': 'novalidate'}})}}
+{{ form_row(form.dateReponse,{'attr': {'placeholder':'Date réponse','class':'form-control-lg'}})}}<br> 
+{{ form_row(form.descriptionreponse,{'attr': {'placeholder':'Description réponse','class':'form-control-lg'}})}}
+
+<br>
+
+<button type="submit" class="btn btn-primary">Ajouter</button>
+
+{{form_end(form)}}
+</div>
+
+{% endblock %}

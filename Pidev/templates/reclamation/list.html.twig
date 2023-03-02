@@ -1,0 +1,44 @@
+{% extends 'baseback.html.twig' %}
+{% block content %}
+<div class=container>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+<h1> Liste des réclamations</h1>
+<table class="table">
+    <tr> 
+    <thead>
+        <th scope="col"> Date reclamation</th>
+        <th scope="col"> Description reclamation</th>
+        
+        <th scope="col"> Type reclamation</th>
+    </tr>
+    <thead>
+    <tbody>
+    {%  for a in  reclamations %}
+        <tr>
+          
+            <td>   {{ a.dateReclamtion|date("Y-m-d")}} </td>
+
+            <td>   {{ a.descriptionReclamation }} </td>
+          
+            <td>   {{ a.typeReclamation }} </td>
+                <td> <a class="btn btn-sm btn-danger" href="{{ path('deleteReclamation',{'id' : a.id}) }}">Supprimer </a></td>
+            
+        <td> <a class="btn btn-sm btn-success" href="{{ path('repondre', {id:a.id}) }}">Répondre </a></td>
+        </tr>
+    {% endfor %}
+    <a href="{{path('stats') }}"><i class="btn btn-warning" data-feather="arrow-down"></i>Statistiques</a>
+<a href="{{path('listrec') }}"><i class="btn btn-warning" data-feather="arrow-down"></i>Générer pdf</a>
+</table>
+
+</center>
+{% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+        {{message}}
+    {% endfor %}
+{% endblock %}

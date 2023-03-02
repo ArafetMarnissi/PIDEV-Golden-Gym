@@ -1,0 +1,36 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+<h1> Liste des traitements des réclamations</h1>
+<table border="1">
+    <tr> 
+        <th> dateReclamation</th>
+        <th> descriptionReclamation</th>
+        <th> Etat</th>
+        <th> typeReclamation</th>
+        <th> dateReponse </th>
+        <th> descriptionreponse </th>
+    </tr>
+    {%  for a in  reclamations %}
+        <tr>
+            
+            <td>   {{ a.dateReclamtion}} </td>
+            <td>   {{ a.descriptionReclamation }} </td>
+            <td>   {{ a.etat }} </td>
+            <td>   {{ a.typeReclamation }} </td>
+
+            <td> <a href="{{ path('updateReclamation', {id:a.id}) }}">Modifier </a></td>
+            <td> <a href="{{ path('deleteReclamation', {id:a.id}) }}">Supprimer </a></td>
+     {%  for a in  reponses %}
+        <tr>
+         <td>   {{ a.dateReponse}} </td>
+         <td>   {{ a.descriptionreponse }} </td>
+        </tr>
+    {% endfor %}
+</table>
+
+</center>

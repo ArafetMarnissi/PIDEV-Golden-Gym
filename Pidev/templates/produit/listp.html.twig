@@ -1,0 +1,56 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}gestion des produits{% endblock %}
+{% block content %}
+<div class="container">
+<br>
+<h1>Liste des produits</h1>
+<form action="{{ path('addp') }}">
+    <button class="btn btn-round btn-facebook">Ajouter</button>
+</form>
+<br>
+<br>
+<br>
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>nom categorie</th>
+                <th>Name</th>
+                <th>description</th>
+                <th>prix produit</th>
+                <th>quantite produit</th>
+                <th>image produit</th>
+                <th>date expiration</th>
+                <th>actions</th>
+                <th></th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for p in produit %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{p.category.nomCategory}}</td>
+                <td>{{ p.nom }}</td>
+                <td>{{p.description}}</td>
+                <td>{{p.prixproduit}}dt</td>
+                <td>{{p.quantiteproduit}}</td>
+                <td><img style="width:200px;" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt=""></td>
+                <td>{{p.dateexpiration|date("Y-m-d")}}</td>
+                <td>
+                <a href="{{path('editp',{id:p.id})}}" class="btn btn-round btn-twitter">edit</a>
+                <a href="{{path('deletep',{id:p.id})}}" class="btn btn-round btn-twitter">supprimer</a>
+                </td>
+                <td><a href="{{path('getid',{id:p.id})}}" class="btn btn-round btn-twitter">show</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}
