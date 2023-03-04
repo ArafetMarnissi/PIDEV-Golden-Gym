@@ -21,7 +21,7 @@ class ActiviteType extends AbstractType
         $builder
             ->add('nomAcitivite',null,array('label' => false))
             ->add('descriptionActivite',null,array('label' => false))
-            ->add('dureeActivite',null,array('label' => false))
+            
             ->add('DateActivite', DateType::class, ['widget' => 'single_text'])
             ->add('TimeActivite',null,array('label' => false))
             ->add('end',null,array('label' => false))

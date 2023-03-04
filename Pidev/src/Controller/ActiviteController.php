@@ -6,13 +6,25 @@ use App\Entity\Activite;
 use App\Entity\Participation;
 use App\Form\ActiviteType;
 use App\Repository\ParticipationRepository;
+use App\Services\QrcodeService;
+use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Builder\Method as BuilderMethod;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Builder\Method;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Endroid\QrCodeBundle\Response\QrCodeResponse;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 
 class ActiviteController extends AbstractController
 {
@@ -56,6 +68,7 @@ class ActiviteController extends AbstractController
                 // instead of its contents
                 $activite->setImage($newFilename);
             }
+            
             $em = $doctrine->getManager();
             $em->persist($activite);
             $em->flush();
@@ -100,14 +113,17 @@ class ActiviteController extends AbstractController
     } 
 
     #[Route('activiteFront/get/{id}', name: 'getidFront')]
-    public function show_id(ManagerRegistry $doctrine, $id): Response
+    public function show_id(ManagerRegistry $doctrine, $id, QrcodeService $qrcodeService): Response
     {
+        $qrCode = null;
         $repository = $doctrine->getRepository(Activite::class);
         $Activites = $repository->find($id);
+        $qrCode = $qrcodeService->qrcode($Activites->getNomAcitivite());
         return $this->render('activite/detailActiviteFront.html.twig', [
             'activites' => $Activites,
             'id' => $id,
             'enable' => $this->en($doctrine->getRepository(Participation::class),$id,$this->getUser()),
+            'qrcode' => $qrCode
         ]);
     }
 
@@ -192,4 +208,99 @@ class ActiviteController extends AbstractController
         return $this->render('activite/CalendrierFront.html.twig', compact('data')
         )  ;
     }
+
+    #[Route('/activite/planningBack', name: 'activite_planningBack')]
+    public function indexBack(ManagerRegistry $doctrine): Response
+    {
+        $repository = $doctrine->getRepository(Activite::class);
+        $Activites = $repository->findAll();
+        
+        $list = [];
+        foreach($Activites as $act)
+        {
+            $start = $act->getDateActivite()->format('Y-m-d').' '.$act->getTimeActivite()->format('H:i:s');
+            $end = $act->getDateActivite()->format('Y-m-d').' '.$act->getEnd()->format('H:i:s');
+            $list[] = [
+                'id' => $act->getId(),
+                'start' => $start,
+                'end' => $end,
+                'title' => $act->getNomAcitivite(),
+                'description' => $act->getNbrePlace(),
+                'backgroundColor' => $act->getBackgroundColor(),
+                'borderColor' => $act->getBorderColor(),
+                'textColor' => $act->getTextColor(),
+            ];
+        }
+        $data = json_encode($list);
+        return $this->render('activite/CalendrierBack.html.twig', compact('data')
+        )  ;
+    }
+
+    #[Route('/affichageActiviteMobile', name: 'AffichageActiviteMobile')]
+    public function listMobile(ManagerRegistry $doctrine, NormalizerInterface $normalizer)
+    {
+        $repository = $doctrine->getRepository(Activite::class);
+        $Activites = $repository->findAll();
+        $activitesNormalises = $normalizer->normalize($Activites, 'json', ['groups' => "activites"]);
+        //$serializer = new Serializer([new ObjectNormalizer()])
+        $json = json_encode($activitesNormalises);
+        return new Response($json);
+    }
+
+    #[Route('activiteMobile/get/{id}', name: 'getidMobile')]
+    public function show_id_Mobile(ManagerRegistry $doctrine, $id, NormalizerInterface $normalizer)
+    {
+        $repository = $doctrine->getRepository(Activite::class);
+        $Activites = $repository->find($id);
+        $activitesNormalises = $normalizer->normalize($Activites, 'json', ['groups' => "activites"]);
+        $json = json_encode($activitesNormalises);
+        return new Response($json);
+    }
+
+    #[Route('activite/modifierCalendrier/{id}', name: 'ModifCalendrier')]
+    public function ModifierCalendrier(ManagerRegistry $doctrine, $id,?Activite $calendar, Request $req)
+    {
+       $donnees= json_decode($req->getContent());
+       if(
+        isset($donnees->nomAcitivite) && !empty($donnees->nomAcitivite) &&
+        isset($donnees->DateActivite) && !empty($donnees->DateActivite) &&
+        isset($donnees->end) && !empty($donnees->end) &&
+        
+        isset($donnees->background_color) && !empty($donnees->background_color) &&
+        isset($donnees->border_color) && !empty($donnees->border_color) &&
+        isset($donnees->text_color) && !empty($donnees->text_color) &&
+        isset($donnees->nbrePlace) && !empty($donnees->nbrePlace)
+       ){
+        
+        
+            $code = 200;
+            /*if(!$calendar){
+                $calendar = new Activite;
+                $code = 201;
+            }*/
+            $calendar->setNomAcitivite($donnees->nomAcitivite);
+            $calendar->setNbrePlace($donnees->nbrePlace);
+            $calendar->setBackgroundColor($donnees->background_color);
+            $calendar->setBorderColor($donnees->border_color);
+            $calendar->setTextColor($donnees->text_color);
+            $date_act=substr($donnees->DateActivite,0,10);
+            $heure_deb=substr($donnees->DateActivite,11,8);
+            $heure_fin=substr($donnees->end,11,8);
+            
+            $calendar->setEnd(\DateTimeImmutable::createFromFormat('H:i:s', $heure_fin));
+            $calendar->setTimeActivite(\DateTimeImmutable::createFromFormat('H:i:s', $heure_deb ));
+            $calendar->setDateActivite(\DateTimeImmutable::createFromFormat('Y-m-d', $date_act));
+            
+            $em = $doctrine->getManager();
+            $em->persist($calendar);
+            $em->flush();
+  
+            return new Response($code);
+       }else{
+            return new Response('données manquantes', 404);
+           
+       }
+    }
+
+   
 }

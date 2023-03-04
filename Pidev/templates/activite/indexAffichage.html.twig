@@ -18,12 +18,13 @@
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Description</th>
-      <th scope="col">Duree</th>
+      
       <th scope="col">Date </th>
-      <th scope="col">Time </th>
+      <th scope="col">Debut </th>
+      <th scope="col">Fin</th>
       <th scope="col">Coach </th>
       <th scope="col">Nombre places </th>
-      <th scope="col">URL Image </th>
+      <th scope="col">Image </th>
       <th scope="col"> </th>
       <th scope="col"> </th>
     </tr>
@@ -34,9 +35,10 @@
       <td scope="row">{{a.id}}</td>
       <td>{{a.nomAcitivite}}</td>
       <td>{{a.descriptionActivite}}</td>
-      <td>{{a.dureeActivite}}</td>
+      
       <td>{{a.DateActivite|date('d F Y H:i')}}</td>
       <td>{{a.TimeActivite|date('H:i')}}</td>
+      <td>{{a.end|date('H:i')}}</td>
       <td>{{a.Coach.nomCoach}}</td>
       <td>{{a.nbrePlace}}</td>
       <td><img style="width:100px;" src="{{asset('img/activite/'~a.image)}}" alt=""></td>
@@ -47,6 +49,7 @@
     </tr>
  
     {%  endfor %}
+    <td>  <a class="btn btn-round btn-twitter" href="{{ path('activite_planningBack') }}">Planning</a></td>
   </tbody>
 </table>
 <center>
