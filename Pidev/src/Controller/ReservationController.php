@@ -75,7 +75,6 @@ public function newr(Request $request, $id, ManagerRegistry $doctrine, UserRepos
     $user = $this->getUser();
     if ($user instanceof \App\Entity\User) {
         $idu = $user->getId();
-        $enable = $user->isEnableReservation();
     }
     $reservation->setUser($userRepository->find($idu));
 
@@ -99,7 +98,6 @@ public function newr(Request $request, $id, ManagerRegistry $doctrine, UserRepos
         $entityManager = $doctrine->getManager();
         $entityManager->persist($reservation);
         $entityManager->flush();
-        $enable == true;
         $this->addFlash('success', 'La réservation a été ajoutée avec succès.');
 
         return $this->redirectToRoute('list_reservation');

@@ -3,18 +3,24 @@
 namespace App\Controller;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
+use ApiPlatform\Core\Annotation\ApiResource;
+use Captcha\Bundle\CaptchaBundle\Validator\Constraints\ValidCaptcha;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\CoachRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\DocBlock\Serializer as DocBlockSerializer;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class UserController extends AbstractController
 {
@@ -24,6 +30,7 @@ class UserController extends AbstractController
     {
         $this->passwordEncoder = $passwordEncoder;
     }
+
     #[Route('/listuser', name: 'app_user')]
     public function list(ManagerRegistry $doctrine): Response
     {
@@ -33,6 +40,19 @@ class UserController extends AbstractController
             'users' => $users,
         ]);
     }
+/*----------------Affichage User JSON -------------------*/
+
+    #[Route('/apiuserlist', name: 'apiUser')]
+    public function APIlistuser(UserRepository $repo, NormalizerInterface $normalizer)
+    {
+        $user=$repo->findAll();
+        $userNormalises= $normalizer->normalize($user,'json',['attributes' => ['id','email','password','roles','nom','prenom','PrivateKey','Status']]);
+        $json = json_encode($userNormalises);
+
+        return new Response($json);
+    }
+
+
     #[Route('/UserProfile/{id}',name:'afficher_details_user')]
     public function updateProfil(ManagerRegistry $doctrine , HttpFoundationRequest $req ,$id,SessionInterface $session)
     {
@@ -74,6 +94,18 @@ class UserController extends AbstractController
         $em->remove($user);
         $em->flush();
         return $this->redirectToRoute('app_user');
+    }
+/***************Delete User API************* */
+    #[Route('/deleteUserAPI/{id}', name: 'delete_user_api')]
+    public function DeleteUser(ManagerRegistry $doctrine, $id,NormalizerInterface $normalizer): Response
+    {
+        $repository= $doctrine->getRepository(User::class);
+        $user=$repository->find($id);
+        $em= $doctrine->getManager();
+        $em->remove($user);
+        $em->flush();
+        $jsonContent= $normalizer->normalize($user,'json',['groups'=>'users']);
+        return new Response("Student deleted successfully" . json_encode($jsonContent));
     }
 
     #[Route('/updateUser/{id}', name: 'update_user')]
