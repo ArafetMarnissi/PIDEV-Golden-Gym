@@ -62,7 +62,7 @@
 												class="card-product__imgOverlay">
 												<!--<li><button><i class="ti-search"></i></button></li>-->
 												<li>
-													<a href="{{ path('cart_add',{id:p.id}) }}">
+													<a href="{{ path('cart_add',{id:p.id}) }}" class ="buttonAddToCart">
 														<i class="fas fa-shopping-cart"></i>
 													</a>
 												</li>
@@ -110,6 +110,33 @@
 		</div>
 	</div>
 </section>
+{# partie java script pour l ajout d'un produit au panier #}
+<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+<script>
+const spans_quantity = document.querySelectorAll("span#spanAddQuantity");
+
+
+
+//script pour le button AddToCart
+	function onClickBtnAddToCart(event) {
+		event.preventDefault();
+		const url = this.href;
+		//supprimer le produit
+		axios.get(url).then(function (response) {
+			// console.log(response.data);
+			spans_quantity.forEach(span => {
+			span.textContent=response.data.quantity;
+			});
+
+		});
+	}
+
+	document.querySelectorAll('a.buttonAddToCart').forEach(function (link) {
+		link.addEventListener('click', onClickBtnAddToCart);
+	});
+
+
+</script>
 </center>
 <!-- ================ category section end ================= -->
 {# partie java script pour l ajout d'un produit au panier #}
