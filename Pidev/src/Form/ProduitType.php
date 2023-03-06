@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ProduitType extends AbstractType
 {
@@ -36,7 +37,7 @@ class ProduitType extends AbstractType
                     ])
                 ],
             ])
-            ->add('dateExpiration')
+            ->add('dateExpiration',DateType::class, ['widget' => 'single_text'])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'nomCategory',

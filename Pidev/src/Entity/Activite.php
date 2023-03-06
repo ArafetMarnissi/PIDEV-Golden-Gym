@@ -8,6 +8,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ActiviteRepository::class)]
 class Activite
@@ -15,22 +16,22 @@ class Activite
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("activites")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Le nom de l'activité est obligatoire")]
     #[Assert\Length(min:2,max:15,minMessage:"Le nom de l'activité doit comporter au moins {{ limit }} caractéres", maxMessage:"Le nom de l'activité doit comporter au maximum {{ limit }} caractéres")]
     #[Assert\Regex(pattern: '/^[a-z\s]+$/i',htmlPattern: '^[a-zA-Z\s]+$',message:"Le nom de l'activité doit contenir que des lettres")]
+    #[Groups("activites")]
     private ?string $nomAcitivite = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message:"La description de l'activité est obligatoire")]
     #[Assert\Length(min:10,minMessage:"La description de l'activité doit comporter au moins {{ limit }} caractéres")]
+    #[Groups("activites")]
     private ?string $descriptionActivite = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"La durée de l'activité est obligatoire")]
-    private ?string $dureeActivite = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\GreaterThanOrEqual('today',message:"La date de l'activité doit être supérieur à la date actuelle")]
@@ -71,6 +72,9 @@ class Activite
     #[ORM\OneToMany(mappedBy: 'activite', targetEntity: Participation::class,orphanRemoval: true)]
     private Collection $Participation;
 
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $DureeActivite = null;
+
     public function __construct()
     {
         $this->Participation = new ArrayCollection();
@@ -107,17 +111,6 @@ class Activite
         return $this;
     }
 
-    public function getDureeActivite(): ?string
-    {
-        return $this->dureeActivite;
-    }
-
-    public function setDureeActivite(string $dureeActivite): self
-    {
-        $this->dureeActivite = $dureeActivite;
-
-        return $this;
-    }
 
     public function getDateActivite(): ?\DateTimeInterface
     {
@@ -265,6 +258,18 @@ class Activite
                 $participation->setActivite(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDureeActivite(): ?\DateTimeInterface
+    {
+        return $this->DureeActivite;
+    }
+
+    public function setDureeActivite(?\DateTimeInterface $DureeActivite): self
+    {
+        $this->DureeActivite = $DureeActivite;
 
         return $this;
     }
