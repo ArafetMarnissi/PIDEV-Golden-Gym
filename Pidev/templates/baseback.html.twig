@@ -25,6 +25,8 @@
 			<link href="{{ asset("assetsback/demo/demo.css") }}" rel="stylesheet"/>
 			{{ encore_entry_link_tags('app') }}
 
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+			<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
 		</head>
 		<body>
 
@@ -75,15 +77,21 @@
 									</a>
 								</li>
 								<li class="nav-item ">
-									<a class="nav-link" href={{path('list_cat')}}>
-										<i class="material-icons">content_paste</i>
-										<p>Gestion des categorie</p>
-									</a>
-								
+                                    <a class="nav-link" href={{path('list_cat')}}>
+                                        <i class="material-icons">content_paste</i>
+                                        <p>Gestion des categorie</p>
+                                    </a>
+                                </li>
 								<li class="nav-item ">
 									<a class="nav-link" href="{{path('AffichageActivite')}}">
 										<i class="material-icons">content_paste</i>
 										<p>Gestion des activités</p>
+									</a>
+								</li>
+								<li class="nav-item ">
+									<a class="nav-link" href="{{path('AffichageParticipation')}}">
+										<i class="material-icons">content_paste</i>
+										<p>Gestion des participation</p>
 									</a>
 								</li>
 								<li class="nav-item ">

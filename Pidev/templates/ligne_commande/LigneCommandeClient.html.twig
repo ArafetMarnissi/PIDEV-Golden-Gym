@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits Passés en commande
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<br>
+		<br>
+		<br>
+		
+		{# <table class="table" style="width: 50%; margin: 0 auto;"> #}
+		<center>
+        <div class="bg-light p-3">
+			<h1>Les Produits Passés En Commande</h1>
+            <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            
+                            <th></th>
+                            <th><h4>Nom de Produit</h4></th>
+                            <th><h4>Quantité</h4></th>
+                            <th><h4>Prix Unitaire</h4></th>
+
+                        </tr>
+                    </thead>
+                    {% set numProduit = 0 %}
+                    {% for ligne in ligneCommande %}
+                    {% set numProduit = numProduit + 1 %}
+                        <tr>
+                            <td><img class="card-img" style="width:100px;height:100px" src="{{asset('uploads/produits/'~ligne.Produits.imageproduit)}}" alt=""></td>
+                            <td>{{ ligne.Produits.nom }}</td>
+                            <td>{{ ligne.quantiteProduit }}</td>
+                            <td>{{ ligne.prixUnitaire }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            <a class="btn btn-primary" href="{{ path('AffichageCommandeClient') }}">Retourner</a>
+		</div>
+		</center>
+	</div>
+
+<br>
+<br>
+<br>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% if app.user.status == false %}
+
+
+{{form_start(confirmForm,{'attr': {'novalidate': 'novalidate'}})}}
+<center>
+<div class="col-md-12 form-group"> 
+                        {{form_row(confirmForm.code,{'attr': {'placeholder':'Code de 6 chiffres','class':'form-control'}})}}
+</div>
+
+<div class="col-md-12 form-group">
+								<button type="submit" value="submit"  class="button button-header">Confirmer compte</button>
+							</div>               
+
+                                 {{form_end(confirmForm)}}
+    {% if app.session.flashBag.has('success') %}
+<div class="alert alert-success">
+{{ app.session.flashBag.get('success')[0] }}
+</div>
+{% endif %}
+{% if app.session.flashBag.has('error') %}
+    <div class="alert alert-danger">
+        {{ app.session.flashBag.get('error')[0] }}
+    </div>
+
+ 
+
+{% endif %}
+</center>
+
+{% block footer %}
+
+{% endblock %}
+{% else %}
+<hr>
+<center>
+<h1>Votre compte est déjà verifié ! </h1>
+</center>
+
+{% endif %}
+{% endblock %}
+
+

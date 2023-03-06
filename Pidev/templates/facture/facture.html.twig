@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Facture N°1</title>
+	<meta charset="utf-8">
+	<style>
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+	</style>
+</head>
+<h4>MERCI D'AVOIR EFFECTUÉ VOS ACHATS SUR GOLDENGYM!</h4>
+<body>
+    {# <table>
+    <thead>
+        <tr>
+            <th>Détails de la commande</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr><td> Date : {{ commande.dateCommande|date("d/m/Y") }}</td> </tr>
+    <tr><td> Paiement : {{ commande.methodePaiement }}</td></tr>
+    <tr><td> Adresse : {{ commande.AdresseLivraison }}</td></tr>
+    <tr><td> Téléphone : {{ commande.telephone }}</td></tr>
+    </tbody>
+
+
+    </table> #}
+    <br>
+    <br>
+    <br>
+
+	{# <table>
+		<thead>
+			<tr>
+				<th>Produit</th>
+                <th>Prix unitaire</th>
+				<th>Quantité</th>
+				<th>Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for ligne in ligneCommande %}
+				<tr>
+					        
+                            <td>{{ ligne.Produits.nom }}</td>
+                            <td>{{ ligne.quantiteProduit }}</td>
+                            <td>{{ ligne.prixUnitaire }}</td>
+                            <td>{{ ligne.prixUnitaire * ligne.quantiteProduit }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3" style="text-align: right;">Total Prix : </td>
+				<td>{{ commande.prixCommande }} Dt</td>
+			</tr>
+            {% if commande.methodePaiement == "à la livraison" %}
+            
+			<tr>
+				<td colspan="3" style="text-align: right;">Livraison :</td>
+				<td>7 Dt</td>
+			</tr>
+            <tr>
+				<td colspan="3" style="text-align: right;">Total à payer :</td>
+				<td>{{ commande.prixCommande + 7 }} Dt</td>
+			</tr>
+
+            {% endif %}
+			
+		</tfoot>
+	</table> #}
+</body>
+</html>
+

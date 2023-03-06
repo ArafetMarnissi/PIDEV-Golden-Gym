@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ProduitType extends AbstractType
 {
@@ -22,23 +23,21 @@ class ProduitType extends AbstractType
             ->add('quantiteProduit')
             //->add('imageProduit')
             ->add('imageProduit', FileType::class, [
-                'label' => 'image seulement',
+                'label' => 'image only',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '10M',
-                        //  'mimeTypes' => [
-                        //     'imageProduit/gif',
-                        //     'imageProduit/jpeg',
-                        //     'imageProduit/jpg',
-                        //     'imageProduit/png',
-                        //  ],
-                        'mimeTypesMessage' => 'merci de telecharger une photo valide',
-                        ]),
+                        'maxSize' => '1024k',
+                        // 'mimeTypes' => [
+                        //     'application/jpeg',
+                        //     'application/jpg',
+                        // ],
+                        'mimeTypesMessage' => 'Please upload a valid image',
+                    ])
                 ],
             ])
-            ->add('dateExpiration')
+            ->add('dateExpiration',DateType::class, ['widget' => 'single_text'])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'nomCategory',

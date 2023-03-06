@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Commande;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,9 +25,9 @@ class CommandeType extends AbstractType
             ->add('methodePaiement', ChoiceType::class, [
                 'label' => 'Méthode de paiement',
                 'choices' => [
-                    'paiement par chèque' => 'Chèque',
-                    'paiement par carte bancaire' => 'Carte bancaire',
-                    'paiement à la livraison' => 'à la livraison',
+                    ' par chèque' => 'Chèque',
+                    ' par carte bancaire' => 'Carte bancaire',
+                    ' à la livraison (+ 7 Dt)' => 'à la livraison',
                 ],
                 'expanded' => true,
                 'multiple' => false,

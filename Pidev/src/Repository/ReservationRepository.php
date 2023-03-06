@@ -39,7 +39,6 @@ class ReservationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
     public function findByUserId($userId): array
     {
         return $this->createQueryBuilder('c')

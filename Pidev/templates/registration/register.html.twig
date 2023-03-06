@@ -17,7 +17,21 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner register_form_inner">
 						<h3>Créer un compte</h3>
-						{{form_start(form)}}
+								{% if app.session.flashBag.has('success') %}
+<div class="alert alert-success">
+{{ app.session.flashBag.get('success')[0] }}
+</div>
+{% endif %}
+{% if app.session.flashBag.has('error') %}
+    <div class="alert alert-danger">
+        {{ app.session.flashBag.get('error')[0] }}
+    </div>
+
+ 
+
+{% endif %}
+
+{{form_start(form,{'attr': {'novalidate': 'novalidate'}})}}
 
 <div class="col-md-12 form-group">
                         {{form_row(form.email,{'attr': {'placeholder':'Email','class':'form-control'}})}}
@@ -36,16 +50,25 @@
                         {{form_row(form.confirm_password,{'attr': {'placeholder':'Confirmer mot de passe','class':'form-control'}})}}
 </div> 
 
+<div class="col-md-12 form-group">
+                        {{form_row(form.captcha,{'attr': {'placeholder':'Entrez le code ci-dessus','class':'form-control'}})}}
+</div> 
+
+ 
+
 
 <div class="col-md-12 form-group">
 								<button type="submit" value="submit"  class="button button-header">Créer un compte</button>
-							</div>                   
+							</div> 
                                  {{form_end(form)}}
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</section>
+
+
     {% endblock %}
 
 

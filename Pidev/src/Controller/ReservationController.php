@@ -114,10 +114,10 @@ public function newr(Request $request, $id, ManagerRegistry $doctrine, UserRepos
         $entityManager = $doctrine->getManager();
         $entityManager->persist($reservation);
         $entityManager->flush();
-        //$this->sendReservation($reservation,$reservationRepository);
+        $this->sendReservation($reservation,$reservationRepository);
         
         $this->addFlash('success', 'La réservation a été ajoutée avec succès.');
-       // $reservationRepository->sms($nomClient);
+        $reservationRepository->sms($nomClient);
 
         return $this->redirectToRoute('list_reservation');
     }

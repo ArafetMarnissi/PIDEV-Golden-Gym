@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos Participations
+{% endblock %}
+
+{% block body %}
+<div class="container">
+		<br>
+		<br>
+		<br>
+		
+		{# <table class="table" style="width: 50%; margin: 0 auto;"> #}
+		<center>
+        <div class="bg-light p-3">
+			<h1>Vos Participations</h1>
+            <br>
+            {% if part | length > 0 %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nomp de l'activité</th>
+                            <th>Date de la participation</th>
+
+                        </tr>
+                    </thead>
+                     {% set i = 0 %} 
+                    {% for p in part %}
+
+                        <tr>
+                            <td><br><br><br>
+                            <center>{{ p.activite.nomAcitivite }}</center></td>
+                            <td><br><br><br>
+                            <center>{{ p.dateParticipation|date('d F Y') }}</center></td>
+
+                            <td><br><br>
+                            <center><a class="button button-hero" href="{{ path('deleteParticipationU', {id:p.id}) }}">Annuler</a></center></td>
+                            <td>
+                             {% if qrCode[i] %} 
+                                <img src="{{ qrCode[i] }}" alt="">
+                                {% set i = i + 1 %} 
+                             {% else %} 
+                                {% set i = i + 1 %} 
+                            {% endif %} 
+                            </td>
+                            {# <td>
+                                <a class="button button-hero" href="{{ path('supprimer_commande',{'id' : commande.id}) }}">Annuler</a>
+                            </td> #}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+            <p class="alert alert-danger">Vous n' avez pas encore participer à une activité !</p> 
+            {% endif %}
+		</div>
+		</center>
+	</div>
+
+<br>
+<br>
+<br>
+{% endblock %}

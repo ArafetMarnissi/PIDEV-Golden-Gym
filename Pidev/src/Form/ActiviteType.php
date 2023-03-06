@@ -6,6 +6,9 @@ use App\Entity\Activite;
 use App\Entity\Coach;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,9 +21,10 @@ class ActiviteType extends AbstractType
         $builder
             ->add('nomAcitivite',null,array('label' => false))
             ->add('descriptionActivite',null,array('label' => false))
-            ->add('dureeActivite',null,array('label' => false))
-            ->add('DateActivite',null,array('label' => false))
+            
+            ->add('DateActivite', DateType::class, ['widget' => 'single_text'])
             ->add('TimeActivite',null,array('label' => false))
+            ->add('end',null,array('label' => false))
             ->add('Coach', EntityType::class, [
                 'class'=>Coach::class,
                 'choice_label'=>'nomCoach',
@@ -52,6 +56,9 @@ class ActiviteType extends AbstractType
                     ])
                 ],
             ])
+            ->add('background_color', ColorType::class)
+            ->add('border_color', ColorType::class)
+            ->add('text_color', ColorType::class)
         ;
     }
 

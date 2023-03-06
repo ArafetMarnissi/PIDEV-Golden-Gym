@@ -26,7 +26,7 @@ class PanierController extends AbstractController
     }
     /// ajouter un produit au panier
     #[Route('/panier/add/{id}', name: 'cart_add')]
-    public function add($id, SessionInterface $session)
+    public function add($id, SessionInterface $session,ProduitRepository $produitRepository)
     {
         $panier = $session->get('panier', []);
 
@@ -36,8 +36,9 @@ class PanierController extends AbstractController
             $panier[$id] = 1;
         }
         $session->set('panier', $panier);
+        return $this->json(['quantity'=>$this->AfficherPanier($session, $produitRepository)[2]],200);
 
-        return $this->redirectToRoute("app_panier");
+        // return $this->redirectToRoute("app_panier");
     }
     ///Retirer le produit du panier
     #[Route('/panier/remove{id}', name: 'removePrPa')]
@@ -48,8 +49,9 @@ class PanierController extends AbstractController
             unset($panier[$id]);
         }
         $session->set('panier', $panier);
-       $totalPrix= $this->AfficherPanier($session, $produitRepository)[1];
-        return $this->json(['id'=>$id,'total'=>$totalPrix],200);
+        $totalPrix= $this->AfficherPanier($session, $produitRepository)[1];
+        $quantity=$this->AfficherPanier($session, $produitRepository)[2];
+        return $this->json(['id'=>$id,'total'=>$totalPrix,'quantity'=>$quantity],200);
         
         
     }
@@ -106,11 +108,13 @@ class PanierController extends AbstractController
         }
         
         $total = 0;
+        $totalquantiy=0;
         foreach ($panierWithData as $item) {
             $total += $item['product']->getPrixProduit() * $item['quantity'];
+            $totalquantiy+= $item['quantity'];
             
         }
-        return [$panierWithData,$total];
+        return [$panierWithData,$total,$totalquantiy];
 
     }
 }

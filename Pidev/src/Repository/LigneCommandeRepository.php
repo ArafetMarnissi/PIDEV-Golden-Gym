@@ -38,6 +38,14 @@ class LigneCommandeRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findByCommandeId($commandeId): array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.commande = :commandeId')
+            ->setParameter('commandeId', $commandeId)
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return LigneCommande[] Returns an array of LigneCommande objects
