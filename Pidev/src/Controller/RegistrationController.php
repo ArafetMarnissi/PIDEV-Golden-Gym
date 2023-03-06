@@ -36,10 +36,12 @@ class RegistrationController extends AbstractController
  
     
     #[Route('/home', name: 'home-page')]
-    public function hello(): Response
+    public function hello(ProduitRepository $rep): Response
     {
+        $produit=$rep->Findprodbynote();
         return $this->render('home.html.twig', [
             'controller_name' => 'RegistrationController',
+            'prod'=>$produit,
         ]);
     }
     public function __construct(UserPasswordHasherInterface $passwordEncoder)

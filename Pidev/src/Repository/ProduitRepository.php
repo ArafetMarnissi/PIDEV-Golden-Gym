@@ -46,6 +46,14 @@ class ProduitRepository extends ServiceEntityRepository
         $query=$entityManager->createQuery("SELECT p FROM App\Entity\Produit p JOIN p.category c WHERE c.id=:n")->setParameter('n',$n);
         return $query->getResult();
     }
+
+    public function Findprodbynote()
+    {
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager->createQuery("SELECT p FROM App\Entity\Produit p where p.quantiteProduit!=0 ORDER BY p.note DESC");
+        return $query->getResult();
+    }
+
     public  function sms(string $quant){
         // Your Account SID and Auth Token from twilio.com/console
                 $sid = 'ACc210d7a671c53bca6b98f6a1bec72d25';

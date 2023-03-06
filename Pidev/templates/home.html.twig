@@ -212,111 +212,26 @@ Notre site web est votre porte d'entrée vers une expérience de remise en forme
 					<span class="section-intro__style">Gallerie</span>
 				</h2>
 			</div>
+			
 			<div class="owl-carousel owl-theme" id="bestSellerCarousel">
+			{% for p in prod %}
 				<div class="card text-center card-product">
+				
 					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product1.jpg" alt="">
+						<img class="img-fluid" style="width:250px; height:250px" src="{{asset('uploads/produits/'~p.imageproduit)}}" alt="">
 						<ul class="card-product__imgOverlay"></ul>
 					</div>
 					<div class="card-body">
-						<p>Accessories</p>
+						<p>{{p.category.nomCategory}}</p>
 						<h4 class="card-product__title">
-							<a href="single-product.html">Quartz Belt Watch</a>
+							<a href="{{ path('gtidf',{id:p.id})}}">{{ p.nom }}</a>
 						</h4>
 					</div>
+					
 				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product2.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Beauty</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Women Freshwash</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product3.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Decor</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Room Flash Light</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product4.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Decor</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Room Flash Light</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product1.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Accessories</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Quartz Belt Watch</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product2.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Beauty</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Women Freshwash</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product3.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Decor</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Room Flash Light</a>
-						</h4>
-					</div>
-				</div>
-
-				<div class="card text-center card-product">
-					<div class="card-product__img">
-						<img class="img-fluid" src="img/product/product4.jpg" alt="">
-						<ul class="card-product__imgOverlay"></ul>
-					</div>
-					<div class="card-body">
-						<p>Decor</p>
-						<h4 class="card-product__title">
-							<a href="single-product.html">Room Flash Light</a>
-						</h4>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
+			
 		</div>
 	</section>
 	<!-- ================ Best Selling item  carousel end ================= -->

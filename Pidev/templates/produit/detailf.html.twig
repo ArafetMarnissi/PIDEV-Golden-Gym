@@ -138,6 +138,9 @@ var data;
 								<div id="msg">{{produits.note | number_format(2) }}/5</div>
 							</ul>
 						</div>
+						{% if qrcode %}
+    					    <img src="{{ qrcode }}" alt="">
+   						{% endif %}
 						{% endif %}
 						<!--<div class="card_area d-flex align-items-center">
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>

@@ -46,11 +46,31 @@ class ProduitController extends AbstractController
         for($i=0;$i<$nb;$i++){
             if($produits[$i]->getQuantiteProduit()<6 && $produits[$i]->getQuantiteProduit()!=0)
             {
-                $repository->sms($produits[$i]->getNom());
+                //$repository->sms($produits[$i]->getNom());
+                $transport = Transport::fromDsn('smtp://khalilherma6@outlook.fr:KhAlIl332810@smtp.office365.com:587');
+                $mailer = new Mailer($transport); 
+                $email = (new Email());
+                $email->from('khalilherma6@outlook.fr');
+                $email->to('dammakkarim@gmail.com');
+                $email->subject('expiration produit');
+                $email->embed(fopen('../public/img/logo1.png','r','logo'));
+
+                $email->html('le produit à expire :" <b>'  . $produits[$i]->getNom() . '"</b> :<br><img src="cid:logo" ><br>Thanks,<br>Admin');
+                $mailer->send($email);
             }
             else if ($produits[$i]->getQuantiteProduit()==0 )
             {
-                $repository->sms1($produits[$i]->getNom());
+                //$repository->sms1($produits[$i]->getNom());
+                $transport = Transport::fromDsn('smtp://khalilherma6@outlook.fr:KhAlIl332810@smtp.office365.com:587');
+                $mailer = new Mailer($transport); 
+                $email = (new Email());
+                $email->from('khalilherma6@outlook.fr');
+                $email->to('dammakkarim@gmail.com');
+                $email->subject('expiration produit');
+                $email->embed(fopen('../public/img/logo1.png','r','logo'));
+
+                $email->html('le produit à expire :" <b>'  . $produits[$i]->getNom() . '"</b> :<br><img src="cid:logo" ><br>Thanks,<br>Admin');
+                $mailer->send($email);
             }
         }
         $prod = $repository->findAll();
@@ -131,14 +151,17 @@ class ProduitController extends AbstractController
         return $this->renderForm('produit/new.html.twig', ['formp' => $form, "editmode" => $produits->getid() !== null]);
     }
 
-    #[Route('/get/{id}', name: 'getid')]
-    public function show_id(ManagerRegistry $doctrine, $id): Response
+    #[Route('/getf/{id}', name: 'gtidf')]
+    public function show_idf(ManagerRegistry $doctrine, $id,QrcodeService $qrcodeService): Response
     {
+        $qrCode = null;
         $repository = $doctrine->getRepository(produit::class);
         $produits = $repository->find($id);
-        return $this->render('produit/detail.html.twig', [
+        $qrCode = $qrcodeService->qrcode($produits->getNom());
+        return $this->render('produit/detailf.html.twig', [
             'produits' => $produits,
             'id' => $id,
+            'qrcode'=>$qrCode,
         ]);
     }
 
