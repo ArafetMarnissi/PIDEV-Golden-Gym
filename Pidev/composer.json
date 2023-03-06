@@ -11,6 +11,8 @@
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
+        "dompdf/dompdf": "^2.0",
+        "mpdf/mpdf": "^8.1",
         "endroid/qr-code": "^4.8",
         "endroid/qr-code-bundle": "^4.3",
         "knplabs/knp-paginator-bundle": "^5.0",
@@ -47,6 +49,7 @@
         "symfony/validator": "5.4.*",
         "symfony/web-link": "5.4.*",
         "symfony/yaml": "5.4.*",
+        "tecnickcom/tcpdf": "^6.4",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
         "twilio/sdk": "^6.44"
