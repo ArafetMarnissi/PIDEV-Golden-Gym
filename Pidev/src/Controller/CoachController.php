@@ -11,6 +11,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Repository\CoachRepository;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class CoachController extends AbstractController
 {
@@ -150,5 +152,16 @@ class CoachController extends AbstractController
         $em->remove($coach);
         $em->flush();
         return $this->redirectToRoute('AffichageCoach');
+    }
+
+    // /----------------Affichage User JSON -------------------/
+    #[Route('/apiuserlist', name: 'apiUser')]
+    public function APIlistuser(CoachRepository $repo, NormalizerInterface $normalizer)
+    {
+        $coach=$repo->findAll();
+        $coachNormalises= $normalizer->normalize($coach,'json');
+        $json = json_encode($coachNormalises);
+
+        return new Response($json);
     }
 }

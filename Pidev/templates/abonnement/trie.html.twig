@@ -23,7 +23,7 @@
         <th>Durée</th>
     </tr>
     </thead>
-    {% for abonnement in abonnements %}
+    {% for abonnement in abo %}
     <tr>
         <td>{{ abonnement.id }}</td>
         <td>{{ abonnement.nomAbonnement }}</td>
@@ -37,19 +37,9 @@
     {% endfor %}
 </table>
 <center>
-<div class="row">
-<form action="{{ path('order_By_Prix_desc') }}">
-    <button class="btn btn-round btn-twitter">Affichage triéé par prix desc</button>
-</form>
-<form action="{{ path('order_By_Prix_asc') }}">
-    <button class="btn btn-round btn-twitter">Affichage triéé par prix asc</button>
-</form>
-<form action="{{ path('MostReserved') }}">
-    <button class="btn btn-round btn-twitter">Les abonnements les plus réservés</button>
-</form>
-</div></center>
-<center><form action="{{ path('abonnement_new') }}">
+<form action="{{ path('abonnement_new') }}">
     <button class="btn btn-round btn-facebook">Ajouter un nouvel abonnement</button>
-</form></center>
+</form>
+</center>
 </div>
 {% endblock %}

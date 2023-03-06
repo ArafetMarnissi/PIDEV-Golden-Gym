@@ -23,6 +23,7 @@
 			href="{{ asset("assetsback/css/material-dashboard.css?v=2.1.2") }}" rel="stylesheet"/>
 			<!-- CSS Just for demo purpose, don't include it in your project -->
 			<link href="{{ asset("assetsback/demo/demo.css") }}" rel="stylesheet"/>
+			{{ encore_entry_link_tags('app') }}
 
 		</head>
 		<body>
@@ -44,7 +45,7 @@
 						<div class="sidebar-wrapper">
 							<ul class="nav">
 								<li class="nav-item  ">
-									<a class="nav-link" href="">
+									<a class="nav-link" href="{{ path('stats') }}">
 										<i class="material-icons">dashboard</i>
 										<p>Dashboard</p>
 									</a>
@@ -74,19 +75,11 @@
 									</a>
 								</li>
 								<li class="nav-item ">
-<<<<<<< HEAD
-                                    <a class="nav-link" href={{path('list_cat')}}>
-                                        <i class="material-icons">content_paste</i>
-                                        <p>Gestion des categorie</p>
-                                    </a>
-                                </li>
-=======
 									<a class="nav-link" href={{path('list_cat')}}>
 										<i class="material-icons">content_paste</i>
 										<p>Gestion des categorie</p>
 									</a>
 								
->>>>>>> d430ee19228b8f77280caca86de2dd489fdb102b
 								<li class="nav-item ">
 									<a class="nav-link" href="{{path('AffichageActivite')}}">
 										<i class="material-icons">content_paste</i>
@@ -140,7 +133,7 @@
 									</form>
 									<ul class="navbar-nav">
 										<li class="nav-item">
-											<a class="nav-link" href="{{ asset("assetsback/javascript:;") }}">
+											<a class="nav-link" href="{{ path('stats') }}">
 												<i class="material-icons">dashboard</i>
 												<p class="d-lg-none d-md-block">
 													Stats
@@ -461,6 +454,7 @@
 						<script src="{{ asset("assetsback/js/plugins/bootstrap-notify.js") }}"></script>
 						<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 						<script src="{{ asset("assetsback/js/material-dashboard.js?v=2.1.2") }}" type="text/javascript"></script>
+						{{ encore_entry_script_tags('app') }}
 						<!-- Material Dashboard DEMO methods, don't include it in your project! -->
 						<script src="{{ asset("assetsback/demo/demo.js") }}"></script>
 						<script>

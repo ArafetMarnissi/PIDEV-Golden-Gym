@@ -100,13 +100,6 @@
 								<a class="nav-link" href="{{path('home-page')}}">Acceuil</a>
 							</li>
 							<li class="nav-item submenu dropdown">
-<<<<<<< HEAD
-								<a href="{{path('list_produit_front')}}" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Magasin</a>
-								 <ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="{{path('listcf')}}"> Category</a></li>
-									<li class="nav-item"><a class="nav-link" href="{{path('list_produitpag')}}">Tous les Produit</a></li>
-								</ul>
-=======
 								<a href="{{path('list_produit_front')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Magasin</a>
 								<!-- <ul class="dropdown-menu">
 																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="category.html"> Category</a></li>
@@ -116,10 +109,9 @@
 																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
 																																																																																																																																																																																																																																																																																																																																																				                </ul>
 																																																																																																																																																																																																																																																																																																																																																				                -->
->>>>>>> d430ee19228b8f77280caca86de2dd489fdb102b
 							</li>
 							<li class="nav-item submenu dropdown">
-								<a href="" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Abonnement</a>
+								<a href="{{path('list_AbonnementC')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Abonnement</a>
 								<!--
 																																																																																																																																																																																																																																																																																																																																																				                <ul class="dropdown-menu">
 																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
@@ -142,46 +134,9 @@
 							</li>
 						</ul>
 
-<<<<<<< HEAD
-						{% if app.user%}
-
-							<!--<div>Bonjour,
-								<span class="section-intro__style">{{ app.user.nom }}
-								</span>
-								<a class="btn btn-sm btn-success" href="{{ path('afficher_details_user', {id:app.user.id}) }}">Consulter Profil</a>
-								<a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
-							</div>-->
-							<div class="nav-item submenu dropdown">
-								<a  class="nav-link  dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">
-									Profil
-								</a>
-								<div class="dropdown-menu">
-									<h5><a class="dropdown-item" href="#">bonjour, {{ app.user.nom }}</a></h5>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="{{ path('afficher_details_user', {id:app.user.id}) }} ">Consulter Profil</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
-								</div>
-							</div>
-							<ul class="nav-shop">
-
-								<li class="nav-item">
-									<a href="{{ path('app_panier') }}">
-										<i class="ti-shopping-cart"></i>
-										<span class="nav-shop__circle">0
-										</span>
-									</a>
-								</li>
-
-							</ul>
-
-						{% else %}
-							<ul class="nav-shop">
-=======
 
 						
 							 <ul class="nav-shop">
->>>>>>> d430ee19228b8f77280caca86de2dd489fdb102b
 								<li class="nav-item">
 									<a class="button button-header" href="{{path('app_login')}}">Se connecter</a>
 								</li>

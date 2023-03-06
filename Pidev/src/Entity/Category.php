@@ -7,10 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-<<<<<<< HEAD
-
-=======
->>>>>>> d430ee19228b8f77280caca86de2dd489fdb102b
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {

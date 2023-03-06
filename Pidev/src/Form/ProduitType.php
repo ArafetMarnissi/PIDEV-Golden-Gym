@@ -27,7 +27,6 @@ class ProduitType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-<<<<<<< HEAD
                         'maxSize' => '10M',
                         //  'mimeTypes' => [
                         //     'imageProduit/gif',
@@ -37,17 +36,6 @@ class ProduitType extends AbstractType
                         //  ],
                         'mimeTypesMessage' => 'merci de telecharger une photo valide',
                         ]),
-=======
-                        'maxSize' => '1024k',
-
-                        // 'mimeTypes' => [
-                        //     'application/jpeg',
-                        //     'application/jpg',
-                        // ],
-
-                        'mimeTypesMessage' => 'Please upload a valid image',
-                    ])
->>>>>>> d430ee19228b8f77280caca86de2dd489fdb102b
                 ],
             ])
             ->add('dateExpiration')

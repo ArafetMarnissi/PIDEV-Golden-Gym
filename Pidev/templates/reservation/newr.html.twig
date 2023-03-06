@@ -16,14 +16,14 @@
 {% endif %} #}
     {{form_start(form,{'attr': {'novalidate': 'novalidate'}})}}   
         {% if reservations is empty %}
-            <button type='submit' class="cd-select" href="{{ path('list_reservation') }}">Reserver</button>      
+            <button type='submit' class="button button-hero" href="{{ path('list_reservation') }}">Reserver</button>      
         {% else %}
                 {% set lastReservation = reservations|last %}
                 {% if lastReservation.isAbonnementExpired() %}
                     <button type='submit' class="cd-select" href="{{ path('list_reservation') }}">Reserver</button>      
                 {% else %}
                     <a class="alert alert-danger" href="{{ path('list_reservation') }}">Votre abonnement n'est pas expiré</a>                
-                {% endif %}
+                {% endif %} 
         {% endif %}    
     {{form_end(form)}} 
     <br><br>

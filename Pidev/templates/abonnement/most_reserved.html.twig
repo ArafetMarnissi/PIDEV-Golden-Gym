@@ -1,0 +1,38 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Liste des abonnements{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+<center>
+<h1>Liste des abonnements les Plus réservés</h1>
+</center>
+<br><br>
+<table class="table">
+<thead>
+    <tr>
+        <th>Nom</th>
+        <th>Durée</th>
+    </tr>
+    </thead>
+    {% for abonnement in abos %}
+    <tr>
+        <td>{{ abonnement.nomAbonnement }}</td>
+        <td>{{ abonnement.dureeAbonnement }}</td>
+        <td></td>
+    </tr>
+    {% endfor %}
+</table>
+{# <center>
+<form action="{{ path('abonnement_new') }}">
+    <button class="btn btn-round btn-facebook">Ajouter un nouvel abonnement</button>
+</form>
+</center> #}
+</div>
+{% endblock %}
