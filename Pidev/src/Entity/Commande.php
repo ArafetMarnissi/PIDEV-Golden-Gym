@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
@@ -16,9 +17,11 @@ class Commande
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("commandes")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups("commandes")]
     private ?\DateTimeInterface $dateCommande = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -30,15 +33,17 @@ class Commande
         minMessage: 'votre adresse de livraison n\'est pas valide',
 
     )]
-
+    #[Groups("commandes")]
     private ?string $AdresseLivraison = null;
 
     #[ORM\Column]
     #[Assert\NotBlank]
+    #[Groups("commandes")]
     private ?float $prixCommande = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Groups("commandes")]
     private ?string $methodePaiement = null;
 
 
@@ -53,18 +58,32 @@ class Commande
         max: 8,
         minMessage: 'votre numéro de téléphone n\'est pas valide',
     )]
+    #[Groups("commandes")]
     private ?string $telephone = null;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]
+   
     private ?User $User = null;
-
+    //////////
+    #[Groups("commandes")]
+    private ?int $UserId = null;
+        /////
     public function __construct()
     {
         $this->dateCommande = new DateTime();
         $this->ligneCommandes = new ArrayCollection();
     }
-
+    ////
+    public function getUserId(): ?int
+    {
+        return $this->UserId;
+    }
+    public function setUserId(?int $UserId): ?int
+    {
+        return $this->UserId=$UserId;
+    }
+    ////
     public function getId(): ?int
     {
         return $this->id;
