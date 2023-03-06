@@ -28,46 +28,21 @@ class ProduitType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
-<<<<<<< HEAD
                         'mimeTypes' => [
                             'application/jpeg',
                             'application/jpg',
                         ],
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 803a5ae88d8304d7480e74c8935c71b825c3e2b4
-                        // 'mimeTypes' => [
-                        //     'application/jpeg',
-                        //     'application/jpg',
-                        // ],
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 5f668aea2ccc9e7fa1880a1e338dfeb4e27236bb
->>>>>>> 803a5ae88d8304d7480e74c8935c71b825c3e2b4
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
                         'mimeTypesMessage' => 'Please upload a valid image',
                     ])
                 ],
             ])
             ->add('dateExpiration')
-<<<<<<< HEAD
             ->add('category',EntityType::class,[
                 'class'=>Category::class,
                 'choice_label'=>'id',
                 'multiple'=>false,
                 'expanded'=>false,])
         ;
-=======
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
-                'choice_label' => 'nomCategory',
-                'multiple' => false,
-                'expanded' => false,
-            ]);
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
     }
 
     public function configureOptions(OptionsResolver $resolver): void

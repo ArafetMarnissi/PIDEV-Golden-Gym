@@ -9,26 +9,14 @@
 <br>
 <br>
 <br>
-<<<<<<< HEAD
 <center>
 <h1>Liste des abonnements</h1>
-=======
-<div class="container">
-<center>
-<h1>Liste des abonnements</h1>
-</center>
-<br><br>
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 <table class="table">
 <thead>
     <tr>
         <th>Id</th>
         <th>Nom</th>
-<<<<<<< HEAD
         <th>Prix</th>
-=======
-        <th>Prix(en dt)</th>
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
         <th>Durée</th>
     </tr>
     </thead>
@@ -42,7 +30,6 @@
         <td><a class="btn btn-round btn-twitter" href="{{ path('modifier_un_abonnement',{'id' : abonnement.id}) }}">Modifier</a></td>
         <td><a class="btn btn-round btn-twitter" href="{{ path('delete_un_abonnement',{'id' : abonnement.id}) }}">Supprimer</a></td>
         </td>
-<<<<<<< HEAD
         </tr>
     {% endfor %}
 </table>
@@ -51,15 +38,4 @@
     <button class="btn btn-round btn-facebook">Créer un nouvel abonnement</button>
 </form>
 </center>
-=======
-    </tr>
-    {% endfor %}
-</table>
-<center>
-<form action="{{ path('abonnement_new') }}">
-    <button class="btn btn-round btn-facebook">Ajouter un nouvel abonnement</button>
-</form>
-</center>
-</div>
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 {% endblock %}

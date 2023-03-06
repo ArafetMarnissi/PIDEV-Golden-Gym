@@ -20,7 +20,7 @@
     {% for a in reponses %}
     <tr>
 
-        <td> {{ a.dateReponse | date('d-m-y')}} </td>
+        <td> {{ a.dateReponse | date('Y-m-d')}} </td>
         <td> {{ a.descriptionreponse }} </td>
      
            <td> <a class="btn btn-sm btn-danger" href="{{ path('deleteReponse',{'id' : a.id}) }}">Supprimer </a></td>
@@ -29,6 +29,7 @@
        
     </table>
     </center>
+    <span class="badge badge-sm bg-gradient-faded-success-vertical">  {{ knp_pagination_render(reponses) }} </span>
   {% for message in app.flashes('info') %}
         <div class="alert alert-success">
         {{message}}

@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Reclamation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 
 /**
  * @extends ServiceEntityRepository<Reclamation>
@@ -20,7 +22,10 @@ class ReclamationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Reclamation::class);
     }
-
+/**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
     public function save(Reclamation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -63,4 +68,23 @@ class ReclamationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+public function tri()
+    {
+        return $this->createQueryBuilder('Reclamation')
+            ->orderBy('Reclamation.date_Reclamtion', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+   /**
+     * return Reclamation[]
+     */
+    public function findmatchbytype($specialite)
+    {
+        return $this->createQueryBuilder('rec')
+            ->where('rec.type_reclamation LIKE :type_reclamation')
+            ->setParameter('type_reclamation', '%'.$specialite.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    }

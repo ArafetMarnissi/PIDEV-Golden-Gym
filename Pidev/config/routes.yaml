@@ -1,7 +1,6 @@
 #index:
 #    path: /
-<<<<<<< HEAD
 #    controller: App\Controller\DefaultController::index
-=======
-#    controller: App\Controller\DefaultController::index
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
+pdf:
+    path: /pdf
+    controller: App\Controller\ReclamationController::generatePdf

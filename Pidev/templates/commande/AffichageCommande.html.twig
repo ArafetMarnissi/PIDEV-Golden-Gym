@@ -4,7 +4,6 @@
 {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
 	<center>
 		<div class="container">
 			<h2>Liste des Commandes</h2>
@@ -18,37 +17,12 @@
 						<th>prix_Commande</th>
 						<th>methode_Paiement</th>
 						<th>téléphone</th>
-=======
-	<div class="container">
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		{# <table class="table" style="width: 50%; margin: 0 auto;"> #}
-		<center>
-			<h1>Liste des Commandes</h1>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Id Commande</th>
-						<th>Id Client</th>
-						<th>Adresse Livraison</th>
-						<th>Prix Commande</th>
-						<th>Meth Paiement</th>
-						<th>Téléphone</th>
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 
 					</tr>
 				</thead>
 				{% for commande in commandes %}
 					<tr>
 						<td>{{ commande.id }}</td>
-<<<<<<< HEAD
-=======
-						<td>{{ commande.user.id }}</td>
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 						<td>{{ commande.AdresseLivraison }}</td>
 						<td>{{ commande.prixCommande }}</td>
 						<td>{{ commande.methodePaiement }}</td>
@@ -64,20 +38,11 @@
 					</tr>
 				{% endfor %}
 			</table>
-<<<<<<< HEAD
 		</div>
 		<div class="container">
 			<a class="btn btn-round btn-facebook" href="{{ path('ajouter_commande') }}">Ajouter Commande</a>
 		</div>
 	</center>
-=======
-
-			<div class="container">
-				<a class="btn btn-round btn-facebook" href="{{ path('ajouter_commande') }}">Ajouter une nouvelle commande</a>
-			</div>
-		</center>
-	</div>
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 
 
 {% endblock %}

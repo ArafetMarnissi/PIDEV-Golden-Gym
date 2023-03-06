@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Reponse;
 use App\Form\ReponseType;
 use App\Entity\Reclamation;
+use Knp\Component\Pager\PaginatorInterface;
 
 class ReponseController extends AbstractController
 {
@@ -47,11 +48,15 @@ class ReponseController extends AbstractController
     /**
     * @Route("/listreponse", name="listee")
     */
-   public function listReponse(ReponseRepository $repository)
+   public function listReponse(ReponseRepository $repository,PaginatorInterface  $paginator,Request $request)
    {
        $reponses=$this->getDoctrine()->getRepository(Reponse::class)->findAll();
-     
-       return $this->render('reponse/list.html.twig', array("reponses" => $reponses));
+       $rec=$paginator->paginate(
+        $reponses,
+        $request->query->getInt('page',1),
+        1
+    ) ;
+       return $this->render('reponse/list.html.twig', array("reponses" => $rec));
    }
    #[Route('/deleteRep/{id}',name:'deleteReponse')]
    public function delete (ManagerRegistry $doctrine, $id):Response

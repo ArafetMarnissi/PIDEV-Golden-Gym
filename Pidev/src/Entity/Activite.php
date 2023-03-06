@@ -34,19 +34,11 @@ class Activite
     #[Assert\GreaterThanOrEqual('today',message:"La date de l'activité doit être supérieur à la date actuelle")]
     private ?\DateTimeInterface $DateActivite = null;
 
-<<<<<<< HEAD
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Le nom du coach est obligatoire")]
     #[Assert\Length(min:2,minMessage:"Le nom du coach doit comporter au moins {{ limit }} caractéres")]
     #[Assert\Regex(pattern: '/^[a-z\s]+$/i',htmlPattern: '^[a-zA-Z\s]+$',message:"Le nom du coach doit contenir que des lettres")]
     private ?string $coach = null;
-=======
-    /*#[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"Le nom du coach est obligatoire")]
-    #[Assert\Length(min:2,minMessage:"Le nom du coach doit comporter au moins {{ limit }} caractéres")]
-    #[Assert\Regex(pattern: '/^[a-z\s]+$/i',htmlPattern: '^[a-zA-Z\s]+$',message:"Le nom du coach doit contenir que des lettres")]
-    private ?string $coach = null;*/
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 
     #[ORM\Column]
     #[Assert\NotBlank(message:"Il faut donner le nombre de places")]
@@ -56,15 +48,6 @@ class Activite
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Image = null;
 
-<<<<<<< HEAD
-=======
-    #[ORM\ManyToOne]
-    private ?Coach $Coach = null;
-
-    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $TimeActivite = null;
-
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
     public function getId(): ?int
     {
         return $this->id;
@@ -118,11 +101,7 @@ class Activite
         return $this;
     }
 
-<<<<<<< HEAD
     public function getCoach(): ?string
-=======
-    /*public function getCoach(): ?string
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
     {
         return $this->coach;
     }
@@ -132,11 +111,7 @@ class Activite
         $this->coach = $coach;
 
         return $this;
-<<<<<<< HEAD
     }
-=======
-    }*/
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 
     public function getNbrePlace(): ?int
     {
@@ -161,31 +136,4 @@ class Activite
 
         return $this;
     }
-<<<<<<< HEAD
-=======
-
-    public function getCoach(): ?Coach
-    {
-        return $this->Coach;
-    }
-
-    public function setCoach(?Coach $Coach): self
-    {
-        $this->Coach = $Coach;
-
-        return $this;
-    }
-
-    public function getTimeActivite(): ?\DateTimeInterface
-    {
-        return $this->TimeActivite;
-    }
-
-    public function setTimeActivite(?\DateTimeInterface $TimeActivite): self
-    {
-        $this->TimeActivite = $TimeActivite;
-
-        return $this;
-    }
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 }

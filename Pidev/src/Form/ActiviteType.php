@@ -3,11 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Activite;
-<<<<<<< HEAD
-=======
-use App\Entity\Coach;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,17 +18,7 @@ class ActiviteType extends AbstractType
             ->add('descriptionActivite',null,array('label' => false))
             ->add('dureeActivite',null,array('label' => false))
             ->add('DateActivite',null,array('label' => false))
-<<<<<<< HEAD
             ->add('coach',null,array('label' => false))
-=======
-            ->add('TimeActivite',null,array('label' => false))
-            ->add('Coach', EntityType::class, [
-                'class'=>Coach::class,
-                'choice_label'=>'nomCoach',
-                'multiple'=>false,
-                'expanded'=>false,
-                            ])
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
             ->add('nbrePlace',null,array('label' => false))
             ->add('Image', FileType::class, [
 

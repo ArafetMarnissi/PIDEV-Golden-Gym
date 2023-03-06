@@ -16,11 +16,7 @@ class TestController extends AbstractController
         ]);
     }
 
-<<<<<<< HEAD
    /* #[Route('/test1', name: 'app_test')]
-=======
-    /* #[Route('/test1', name: 'app_test')]
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
     public function index1(): Response
     {
         return $this->render('base.html.twig', [

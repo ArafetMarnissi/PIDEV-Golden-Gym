@@ -18,10 +18,6 @@ class Reservation
     private ?\DateTimeInterface $DateDebut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-<<<<<<< HEAD
-=======
-    #[Assert\GreaterThanOrEqual('today',message:"La date de la reservation doit être supérieur à la date actuelle")]
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
     private ?\DateTimeInterface $DateFin = null;
 
     #[ORM\OneToOne(inversedBy: 'reservation', cascade: ['persist', 'remove'])]

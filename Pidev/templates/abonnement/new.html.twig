@@ -7,7 +7,6 @@
 <br>
 <br>
 <br>
-<<<<<<< HEAD
 <center>
 <h1>Créer un nouvel abonnement</h1>
 <div >
@@ -23,22 +22,4 @@
 <div >{{form_end(form)}} </div> 
 </div> 
 </center>    
-=======
-
-<div >
-    <center>
-    <h1>Créer un nouvel abonnement</h1>
-    </center>
-    <br><br>
-    {{form_start(form,{'attr': {'novalidate': 'novalidate'}})}}
-        <div >{{form_row(form.nomAbonnement,{'attr': {'placeholder':'Basic , Premium ou Pro ','class':'form-control'}})}}</div>  
-        <br><br> 
-        <div >{{form_row(form.prixAbonnement,{'attr': {'placeholder':'Prix','class':'form-control'}})}}</div>       
-        <br><br>              
-        <div >{{form_row(form.dureeAbonnement,{'attr': {'placeholder':'Annuel ou Mensuel','class':'form-control'}})}}</div>      
-        <center><button type='submit' class="btn btn-round btn-facebook" href="{{ path('list_Abonnement') }}">Ajouter un nouvel abonnement</button></center>
-    {{form_end(form)}} 
-</div> 
-   
->>>>>>> 97ebc60cafdf1a0cff1154faab316e13b3bb84d1
 {% endblock %}
