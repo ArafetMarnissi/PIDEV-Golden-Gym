@@ -125,7 +125,8 @@ var data;
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
                					class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
 							
-							<a class="button primary-btn" href="#">Add to Cart</a>               
+							<a class="button primary-btn" href="{{ path('cart_add',{id:produits.id})}}" id ="buttonAddToCart">Add to Cart</a>
+							             
 						</div>
 						<div id="stars">
 							<ul>
@@ -163,7 +164,7 @@ const spans_quantity = document.querySelectorAll("span#spanAddQuantity");
 		const url = this.href;
 		//supprimer le produit
 		axios.get(url).then(function (response) {
-			console.log(response.data);
+			// console.log(response.data);
 			spans_quantity.forEach(span => {
 			span.textContent=response.data.quantity;
 			});
@@ -171,10 +172,10 @@ const spans_quantity = document.querySelectorAll("span#spanAddQuantity");
 		});
 	}
 
-	document.querySelectorAll('a#addCart').forEach(function (link) {
+	document.querySelectorAll('a#buttonAddToCart').forEach(function (link) {
 		link.addEventListener('click', onClickBtnAddToCart);
 	});
 
 
-</script>	
+</script>
 {% endblock %}
