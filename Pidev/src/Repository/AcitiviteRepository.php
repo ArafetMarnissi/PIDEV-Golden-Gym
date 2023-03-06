@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Acitivite;
+use App\Entity\Activite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,7 +21,7 @@ class AcitiviteRepository extends ServiceEntityRepository
         parent::__construct($registry, Acitivite::class);
     }
 
-    public function save(Acitivite $entity, bool $flush = false): void
+    public function save(Activite $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class AcitiviteRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Acitivite $entity, bool $flush = false): void
+    public function remove(Activite $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -63,4 +63,18 @@ class AcitiviteRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function TriParNomActivite()
+{
+    $entityManager=$this->getEntityManager();
+    $query=$entityManager->createQuery('SELECT p FROM App\Entity\Activite p ORDER BY p.nomAcitivite ASC');
+    return $query->getResult();
+}
+
+public function TriParDateActivite()
+{
+    $entityManager=$this->getEntityManager();
+    $query=$entityManager->createQuery('SELECT p FROM App\Entity\Activite p ORDER BY p.DateActivite ASC');
+    return $query->getResult();
+}
 }

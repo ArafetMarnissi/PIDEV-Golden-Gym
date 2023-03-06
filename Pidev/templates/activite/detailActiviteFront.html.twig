@@ -58,12 +58,19 @@
                           <p>  
                               <br>
                                Date : {{ activites.DateActivite|date('d F Y')}}
-                              <br>
-                                Heure : {{ activites.TimeActivite|date('H:i')}}
+                              
+                                
                                <br>
                                 Nombre de places : {{ activites.nbrePlace }}
                                <br>
-                                Durée : {{ activites.dureeActivite }}
+                                Commence à : {{ activites.TimeActivite|date('H:i')}}
+                                <br>
+                                Se termine à : {{ activites.end|date('H:i')}}
+                            <br>
+                          <br>
+                          {% if qrcode %}
+                            <img src="{{ qrcode }}" alt="">
+                           {% endif %} 
                           </p>
                           
                       </aside>

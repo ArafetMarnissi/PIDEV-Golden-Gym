@@ -23,21 +23,24 @@
 
                         </tr>
                     </thead>
-                    {# {% set i = 0 %} #}
+                     {% set i = 0 %} 
                     {% for p in part %}
 
                         <tr>
-                            <td>{{ p.activite.nomAcitivite }}</td>
-                            <td>{{ p.dateParticipation|date('d F Y') }}</td>
+                            <td><br><br><br>
+                            <center>{{ p.activite.nomAcitivite }}</center></td>
+                            <td><br><br><br>
+                            <center>{{ p.dateParticipation|date('d F Y') }}</center></td>
 
-
+                            <td><br><br>
+                            <center><a class="button button-hero" href="{{ path('deleteParticipationU', {id:p.id}) }}">Annuler</a></center></td>
                             <td>
-                            {# {% if date[i] == true %} #}
-                                <a class="button button-hero" href="{{ path('deleteParticipationU', {id:p.id}) }}">Annuler</a>
-                                {# {% set i = i + 1 %} #}
-                            {# {% else %} #}
-                                {# {% set i = i + 1 %} #}
-                            {# {% endif %} #}
+                             {% if qrCode[i] %} 
+                                <img src="{{ qrCode[i] }}" alt="">
+                                {% set i = i + 1 %} 
+                             {% else %} 
+                                {% set i = i + 1 %} 
+                            {% endif %} 
                             </td>
                             {# <td>
                                 <a class="button button-hero" href="{{ path('supprimer_commande',{'id' : commande.id}) }}">Annuler</a>

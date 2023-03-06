@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Acivite;
+use App\Entity\Activite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,7 +21,7 @@ class AciviteRepository extends ServiceEntityRepository
         parent::__construct($registry, Acivite::class);
     }
 
-    public function save(Acivite $entity, bool $flush = false): void
+    public function save(Activite $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class AciviteRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Acivite $entity, bool $flush = false): void
+    public function remove(Activite $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 

@@ -51,9 +51,13 @@
 				{% endfor %}
 			</table>
 
-			{# <div class="container">
-				<a class="btn btn-round btn-facebook" href="{{ path('ajouter_commande') }}">Ajouter une nouvelle commande</a>
-			</div> #}
+			<div class="container">
+				<div class="row">
+					<div class="d-felx align-items-center justify-content-center">
+						{{ knp_pagination_render(commandes) }}
+					</div>
+				</div>
+			</div>
 		</center>
 	</div>
 

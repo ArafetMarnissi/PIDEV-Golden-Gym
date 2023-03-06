@@ -11,8 +11,12 @@
         "doctrine/doctrine-bundle": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
+        "dompdf/dompdf": "^2.0",
+        "endroid/qr-code": "^4.8",
+        "endroid/qr-code-bundle": "^4.3",
         "gregwar/captcha-bundle": "2.2.*",
-        "knplabs/knp-paginator-bundle": "*",
+        "knplabs/knp-paginator-bundle": "^5.0",
+        "mpdf/mpdf": "^8.1",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.16",
         "sensio/framework-extra-bundle": "^6.1",
@@ -46,6 +50,7 @@
         "symfony/validator": "5.4.*",
         "symfony/web-link": "5.4.*",
         "symfony/yaml": "5.4.*",
+        "tecnickcom/tcpdf": "^6.4",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
         "twilio/sdk": "^6.44"
@@ -54,7 +59,8 @@
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "endroid/installer": true
         },
         "optimize-autoloader": true,
         "preferred-install": {

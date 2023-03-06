@@ -1,0 +1,157 @@
+
+
+<html>
+
+<h1 class="align-center">Facture N°34</h1>
+<h4>MERCI D'AVOIR EFFECTUÉ VOS ACHATS SUR GOLDENGYM!</h4>
+<div class="wrapper">
+  <section class="left-section">
+<table>
+  <thead>
+        <tr>
+            <th>Détails de la commande</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr><td> Date : {{ commande.dateCommande|date("d/m/Y") }}</td> </tr>
+    <tr><td> Paiement : {{ commande.methodePaiement }}</td></tr>
+    <tr><td> Adresse : {{ commande.AdresseLivraison }}</td></tr>
+    <tr><td> Téléphone : {{ commande.telephone }}</td></tr>
+    </tbody>
+
+    <thead>
+</table>
+</section>
+<section class="right-section">
+<p>client 2</p>
+</section>
+</div>
+<br>
+<br>
+<br>
+ <table class="table" >   
+    <thead>
+			<tr style="background-color: #007bff; color: white;">
+                
+				        <th>Produit</th>
+                <th></th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+				        <th>Total</th>
+			</tr>
+    
+    </thead>
+    <br>
+    <br>
+    <br>
+    <tbody>
+        			{% for ligne in ligneCommande %}
+				<tr>
+					        <td><img class="card-img" style="width:80px;height:80px" src="{{asset('uploads/produits/'~ligne.Produits.imageproduit)}}" alt=""></td>
+				
+                            <td>{{ ligne.Produits.nom }}</td>
+                            <td>{{ ligne.quantiteProduit }}</td>
+                            <td>{{ ligne.prixUnitaire }}</td>
+                            <td>{{ ligne.prixUnitaire * ligne.quantiteProduit }}</td>
+                </tr>            
+			{% endfor %}
+    </tbody>
+    <tfoot>
+			<tr>
+				<td colspan="4" style="text-align: right;">Total Prix : </td>
+				<td>{{ commande.prixCommande }} Dt</td>
+			</tr>
+            {% if commande.methodePaiement == "à la livraison" %}
+            
+			<tr>
+				<td colspan="4" style="text-align: right;">Livraison :</td>
+				<td>7 Dt</td>
+			</tr>
+            <tr>
+				<td colspan="4" style="text-align: right;">Total à payer :</td>
+				<td>{{ commande.prixCommande + 7 }} Dt</td>
+			</tr>
+
+            {% endif %}
+			
+		</tfoot>
+</table>
+<style>
+	table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+.align-center {
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.left-section,
+.right-section {
+  width: 45%;
+}
+
+.left-section table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.left-section table th {
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 2px solid #333;
+}
+
+.left-section table td {
+  font-size: 16px;
+  padding: 10px 0;
+}
+
+.right-section p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.table th {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 2px solid #333;
+  padding: 100px 0;
+}
+
+.table td {
+  font-size: 10px;
+  padding: 10px 0;
+}
+
+.card-img {
+  object-fit: contain;
+}
+
+tfoot tr td:first-child {
+  text-align: right;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+
+</style>
+</html>

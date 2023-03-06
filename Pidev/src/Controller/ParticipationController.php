@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Form\ActiviteType;
 use App\Form\ParticipationType;
 use App\Repository\ParticipationRepository;
+use App\Services\QrcodeService;
 use Doctrine\Persistence\ManagerRegistry;
 use Egulias\EmailValidator\Parser\PartParser;
 use phpDocumentor\Reflection\Types\Boolean;
@@ -96,19 +97,23 @@ class ParticipationController extends AbstractController
     }
 
     #[Route('/affichageParticipationUser', name: 'AffichageParticipationUser')]
-    public function listUser(ManagerRegistry $doctrine,ParticipationRepository $repo): Response
+    public function listUser(ManagerRegistry $doctrine,ParticipationRepository $repo, QrcodeService $qrcodeService): Response
     {
+        $qrCode = null;
         $user = $this->getUser(); 
-        $repository = $doctrine->getRepository(Participation::class);
+        //$repository = $doctrine->getRepository(Participation::class);
         $part = $repo->FindPartsById($user);
-        /*for($i=0 ; $i < count($part) ; $i++)
+        for($i=0 ; $i < count($part) ; $i++)
         {
-        $date = $this->dateValid($part[$i]);
-        $dateTab[] = $date;
-        }*/
+        $date = $part[$i]->getActivite()->getDateActivite()->format('d F Y');
+        $time = $part[$i]->getActivite()->getTimeActivite()->format('H:i');
+        $query = $part[$i]->getActivite()->getNomAcitivite().' aura lieu le '.$date.' à '.$time.' avec le coach '.$part[$i]->getActivite()->getCoach()->getNomCoach();
+        $qrCode = $qrcodeService->qrcode($query);
+        $qrCode_array[] = $qrCode;
+        }
         return $this->render('participation/participationUser.html.twig', [
             'part' => $part,
-           /* 'date' => $dateTab,*/
+           'qrCode' => $qrCode_array,
         ]);
     }
 
