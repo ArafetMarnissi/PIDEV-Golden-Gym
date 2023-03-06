@@ -75,6 +75,16 @@ class CoachController extends AbstractController
         ]);
     }
 
+    #[Route('/affichageCoachH', name: 'AffichageCoachH')]
+    public function listHome(ManagerRegistry $doctrine): Response
+    {
+        $repository= $doctrine->getRepository(Coach::class);
+        $coach=$repository->findAll();
+        return $this->render('home.html.twig', [
+            'coach' => $coach,
+        ]);
+    }
+
     /*#[Route('/affichageCoachF', name: 'AffichageCoachF')]
     public function listFront(ManagerRegistry $doctrine): Response
     {

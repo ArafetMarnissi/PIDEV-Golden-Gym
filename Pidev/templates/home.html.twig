@@ -19,15 +19,11 @@
 								<a class="nav-link" href="{{path('home-page')}}">Acceuil</a>
 							</li>
 							<li class="nav-item submenu dropdown">
-								<a href="{{path('list_produit_front')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Magasin</a>
-								<!-- <ul class="dropdown-menu">
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="category.html"> Category</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                </ul>
-																																																																																																																																																																																																																																																																																																																																																				                -->
+								<a href="" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Magasin</a>
+								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="{{path('listcf')}}"> Category</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{path('list_produitpag')}}">Tous les Produit</a></li>
+								</ul>
 							</li>
 							<li class="nav-item submenu dropdown">
 								<a href="{{path('list_AbonnementC')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Abonnement</a>
@@ -49,6 +45,9 @@
 																																																																																																																																																																																																																																																																																																																																																				                -->
 							</li>
 							<li class="nav-item">
+										<a href="{{path('activite_planning')}}" class="nav-link">Planning</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link" href="contact.html">Contact</a>
 							</li>
 							   <li class="nav-item submenu dropdown">
@@ -58,18 +57,28 @@
                                         <span class="section-intro__style">{{ app.user.nom }}
                                         </span></a></li>
                                         <li class="nav-item"><a class="nav-link" href="{{ path('afficher_details_user', {id:app.user.id}) }}"> Consulter Profil</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ path('AffichageCommandeClient') }}">Mes Commandes</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{ path('AffichageParticipationUser') }}"> Mes participations</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
                                     </ul>
                                   </li>
 						</ul>
-
+						
 							<ul class="nav-shop">
 
 								<li class="nav-item">
 									<a href="{{ path('app_panier') }}">
 										<i class="ti-shopping-cart"></i>
-										<span class="nav-shop__circle">0
-										</span>
+										{% set total = 0 %}
+											{% if app.session.get('panier') is not null %}
+												{% for item in app.session.get('panier') %}
+													{% set  total = total + item %} 
+															
+												{% endfor %}
+												
+											
+											{% endif %}
+										<span id="spanAddQuantity"class="nav-shop__circle">{{ total }}</span>
 									</a>
 								</li>
 
@@ -100,17 +109,13 @@
 								<a class="nav-link" href="{{path('home-page')}}">Acceuil</a>
 							</li>
 							<li class="nav-item submenu dropdown">
-								<a href="{{path('list_produit_front')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Magasin</a>
-								<!-- <ul class="dropdown-menu">
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="category.html"> Category</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-																																																																																																																																																																																																																																																																																																																																																				                </ul>
-																																																																																																																																																																																																																																																																																																																																																				                -->
+								<a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Magasin</a>
+								 <ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="{{path('listcf')}}"> Category</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{path('list_produitpag')}}">Tous les Produit</a></li>
+								</ul>
 							</li>
-							<li >
+							<li class="nav-item submenu dropdown">
 								<a href="{{path('list_AbonnementC')}}" class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Abonnement</a>
 								<!--
 																																																																																																																																																																																																																																																																																																																																																				                <ul class="dropdown-menu">
@@ -130,12 +135,15 @@
 																																																																																																																																																																																																																																																																																																																																																				                -->
 							</li>
 							<li class="nav-item">
+										<a href="{{path('activite_planning')}}" class="nav-link">Planning</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link" href="contact.html">Contact</a>
 							</li>
 						</ul>
 
 
-						
+						 
 							 <ul class="nav-shop">
 								<li class="nav-item">
 									<a class="button button-header" href="{{path('app_login')}}">Se connecter</a>
@@ -143,8 +151,17 @@
 								<li class="nav-item">
 									<a href="{{ path('app_panier') }}">
 										<i class="ti-shopping-cart"></i>
-										<span class="nav-shop__circle">0
-										</span>
+										{% set total = 0 %}
+											{% if app.session.get('panier') is not null %}
+												{% for item in app.session.get('panier') %}
+													{% set  total = total + item %} 
+															
+												{% endfor %}
+												
+											
+											{% endif %}
+										<span id="spanAddQuantity"class="nav-shop__circle">{{ total }}</span>
+										
 									</a>
 								</li>
 

@@ -4,17 +4,23 @@
 {% endblock %}
 
 {% block body %}
+<br>
+<br>
+<br>
 	<div class="bg-light p-3">
 		<h1>Votre panier</h1>
 	</div>
+	<div id="Panier">
 	{% if items | length > 0 %}
+	
 		<table class="table">
 			<thead>
 				<tr>
-					<th>nom de produit</th>
-					<th>prix de produit</th>
-					<th>Quantité</th>
-					<th>Total</th>
+					<th><h4>Produit</h4></th>
+					<th></th>
+					<th><h4>Prix de produit</h4></th>
+					<th><h4>Quantité</h4></th>
+					<th><h4>Total</h4></th>
 					<th></th>
 					<th></th>
 					<th></th>
@@ -24,6 +30,9 @@
 				{% for item in items %}
 					
 						<tr id='js_Product_{{item.product.id}}'>
+							<td>
+								<img class="card-img" style="width:100px;height:100px" src="{{asset('uploads/produits/'~item.product.imageproduit)}}" alt="">
+							</td>
 							<td>{{item.product.nom}}</td>
 							<td>{{item.product.prixProduit}}DT</td>
 							<td><span id='js_quantity_{{item.product.id}}'>{{item.quantity}}</span></td>
@@ -47,44 +56,54 @@
 					
 				{% endfor %}
 			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="3" class="text-right">Total Prix :</td>
-					<td><span id="prix_total">{{ total }}</span>DT
-						</td>
-					<td></td>
-				</tr>
-			</tfoot>
+			
+			
+			
 		</table>
+		<div class="alert alert-danger">
+			<div class="text-right">
+				<h3>Total Prix : <span id="prix_total">{{ total }}</span>DT</h3>
+			</div>
+		</div>
 		
 		
 
+		{% if app.user %}
 		
 
 		<div class="text-right">
-		{# <a id ="" href="{{path('ajouter_commande') }}"  class="btn btn-danger btn-sm btn-large">Commander
-			<i class="fa fa-angle-right" aria-hidden="true"></i>
-		</a> #}
 		<a class="button button-hero" href="{{path('ajouter_commande')}}">Commander <i class="fa fa-angle-right" aria-hidden="true"></i></a>
 		</div>
-		<br>
-		<br>
+		{% else %}
+		<div class="text-right">
+		<a class="button button-hero" href="{{path('app_login')}}">Commander <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+		</div>	
+		{% endif %}
+		
 
 	
-	{% else %}
-		<p>
-			votre panier est vide !
-		</p>
-	{% endif %}
+		{% else %}
+			
+			<p class="alert alert-danger">votre panier est vide !</p> 
+		{% endif %}
+	</div>
+<br>
+<br>
+<br>
+	
+	
+		
 
 </div>
 
 <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 <script>
+const spans_quantityCart = document.querySelectorAll("span#spanAddQuantity");
 const spans_quantity = document.querySelectorAll("span[id^='js_quantity_']");
 const spans_prix = document.querySelectorAll("span[id^='js_prix_']");
 const span_prix_total = document.querySelector("#prix_total");
 const span_products = document.querySelectorAll("#js_Product");
+const divPanier = document.querySelector("#Panier");
 
 //script pour le button removeProduit
 	function onClickBtnRemove(event) {
@@ -98,6 +117,15 @@ const span_products = document.querySelectorAll("#js_Product");
 
 			if (productRow) {
 				productRow.remove();
+			}
+			//incrementer le nombre de produit dans cart
+			spans_quantityCart.forEach(span => {
+			span.textContent=response.data.quantity;
+			});
+
+			//tester si le panier est vide
+			if (response.data.total == 0) {
+				divPanier.innerHTML='<p class="alert alert-danger">votre panier est vide !</p> '; 
 			}
 			//changer le prix totale
 			span_prix_total.textContent = response.data.total;

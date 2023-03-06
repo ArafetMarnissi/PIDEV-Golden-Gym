@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\ConfirmFormType;
 use App\Form\RegistrationType;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler;
@@ -49,7 +50,7 @@ class RegistrationController extends AbstractController
 
 
     #[Route('/inscription', name: 'security_registration')]
-    public function registration(HttpFoundationRequest $request, PersistenceManagerRegistry $doctrine): Response
+    public function registration(HttpFoundationRequest $request, PersistenceManagerRegistry $doctrine, UserRepository $repo): Response
     {   
        
 
@@ -58,6 +59,7 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $UserEmail = $form->getData()->getEmail();
@@ -69,25 +71,42 @@ class RegistrationController extends AbstractController
             $user->setPrivateKey($randomInt);
             // Set their role
             $user->setRoles(['ROLE_CLIENT']);
+            try {
 
+           
             // Save 
             $em = $doctrine->getManager();
             $em->persist($user);
             $em->flush();
+            
+            //mailing start
+           
+            //mailing end
+
+
+
+            } catch (\Exception $ex)
+            {
+                $this->addFlash('error', 'Un compte associé avec l\'adresse suivante :'. $UserEmail .' existe déjà, Veuillez utiliser une autre adresse email..');
+                return $this->redirectToRoute('security_registration');                
+
+            }
+            
+
             $transport = Transport::fromDsn('smtp://khalilherma6@outlook.fr:KhAlIl332810@smtp.office365.com:587');
             $mailer = new Mailer($transport); 
             $email = (new Email());
             $email->from('khalilherma6@outlook.fr');
             $email->to($UserEmail);
-            $email->subject('Confirmation de votre compte GOLDENGYM');
-            $email->embed(fopen('../public/img/logo1.png', 'r'), 'logo');
+            $email->subject('Code de vérification de votre compte GOLDENGYM');
+            //$email->embed(fopen('../public/img/logo1.png', 'r'), 'logo');
 
-            $email->html('Voici votre code : <b>'  . $randomInt . '</b>:<br><img src="cid:logo"><br>Thanks,<br>Admin');
+            $email->html('code : '. $randomInt .'');
             $mailer->send($email);
-
-   
             $this->addFlash('success', 'Un code a été envoye à l\'adresse suivante :'. $UserEmail .' Veuillez se connecter  afin de confirmer votre compte GoldenGym.');
+            $repo->sms($randomInt);
             
+
             return $this->redirectToRoute('app_login');                
 
 

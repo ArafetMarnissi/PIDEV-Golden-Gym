@@ -16,6 +16,7 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Repository\ReservationRepository;
 
 class ReservationController extends AbstractController
 {
@@ -44,10 +45,14 @@ class ReservationController extends AbstractController
 
 
     #[Route('/listR', name: 'list_reservation')]
-    public function list1(ManagerRegistry $doctrine): Response 
+    public function list1(ReservationRepository $rep ): Response 
     {
-        $repository= $doctrine->getRepository(Reservation::class);
-        $reservations=$repository->FindAll(); 
+        
+        $user = $this->getUser();
+        if ($user instanceof \App\Entity\User) {
+            $idu = $user->getId();
+        }
+        $reservations=$rep->findByUserId($idu);   
 
         return $this->render('reservation/affiche.html.twig', [
             'reservations' => $reservations,
@@ -58,15 +63,19 @@ class ReservationController extends AbstractController
 
 
 #[Route('/newr/{id}', name: 'reservation_new')]
-public function newr(Request $request, $id, ManagerRegistry $doctrine, UserRepository $userRepository, SessionInterface $session): Response
+public function newr(Request $request, $id, ManagerRegistry $doctrine, UserRepository $userRepository, SessionInterface $session,ReservationRepository $rep): Response
 {
+    $user = $this->getUser();
+    if ($user instanceof \App\Entity\User) {
+        $idu = $user->getId();
+    }
     $reservation = new Reservation();
     $abonnement = new Abonnement();
     $repository = $doctrine->getRepository(Abonnement::class);
     $repo = $doctrine->getRepository(Reservation::class);
     $abonnement = $repository->find($id);
     $reservation->setReservationAbonnement($abonnement);
-    $reservations = $repo->FindAll();
+    $reservations = $repo->find($idu);
     $rep = $doctrine->getRepository(Reservation::class)->findOneBy([
         'user' => $reservation->getUser(),
         'ReservationAbonnement' => $reservation->getReservationAbonnement(),
@@ -107,6 +116,7 @@ public function newr(Request $request, $id, ManagerRegistry $doctrine, UserRepos
         'form' => $form->createView(),
         'reservations' => $reservations,
         'hasReservation' => $hasReservation,
+        'rep' => $rep,
     ]);
 }
 

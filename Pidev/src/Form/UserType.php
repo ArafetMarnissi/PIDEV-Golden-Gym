@@ -28,7 +28,13 @@ class UserType extends AbstractType
         ->add('prenom',null,array('label' => false))
         ->add('password',PasswordType::class,array('label' => false))
         ->add('confirm_password',PasswordType::class,array('label' => false))
-
+        ->add('captcha', CaptchaType::class,[
+            'attr' => [
+                'label'=>false,
+                'class' => "form-control"
+            ],
+            ]
+        )
 
         ;
     

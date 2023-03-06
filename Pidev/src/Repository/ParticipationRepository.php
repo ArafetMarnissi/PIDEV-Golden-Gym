@@ -63,4 +63,27 @@ class ParticipationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function FindPartById($activite,$user)
+{
+    $entityManager=$this->getEntityManager();
+    $query=$entityManager->createQuery("SELECT p FROM App\Entity\Participation p WHERE p.activite=:activite AND p.User=:user")
+    ->setParameter('activite',$activite)
+    ->setParameter('user',$user);
+    return $query->getOneOrNullResult();
+}
+/*public function FindPartsById($user)
+{
+    $entityManager=$this->getEntityManager();
+    $query=$entityManager->createQuery("SELECT p FROM App\Entity\Participation p WHERE p.User=:user")
+    ->setParameter('user',$user);
+    return $query->getResult();
+}*/
+
+public function FindPartsById($user)
+{
+    $entityManager=$this->getEntityManager();
+    $query=$entityManager->createQuery("SELECT p FROM App\Entity\Participation p JOIN p.activite a WHERE a.DateActivite>=CURRENT_DATE() and p.User=:user")
+    ->setParameter('user',$user);
+    return $query->getResult();
+}
 }

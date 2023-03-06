@@ -38,20 +38,11 @@
             "./migrations/.gitignore"
         ]
     },
-    "google/recaptcha": {
-        "version": "1.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "1.1",
-            "ref": "e5a4aa21f2e98d7440ae9aab6b56e307f99dd084"
-        },
-        "files": [
-            "./config/packages/google_recaptcha.yaml"
-        ]
-    },
     "gregwar/captcha-bundle": {
         "version": "v2.2.0"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.9.0"
     },
     "phpunit/phpunit": {
         "version": "9.6",

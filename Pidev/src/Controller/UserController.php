@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -15,7 +16,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use phpDocumentor\Reflection\DocBlock\Serializer as DocBlockSerializer;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -36,6 +39,9 @@ class UserController extends AbstractController
     {
         $repository= $doctrine->getRepository(User::class);
         $users=$repository->findAll();
+
+        
+           
         return $this->render('user/index.html.twig', [
             'users' => $users,
         ]);
