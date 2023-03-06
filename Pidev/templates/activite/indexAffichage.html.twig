@@ -36,7 +36,7 @@
       <td>{{a.nomAcitivite}}</td>
       <td>{{a.descriptionActivite}}</td>
       
-      <td>{{a.DateActivite|date('d F Y H:i')}}</td>
+      <td>{{a.DateActivite|date('d F Y')}}</td>
       <td>{{a.TimeActivite|date('H:i')}}</td>
       <td>{{a.end|date('H:i')}}</td>
       <td>{{a.Coach.nomCoach}}</td>
@@ -50,6 +50,21 @@
  
     {%  endfor %}
     <td>  <a class="btn btn-round btn-twitter" href="{{ path('activite_planningBack') }}">Planning</a></td>
+    {% if tri %}
+<td>  <a class="btn btn-round btn-twitter" href="{{ path('AffichageActivite') }}">Retour</a></td>
+    {% else %}
+    <td>  <a class="btn btn-round btn-twitter" href="{{ path('AffichageActiviteTriN') }}">Tri Par Nom</a></td>
+    {% endif %}
+        {% if tri1 %}
+<td>  <a class="btn btn-round btn-twitter" href="{{ path('AffichageActivite') }}">Retour</a></td>
+    {% else %}
+    <td>  <a class="btn btn-round btn-twitter" href="{{ path('AffichageActiviteTriD') }}">Tri Par Date</a></td>
+    {% endif %}
+        {% if tri2 %}
+<td>  <a class="btn btn-round btn-twitter" href="{{ path('AffichageActivite') }}">Retour</a></td>
+    {% else %}
+    <td>  <a class="btn btn-round btn-twitter" href="{{ path('AffichageActiviteTriNb') }}">Tri Par Nombre de places</a></td>
+    {% endif %}
   </tbody>
 </table>
 <center>
