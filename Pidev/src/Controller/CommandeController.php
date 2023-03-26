@@ -12,6 +12,7 @@ use App\Repository\LigneCommandeRepository;
 use App\Repository\UserRepository;
 use App\service\ServiceCommande;
 use App\service\servicePdf;
+use App\Services\mailService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,7 +86,7 @@ class CommandeController extends AbstractController
                 $em->flush();
                 unset($panier[$id]);
                 $session->set('panier', $panier);
-                $this->sendFacture($commande,$ligneCommandeRepository);
+               // $this->sendFacture($commande,$ligneCommandeRepository);
                 //$commandeRepository->sms($nomClient,$commande->getTelephone());
             }
            
@@ -278,8 +279,7 @@ class CommandeController extends AbstractController
 
     ////creer un pdf
     
-//controller
-// #[Route('/pdf', name:"PDF_Article", methods:("GET"))]
+
      
 public function pdf(Commande $commande,LigneCommandeRepository $ligneCommandeRepository)
 {
@@ -343,7 +343,7 @@ return $mpdf;
 
 ///////ajouter une commande
 #[Route('/apiAjouterCommande', name: 'Api_ajouter_commande')]
-public function  ajouterCommande(Request  $request, UserRepository $userRepository, ProduitRepository $produitRepository,LigneCommandeRepository $ligneCommandeRepository,NormalizerInterface $normalizerInterface): Response
+public function  ajouterCommande(Request  $request, UserRepository $userRepository,CommandeRepository $commandeRepository, ProduitRepository $produitRepository,LigneCommandeRepository $ligneCommandeRepository,NormalizerInterface $normalizerInterface,mailService $mailService): Response
 {
     $em = $this->getDoctrine()->getManager();
     $commande = new commande();
@@ -377,8 +377,26 @@ public function  ajouterCommande(Request  $request, UserRepository $userReposito
         $commande->setPrixCommande($totalPrix);
         $em->persist($commande);
         $em->flush();
+////api mailing avec facture et sms
+///preparer le fichier pdf
+        $ligneCommandes = $ligneCommandeRepository->findByCommandeId($commande->getId());
+        $html = $this->renderView('facture/pdftest.html.twig', [
+            'commande' => $commande,
+            'ligneCommande' => $ligneCommandes,
+            'client'=>$user, 
+    ]);
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->WriteHTML($html);    
 
-        //     $this->sendFacture($commande,$ligneCommandeRepository);
+/////
+$content = $this->renderView('facture/facture.html.twig', array(
+    'commande' => $commande,
+    'ligneCommande' => $ligneCommandes,
+));
+/////
+        $mailService->sendFacture($user->getEmail(),$mpdf,$content);
+        //$this->sendFacture($commande,$ligneCommandeRepository);
+       // $commandeRepository->sms($user->getNom(),$commande->getTelephone());
 
  
        
