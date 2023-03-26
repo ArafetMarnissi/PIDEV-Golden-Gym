@@ -2,10 +2,12 @@
 
 {% block body %}
 
+{% if app.user.status == false %}
+
+
 {{form_start(confirmForm,{'attr': {'novalidate': 'novalidate'}})}}
-
-
-<div class="col-md-12 form-group">
+<center>
+<div class="col-md-12 form-group"> 
                         {{form_row(confirmForm.code,{'attr': {'placeholder':'Code de 6 chiffres','class':'form-control'}})}}
 </div>
 
@@ -27,7 +29,18 @@
  
 
 {% endif %}
+</center>
 
+{% block footer %}
+
+{% endblock %}
+{% else %}
+<hr>
+<center>
+<h1>Votre compte est déjà verifié ! </h1>
+</center>
+
+{% endif %}
 {% endblock %}
 
 

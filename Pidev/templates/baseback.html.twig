@@ -23,6 +23,8 @@
 			href="{{ asset("assetsback/css/material-dashboard.css?v=2.1.2") }}" rel="stylesheet"/>
 			<!-- CSS Just for demo purpose, don't include it in your project -->
 			<link href="{{ asset("assetsback/demo/demo.css") }}" rel="stylesheet"/>
+			{{ encore_entry_link_tags('app') }}
+
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
 			<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
 		</head>
@@ -45,7 +47,7 @@
 						<div class="sidebar-wrapper">
 							<ul class="nav">
 								<li class="nav-item  ">
-									<a class="nav-link" href="">
+									<a class="nav-link" href="{{ path('stats') }}">
 										<i class="material-icons">dashboard</i>
 										<p>Dashboard</p>
 									</a>
@@ -139,7 +141,7 @@
 									</form>
 									<ul class="navbar-nav">
 										<li class="nav-item">
-											<a class="nav-link" href="{{ asset("assetsback/javascript:;") }}">
+											<a class="nav-link" href="{{ path('stats') }}">
 												<i class="material-icons">dashboard</i>
 												<p class="d-lg-none d-md-block">
 													Stats
@@ -460,6 +462,7 @@
 						<script src="{{ asset("assetsback/js/plugins/bootstrap-notify.js") }}"></script>
 						<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 						<script src="{{ asset("assetsback/js/material-dashboard.js?v=2.1.2") }}" type="text/javascript"></script>
+						{{ encore_entry_script_tags('app') }}
 						<!-- Material Dashboard DEMO methods, don't include it in your project! -->
 						<script src="{{ asset("assetsback/demo/demo.js") }}"></script>
 						<script>

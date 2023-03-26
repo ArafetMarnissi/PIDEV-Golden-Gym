@@ -1,0 +1,10 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Liste des abonnements{% endblock %}
+
+{% block content %}
+<div class="example-wrapper container" >
+    <h1>Statistique des Abonnements! </h1>
+    {{ render_chart(chart) }}
+</div>
+{% endblock %}

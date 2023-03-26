@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Abonnement;
+use App\Entity\Reservation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -38,6 +39,42 @@ class AbonnementRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function order_By_PRIX_ASC()
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.prixAbonnement', 'ASC')
+            ->getQuery()->getResult();
+    }
+
+    public function order_By_PRIX_desc()
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.prixAbonnement', 'DESC')
+            ->getQuery()->getResult();
+    }    
+
+    public function findMostSoldAbonnement($limit = 6)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p.nomAbonnement', 'p.dureeAbonnement', 'COUNT(s.id) AS total_reservation')
+            ->join('p.reservation', 's')
+            ->groupBy('p.id')
+            ->orderBy('total_reservation', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery();
+    
+        return $qb->getResult();
+    }
+
+    // public function calcul(){
+
+    //     $qb = $this->createQueryBuilder('p')
+    //     ->select('p.nomAbonnement', 'p.dureeAbonnement', 'COUNT(s.id) AS total_reservation')
+    //     ->join('p.reservation', 's')
+    //     ->groupBy('p.id')
+    //     ->getQuery();
+    // }
 
 //    /**
 //     * @return Abonnement[] Returns an array of Abonnement objects

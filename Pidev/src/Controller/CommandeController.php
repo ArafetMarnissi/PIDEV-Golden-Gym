@@ -251,7 +251,7 @@ class CommandeController extends AbstractController
             $mailer->send($email);
 
    
-           $this->addFlash('success', 'la facture est envoyer à ce émail :'. $UserEmail .' merci d\'avoir effectué vos achats sur GOLDENGYM!.');
+           //$this->addFlash('success', 'la facture est envoyer à ce émail :'. $UserEmail .' merci d\'avoir effectué vos achats sur GOLDENGYM!.');
 
         return true;
 

@@ -32,7 +32,7 @@
 			<link rel="stylesheet" href="{{asset('vendors/owl-carousel/owl.carousel.min.css')}}">
 			<link rel="stylesheet" href="{{asset('css/style.css')}}">
 			{# <link rel="stylesheet" href="{{asset('css/style1.css')}}"> #}
-			{{ encore_entry_link_tags('app') }}
+			{# {{ encore_entry_link_tags('app') }} #}
 		{% endblock %}
 			<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
 		{% block javascripts %}
@@ -44,6 +44,7 @@
 			<script src="{{asset('vendors/jquery.ajaxchimp.min.js')}}"></script>
 			<script src="{{asset('vendors/mail-script.js')}}"></script>
 			<script src="{{asset('js/main.js')}}"></script>
+			{# {{ encore_entry_script_tags('app') }} #}
 			<script src="{{asset('js/panier.js')}}"></script>
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}

@@ -3,6 +3,9 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+
+
+{% if not app.user %}
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -26,6 +29,9 @@
     <div class="alert alert-danger">
         {{ app.session.flashBag.get('error')[0] }}
     </div>
+
+ 
+
 {% endif %}
     <h1 class="h3 mb-3 font-weight-normal">Se Connecter</h1>
     <label for="inputEmail">Email</label>
@@ -65,4 +71,17 @@ Créer un compte    </a>
 
    
 </form>
+
+
+{% else %}
+
+<h3>Vous êtes déjà connecté en tant que {{app.user.username}}</h3>
+<hr>
+<hr>
+
+<hr>
+<hr>
+
+{% endif %}
+
 {% endblock %}

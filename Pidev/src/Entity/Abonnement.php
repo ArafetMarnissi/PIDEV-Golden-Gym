@@ -33,13 +33,14 @@ class Abonnement
     #[ORM\OneToMany(mappedBy: 'ReservationAbonnement', targetEntity: Reservation::class)]
     private Collection $reservation;
 
+    #[ORM\Column]
+    private ?int $count = 0;
+
     public function __construct()
     {
         $this->reservation = new ArrayCollection();
     }
 
-    // #[ORM\OneToOne(mappedBy: 'ReservationAbonnement', cascade: ['persist', 'remove'])]
-    // private ?Reservation $reservation = null;
 
     public function getId(): ?int
     {
@@ -113,29 +114,22 @@ class Abonnement
     }
 
 
+    public function getCount(): ?int
+    {
+        return $this->count;
+    }
 
+    public function setCount(int $count): self
+    {
+        $this->count = $count;
 
-    // public function getReservation(): ?Reservation
-    // {
-    //     return $this->reservation;
-    // }
+        return $this;
+    }
 
-    // public function setReservation(?Reservation $reservation): self
-    // {
-    //     // unset the owning side of the relation if necessary
-    //     if ($reservation === null && $this->reservation !== null) {
-    //         $this->reservation->setReservationAbonnement(null);
-    //     }
-
-    //     // set the owning side of the relation if necessary
-    //     if ($reservation !== null && $reservation->getReservationAbonnement() !== $this) {
-    //         $reservation->setReservationAbonnement($this);
-    //     }
-
-    //     $this->reservation = $reservation;
-
-    //     return $this;
-    // }
+    public function getNomDureeAbonnement(): string
+{
+    return sprintf('%s - %s', $this->nomAbonnement, $this->dureeAbonnement);
+}
 
 
 }

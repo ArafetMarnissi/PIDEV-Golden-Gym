@@ -1,0 +1,7 @@
+gregwar_captcha:
+    width: 200
+    height: 50
+    length: 6
+    background_color: [255, 255, 255]
+    quality: 90
+    charset: "0123456789AZERTYUIOP"
